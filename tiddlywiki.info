@@ -1,0 +1,47 @@
+{
+  "description": "TW5-T-ONLINE",
+  "plugins": [
+    "tiddlywiki/filesystem",
+    "tiddlywiki/tiddlyweb",
+    "tiddlywiki/browser-sniff"
+  ],
+  "themes": [
+    "tiddlywiki/vanilla"
+  ],
+  "languages": [
+    "zh-Hans"
+  ],
+  "build": {
+    "index": [
+      "--rendertiddler",
+      "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
+      "index.html",
+      "text/plain"
+    ],
+    "externalimages": [
+      "--setfield",
+      "[is[binary]] [type[application/msword]]",
+      "_canonical_uri",
+      "$:/core/templates/canonical-uri-external-image",
+      "text/plain",
+      "--setfield",
+      "[is[binary]] [type[application/msword]]",
+      "text",
+      "",
+      "text/plain",
+      "--rendertiddler",
+      "$:/core/save/all-external-js",
+      "index.html",
+      "text/plain"
+    ],
+    "externaljs": [
+      "--rendertiddler",
+      "$:/core/templates/tiddlywiki5.js",
+      "tiddlywiki5.js",
+      "text/plain"
+    ]
+  },
+  "config": {
+    "retain-original-tiddler-path": true
+  }
+}
