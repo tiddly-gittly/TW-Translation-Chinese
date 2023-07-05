@@ -1,0 +1,17 @@
+caption: Batch
+color: #bbb
+created: 20230705071240073
+creator: 马不前
+description: Batch Operation
+icon: $:/xp/images/batch-creation
+modified: 20230705071241707
+modifier: 马不前
+tags: 
+title: $:/xp/ui/SideBar/BatchOperation
+
+<$macrocall
+  $name="tabs"
+  tabsList="[all[shadows+tiddlers]tag[$:/tags/BatchOperation]!has[draft.of]]"
+  default="$:/BatchCreation"
+  state="$:/state/tab/batch-operation"
+/>

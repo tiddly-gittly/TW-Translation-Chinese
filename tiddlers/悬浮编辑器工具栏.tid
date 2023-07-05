@@ -1,0 +1,17 @@
+created: 20230705071033553
+creator: 马不前
+modified: 20230705071057029
+modifier: 马不前
+tags: $:/tags/Stylesheet
+title: 悬浮编辑器工具栏
+
+.tc-editor-toolbar {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
+    position: -ms-sticky;
+    position: sticky;
+    top: 50px;
+    background: fafaf1;
+    z-index: 500;
+}

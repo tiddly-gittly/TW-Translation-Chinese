@@ -1,0 +1,15 @@
+created: 20230601130625349
+creator: 马不前
+modified: 20230607150037716
+modifier: 马不前
+tags: $:/tags/Stylesheet tiddlywiki
+title: 中英文字体
+type: text/vnd.tiddlywiki
+
+html body, .tc-sidebar-scrollable-backdrop {
+	font-family: "Arvo","LXGW WenKai Lite", "Times";
+}
+
+.tc-page-controls svg {
+	<<filter "drop-shadow(1px 1px 2px rgba(255,255,255,0.9))">>
+}
