@@ -1,6 +1,176 @@
 created: 20230705103013752
 creator: 马不前
-modified: 20230705103105015
+modified: 20230705110129366
 modifier: 马不前
 tags: TableOfContents
 title: The Book of  Tiddlywiki
+
+"""
+- 1 Introduction
+   - 1.1 Key points
+   - 1.2 What is tiddlywiki
+   - 1.3 Starting with tiddlywiki
+   - 1.4 Reasons to use tiddlywiki
+   - 1.5 Elements of TW
+      - 1.5.1 The screen
+      - 1.5.2 Tiddlers
+      - 1.5.3 The Story River
+      - 1.5.4 Tags
+      - 1.5.5 Fields
+      - 1.5.6 Text format
+      - 1.5.7 Transclusion
+      - 1.5.8 Templates
+      - 1.5.9 Filters
+      - 1.5.10 Macros and widgets
+      - 1.5.11 Mechanisms
+      - 1.5.12 Lists
+- 2 Using tiddlywiki
+   - 2.1 The philosophy of Tiddlywiki
+   - 2.2 Planning your wiki
+   - 2.3 Organizing microcontent with links
+   - 2.4 Personalize Tiddlywiki
+   - 2.5 Importing content
+- 3 Loading tiddlywiki in the browser
+   - 3.1 Key points
+   - 3.2 Introduction
+   - 3.3 Architecture
+   - 3.4 Starting Tiddlywiki
+   - 3.5 Tiddlers as Basic Coding Elements
+   - 3.6 The Tiddlers Store
+- 4 Mechanisms
+   - 4.1 Key points
+   - 4.2 Alert Mechanism
+   - 4.3 Draft Mechanism
+   - 4.4 Drag and Drop Mechanism
+   - 4.5 History Mechanism
+   - 4.6 Info Mechanism
+   - 4.7 Plugin Mechanism
+   - 4.8 Popup Mechanism
+- 5 Components of the tiddlywiki screen
+   - 5.1 Key points
+   - 5.2 The TW whole screen
+      - 5.2.1 The story river
+      - 5.2.2 The right sidebars
+   - 5.3 Drawing its interface
+- 6 Page and tiddler layout customization
+   - 6.1 Modifying Page Layout with System Tags
+   - 6.2 Modifying Page Layout with CSS
+   - 6.3 Modifying Tiddler Layout with System Tags
+   - 6.4 Modifying Tiddler Layout with CSS
+- 7 Customize the TW screen
+   - 7.1 Key points
+   - 7.2 Introduction
+   - 7.3 PageTemplate
+   - 7.4 ViewTemplate
+      - 7.4.1 Example
+   - 7.5 EditTemplate
+   - 7.6 Formating with CSS
+      - 7.6.1 Example
+   - 7.7 Create a loading message
+   - 7.8 Create a new button at the toolbars
+      - 7.8.1 How to do it
+   - 7.9 Add a new global keyboard shortcut
+      - 7.9.1 How to do it
+   - 7.10 Creating a left menu
+      - 7.10.1 Configure the story river position
+      - 7.10.2 Create the tiddler menu
+      - 7.10.3 Create the styles for the left menu
+      - 7.10.4 Create the entries for the left menu
+      - 7.10.5 The next step
+- 8 Inside a tiddler
+   - 8.1 Key points
+   - 8.2 Types of tiddlers
+      - 8.2.1 The tiddler type field
+   - 8.3 Normal tiddler
+   - 8.4 Plugin tiddler
+   - 8.5 Tag tiddler
+   - 8.6 Alert tiddler
+   - 8.7 Dictionary tiddler
+   - 8.8 JSON tiddlers
+   - 8.9 CSS tiddlers
+   - 8.10 Template tiddlers
+   - 8.11 Other system tiddlers
+      - 8.11.1 $:/config/EmptyStoryMessage
+   - 8.12 Adding macros and widgets
+- 9 Filters
+   - 9.1 Key points
+   - 9.2 What is a filter?
+   - 9.3 The filter expression
+   - 9.4 Using filters
+   - 9.5 The filter basic step
+   - 9.6 Regular expressions
+      - 9.6.1 Writing regular expressions
+      - 9.6.2 Using regular expressions
+- 10 Macros
+   - 10.1 Key points
+   - 10.2 Introduction
+   - 10.3 Variables and parameters
+      - 10.3.1 Defining variables
+      - 10.3.2 Parameters
+      - 10.3.3 Using variables and parameters
+      - 10.3.4 Javascript macros
+   - 10.4 Using macros
+- 11 Widgets
+   - 11.1 Key points
+   - 11.2 Introduction
+   - 11.3 First approach. The manual way
+   - 11.4 The checkbox widget
+   - 11.5 The $list widget
+      - 11.5.1 Paragraphs in Tiddlylwiki
+   - 11.6 $edit-text widget
+   - 11.7 $button widget
+   - 11.8 Combining widgets
+      - 11.8.1 Collecting information
+      - 11.8.2 Change a tag
+   - 11.9 Writing your own widgets
+      - 11.9.1 Data structures
+         - 11.9.1.1 The parse tree
+         - 11.9.1.2 The widget tree
+         - 11.9.1.3 The dom node tree
+         - 11.9.1.4 The dom
+      - 11.9.2 Code notes
+      - 11.9.3 Code of the $select widget
+- 12 The Tiddlywiki internals
+   - 12.1 The Tiddlywiki architecture
+   - 12.2 The $tw object
+   - 12.3 More information inside Tiddlywiki
+- 13 Plugins
+   - 13.1 Introduction
+      - 13.1.1 Purpose
+      - 13.1.2 Task manager plugin
+      - 13.1.3 Content of the plugin
+   - 13.2 Level 1: Primary
+      - 13.2.1 Button to Create New Task
+      - 13.2.2 Create a List of Unfinished Tasks
+         - 13.2.2.1 List tasks
+      - 13.2.3 Create a List of Finished Tasks
+      - 13.2.4 Put all Sections Together
+      - 13.2.5 Bundle as a Plugin
+      - 13.2.6 The Tinka process
+      - 13.2.7 Distributing Rome Plugin
+      - 13.2.8 Packaging Rome as a Plugin
+      - 13.2.9 Using Rome Plugin
+- 14 Tiddlywiki internationalization
+   - 14.1 Key points
+   - 14.2 Languages internals
+   - 14.3 The new tiddler button
+   - 14.4 Writing international wikis and plugins
+      - 14.4.1 Tiddlywiki support to internationalization
+      - 14.4.2 Translating messages
+      - 14.4.3 Translating messages in you plugin
+- 15 Examples
+   - 15.1 A simple to-do list
+      - 15.1.1 Introduction
+      - 15.1.2 The Todolist plugin
+      - 15.1.3 The Todolist tiddlers
+         - 15.1.3.1 Icons
+         - 15.1.3.2 Information tiddlers
+         - 15.1.3.3 The styles
+         - 15.1.3.4 Templates
+         - 15.1.3.5 The macros
+      - 15.1.4 The Todolist main macros
+   - 15.2 more projects
+- 16 The people of Tiddlywiki
+- 17 Glossary
+- 18 Resources
+"""
