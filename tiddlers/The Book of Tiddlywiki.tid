@@ -1,6 +1,6 @@
 created: 20230705103013752
 creator: 马不前
-modified: 20230705115858490
+modified: 20230705120508614
 modifier: 马不前
 tags: TableOfContents
 title: The Book of Tiddlywiki
@@ -79,17 +79,17 @@ title: The Book of Tiddlywiki
       - 7.10.5 接下来的步骤
 - 8 条目内部
    - 8.1 关键点
-   - 8.2 tiddlers的类型
-      - 8.2.1 tiddler类型字段
-   - 8.3 普通tiddler
-   - 8.4 插件触发器
-   - 8.5 标签触发器
+   - 8.2 条目的类型
+      - 8.2.1 条目的字段
+   - 8.3 普通条目
+   - 8.4 插件条目
+   - 8.5 标签条目
    - 8.6 警示器
-   - 8.7 词典式提示器
+   - 8.7 词典条目
    - 8.8 JSON条目
    - 8.9 CSS条目
-   - 8.10 模板触发器
-   - 8.11 其他系统提示器
+   - 8.10 模板条目
+   - 8.11 其他系统条目
       - 8.11.1 `$:/config/EmptyStoryMessage`
    - 8.12 添加宏和小工具
 - 9 筛选器

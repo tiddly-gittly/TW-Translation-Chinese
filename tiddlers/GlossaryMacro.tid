@@ -1,8 +1,8 @@
 created: 20230705112842167
 creator: 马不前
-modified: 20230705113753662
+modified: 20230705120304379
 modifier: 马不前
-tags: $:/tags/Macro
+tags: $:/tags/Macro 术语集
 title: GlossaryMacro
 
 \define glossary(define,term)
