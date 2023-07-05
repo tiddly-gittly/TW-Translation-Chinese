@@ -1,6 +1,6 @@
 created: 20230705065620473
 creator: 马不前
-modified: 20230705071135255
+modified: 20230705103357983
 modifier: 马不前
 tags: $:/tags/Stylesheet
 title: 修改编辑字体大小
@@ -8,6 +8,6 @@ title: 修改编辑字体大小
 .CodeMirror {
     height: auto;
     font-family: ;
-    font-size: 30px;
-    line-height: 35px;
+    font-size: 25px;
+    line-height: 30px;
 }
