@@ -1,9 +1,9 @@
 created: 20230705112747840
 creator: 马不前
-modified: 20230705112836922
+modified: 20230705114251009
 modifier: 马不前
 tags: 
 title: 术语集
 
-;tiddlywiki
-:dsdf
+<<glossary "TiddlyWiki" "国内翻译成太微，但在本文档中保留英文名。" >>
+<<glossary "Tiddlers" "条目，是构建太微的基本内容。" >>

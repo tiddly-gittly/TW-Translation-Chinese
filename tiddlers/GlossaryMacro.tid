@@ -1,0 +1,13 @@
+created: 20230705112842167
+creator: 马不前
+modified: 20230705113753662
+modifier: 马不前
+tags: $:/tags/Macro
+title: GlossaryMacro
+
+\define glossary(define,term)
+; $define$
+: $term$
+\end
+
+<<glossary "tiddlywiki" "国内翻译成太微，但在本文档中保留英文名。" >>
