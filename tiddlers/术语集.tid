@@ -1,0 +1,11 @@
+created: 20230705112747840
+creator: 马不前
+modified: 20230705120556057
+modifier: 马不前
+tags: OtherThings
+title: 术语集
+
+<<glossary "TiddlyWiki" "国内翻译成太微，但在本文档中保留英文名。" >>
+<<glossary "Tiddlers" "条目，是构建太微的基本内容。" >>
+<<glossary "Mechanism" "机制，指太微里各种机制。">>
+<<glossary "Filter" "翻译成筛选器，与官方中文文档保持一致。">>

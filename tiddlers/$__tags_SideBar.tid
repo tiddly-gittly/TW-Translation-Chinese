@@ -1,6 +1,6 @@
 created: 20230705070642587
 creator: 马不前
-list: $:/core/ui/SideBar/Open $:/core/ui/SideBar/Recent TableOfContents $:/core/ui/SideBar/Tools $:/core/ui/SideBar/More $:/xp/ui/SideBar/BatchOperation
-modified: 20230705070642587
+list: $:/core/ui/SideBar/Open $:/core/ui/SideBar/Recent TableOfContents TheBrain $:/core/ui/SideBar/Tools $:/core/ui/SideBar/More
+modified: 20230705121221369
 modifier: 马不前
 title: $:/tags/SideBar

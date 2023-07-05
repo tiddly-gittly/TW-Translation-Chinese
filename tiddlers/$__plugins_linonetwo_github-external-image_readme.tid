@@ -1,10 +1,12 @@
 creator: LinOnetwo
-title: $:/plugins/linonetwo/github-external-image/canonical-uri-external-image
+title: $:/plugins/linonetwo/github-external-image/readme
 type: text/vnd.tiddlywiki
 
 !! Usage
 
-Please fill in [[$:/GitHub/Repo]] and [[$:/config/linonetwo/github-external-image/tiddler-folder-name]] to get started.
+Please fill in [[$:/GitHub/Repo]] and [[$:/config/linonetwo/github-external-image/tiddler-folder-name]] in settings to get started:
+
+[[Settings|$:/plugins/linonetwo/github-external-image/ControlPanel/Settings]]
 
 Then, on build, all images will be replaced by place holders.
 

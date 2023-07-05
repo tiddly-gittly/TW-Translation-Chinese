@@ -1,0 +1,22 @@
+caption: GithubPagesImage
+tags: $:/tags/ControlPanel/SettingsTab
+title: $:/plugins/linonetwo/github-external-image/ControlPanel/Settings
+type: text/vnd.tiddlywiki
+
+!!! [[Repo|$:/GitHub/Repo]]
+
+This is the user name + / + repo name, e.g. `linonetwo/wiki`
+
+<$edit-text tiddler="$:/GitHub/Repo" field="text" tag=input class="w-100" />
+
+!!! [[Branch|$:/GitHub/Branch]]
+
+This usually is `master` or `main`
+
+<$edit-text tiddler="$:/GitHub/Branch" field="text" tag=input class="w-100" />
+
+!!! [[tiddler-folder-name|$:/config/linonetwo/github-external-image/tiddler-folder-name]]
+
+This usually is just `tiddlers`
+
+<$edit-text tiddler="$:/config/linonetwo/github-external-image/tiddler-folder-name" field="text" tag=input class="w-100" />
