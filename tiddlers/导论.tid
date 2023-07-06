@@ -1,6 +1,6 @@
 created: 20230706073101279
 creator: 马不前
-modified: 20230706084630729
+modified: 20230706121858264
 modifier: 马不前
 original-title: Introduction
 tags: doc TiddlyWiki/Dev
@@ -11,3 +11,5 @@ TiddlyWiki是一个基于wiki应用程序的个人笔记本应用程序。除了
 本文档的目的是概述TiddlyWiki应用程序背后的理念，并向读者提供一个架构的概述。这意味着在阅读完本文档后，读者可以了解整个应用程序是如何工作的，以及读者可以在哪些方面扩展应用程序的功能。
 
 ''__<c style="color:Black;">分段概述</c>__''
+
+{{分段概述}}

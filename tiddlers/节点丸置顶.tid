@@ -2,12 +2,12 @@ code-body: yes
 created: 20230604125348466
 creator: 马不前
 list-after: Tiddler Breadcrumbs Template
-modified: 20230703150411896
+modified: 20230706120525463
 modifier: 马不前
 tags: $:/tags/ViewTemplate
 title: 节点丸置顶
 type: text/vnd.tiddlywiki
 
-<div style="font-size: 0.8em;">
+<div style="font-size: 0.9em;">
 <$transclude tiddler={{node-explorer-colorful}} field=title mode=block/>
 </div>

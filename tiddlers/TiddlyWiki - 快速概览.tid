@@ -1,8 +1,8 @@
 created: 20230706074056770
 creator: 马不前
 description: 本节描述了TiddlyWiki应用程序的理念。这应该能让读者对TiddlyWiki的内容有一个大致的了解，并对主要文档的主题作一个简单的介绍。
-list: TiddlyWiki作为单页应用程序 微内核 数据的持久化
-modified: 20230706085115254
+list: TiddlyWiki作为单页应用程序 微内核 数据的持久化 用户界面 模块化
+modified: 20230706123628239
 modifier: 马不前
 original-title: TiddlyWiki - A quick Overview
 sectionnumber: 1
@@ -17,6 +17,6 @@ TiddlyWiki试图克服这些限制和由此产生的缺点，它建立在一些�
 
 <$list filter="[!has[draft.of]has[chapter.of]chapter.of[TiddlyWiki - A quick Overview]tag[doc]sort[sub.num]]">
 
-! <$view field="title"/>
+! <$link><$view field="title"/></$link>
 {{!!text}}
 </$list>
