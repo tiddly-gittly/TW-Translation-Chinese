@@ -1,14 +1,14 @@
 chapter.of: TiddlyWiki - A quick Overview
 created: 20230706074842945
 creator: 马不前
-modified: 20230706085106354
+modified: 20230706122259539
 modifier: 马不前
 original-title: Microkernel
 sub.num: 2
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 微内核
 
-在TiddlyWiki的世界里，所有东西都是一个<c style="color:Red;">条目</c>。
+在TiddlyWiki的世界里，任何东西都是一个<c style="color:Red;">条目</c>。
 
 甚至应用逻辑也被存储在标记为 "application/javascript "的条目中。
 
