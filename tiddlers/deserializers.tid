@@ -1,0 +1,13 @@
+created: 20230706080657747
+creator: 马不前
+modified: 20230706084115847
+modifier: 马不前
+tags: word
+title: deserializers
+
+这是一个专业术语，通常翻译有“解释串器”、“反序列化”、“并行串”等翻译。这里一般翻译成`反序列化`。
+
+反序列化主要是指把字符串内容转换成原始对象。下面是一些参考链接。
+
+* MDN：[[JSON|https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON]]
+* stackoverflow：[[stackoverflow|https://stackoverflow.com]]上的回答[[What is deserialize and serialize in JSON?|https://stackoverflow.com/questions/3316762/what-is-deserialize-and-serialize-in-json]]

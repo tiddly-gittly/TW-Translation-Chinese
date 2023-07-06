@@ -1,0 +1,31 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20230706074842945
+creator: 马不前
+modified: 20230706085106354
+modifier: 马不前
+original-title: Microkernel
+sub.num: 2
+tags: doc [[TiddlyWiki - 快速概览]]
+title: 微内核
+
+在TiddlyWiki的世界里，所有东西都是一个<c style="color:Red;">条目</c>。
+
+甚至应用逻辑也被存储在标记为 "application/javascript "的条目中。
+
+这些包含应用逻辑的条目被称为模块，一个CommonJS兼容的模块系统负责将各个模块组装成TiddlyWiki应用程序。
+
+其结果是一棵代表整个TiddlyWiki应用程序的树，其中包含模块条目、数据条目和一些JavaScript函数和对象。
+
+只有TiddlyWiki的一小部分不作为条目管理，即微内核。
+
+当应用程序启动时，微内核是第一个运行的东西，它将一些初始的对象和函数放入应用程序树中，这些对象和函数需要用来加载和管理条目。
+
+在微内核建立了这个初始应用树之后，应用程序的其余部分可以作为模块条目被加载。
+
+除了一些实用的功能之外，最重要的由启动内核贡献的对象是"$tw.wiki"，由JavaScript结构和函数组成，用来存储和管理加载的条目。
+
+在其他方面，这个存储空间可以用来添加新的条目，移除条目和通过名字检索条目。
+
+> {{apptree.svg}}
+
+> 微内核构建了一个初始的$tw对象，包含了所需的结构和功能。

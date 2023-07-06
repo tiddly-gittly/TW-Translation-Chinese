@@ -1,0 +1,23 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20230706074411705
+creator: 马不前
+modified: 20230706085106353
+modifier: 马不前
+original-title: TiddlyWiki as Single Page Application
+sub.num: 1
+tags: doc [[TiddlyWiki - 快速概览]]
+title: TiddlyWiki作为单页应用程序
+
+TiddlyWiki建立在一些基本概念之上。首先，TiddlyWiki不应该被看作是一个像传统的服务器端生成的网页那样的动态网页。相反，TiddlyWiki可以被看作是一个完全用JavaScript编写的应用程序，并使用HTML5和CSS3来渲染图形用户界面。这样，TiddlyWiki可以在任何JavaScript环境中执行，如浏览器或node.js实例，同时保持一个简单应用程序的优势。
+其中一个优点是，TiddlyWiki不需要像传统的网络应用程序那样去模拟一个应用程序的状态。
+
+第二个想法是关于应用程序数据的存储。与传统的网络应用程序相比，TiddlyWiki并不将数据存储在外部数据库中，而是简单地使用JavaScript中已有的本地数据结构将Tiddlers（TiddlyWiki应用程序的基本（原子）元素）存储在内存中。额外的核心模块提供了一种在简单的HTML div元素中持久化这种存储的方法。
+
+仅仅通过建立在这些简单和基本的概念上、
+
+* TiddlyWiki能够通过使用div元素作为数据容器，将应用数据存储在单个HTML页面中。
+*TTW能够在同一个单一的HTML页面中存储应用程序代码（JavaScript）。
+*TiddlyWiki可以在任何JavaScript环境下执行，如浏览器。
+
+这些要点已经使TW能够作为一个离线启用的单文件网络应用程序使用。
+另外，通过使用服务器端的node.js环境运行相同的TiddlyWiki应用程序，TiddlyWiki可以作为一个在线网络应用程序使用。这在服务器端通过提供一个额外的模块将Tiddlers持久化为纯文本文件来实现，在客户端通过一个模块将本地数据存储与node.js服务器同步。
