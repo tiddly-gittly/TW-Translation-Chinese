@@ -1,0 +1,13 @@
+created: 20230706073101279
+creator: 马不前
+modified: 20230706084630729
+modifier: 马不前
+original-title: Introduction
+tags: doc TiddlyWiki/Dev
+title: 导论
+
+TiddlyWiki是一个基于wiki应用程序的个人笔记本应用程序。除了一个静态网站，TiddlyWiki还被实现为一个单页应用程序。这是一种建立丰富的互联网应用的方法，它包括将应用逻辑放入网页，使其动态化的可能性。此外，这意味着整个应用程序在一个HTML文件中交付，由源代码组成，可以动态地改变应用程序的视图和行为，以及应用程序的数据。在运行期间，没有任何东西必须从服务器加载到TiddlyWiki应用程序中。HTML文件包含启动应用程序所需的一切。TiddlyWiki是高度可定制的，因为有一个非常复杂的模块概念。除了一个用JavaScript编写的微内核外，整个应用程序由一个叫做tiddlers的数据结构和一个叫做wikiText的标记语言组成。甚至模块也是作为tiddlers实现的。
+
+本文档的目的是概述TiddlyWiki应用程序背后的理念，并向读者提供一个架构的概述。这意味着在阅读完本文档后，读者可以了解整个应用程序是如何工作的，以及读者可以在哪些方面扩展应用程序的功能。
+
+''__<c style="color:Black;">分段概述</c>__''
