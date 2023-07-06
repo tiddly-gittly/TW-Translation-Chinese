@@ -1,9 +1,9 @@
 # TW-Translation-Chinese
 
-本仓库是用来放太微翻译文档的。
+本仓库是用来放太微翻译文档的。翻译只作为参考，具体内容还需阅读原文。可通过修改日期旁边的原标题链接跳转到原文网站。
 
 - 在线网址：https://tiddly-gittly.github.io/TW-Translation-Chinese/
-- 可离线版本链接：https://tiddly-gittly.github.io/TW-Translation-Chinese/offline.html 
+- 可离线版本链接：https://tiddly-gittly.github.io/TW-Translation-Chinese/offline.html
 
 # 如何贡献
 

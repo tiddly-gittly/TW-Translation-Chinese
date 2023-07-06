@@ -1,11 +1,11 @@
 chapter.of: Microkernel Architecture
 created: 20230706143425509
 creator: 马不前
-modified: 20230706170700581
+modified: 20230706171236510
 modifier: 马不前
 original-title: Microkernel Description
 sub.num: 1
-tags: doc new
+tags: doc new 微内核架构
 title: 微内核描述
 
 TiddlyWiki应用程序基于微内核架构，这意味着它将最基本的核心功能与扩展功能分离开来。微内核提供加载外部扩展以扩展其核心功能的能力。
@@ -25,7 +25,6 @@ TiddlyWiki微内核提供了一些辅助方法，但其主要任务是提供用�
 
 下图显示了TiddlyWiki内核的启动过程。bootprefix负责准备内核在不同的引擎上启动，例如浏览器和Node.js。之后，包括微内核在内的主启动过程，通过startup-method开始。成功运行这些步骤后，加载主架构。最后一步是运行启动模块。稍后将描述这些模块。简言之，这是TiddlyWiki微内核可以通过自定义功能进行扩展的地方。在内核的引导过程完成后，每个标记为"startup"的模块都会启动。
 
-> 
-{{StartupTimeline.png}}
+> {{StartupTimeline.png}}
 
 > 微内核构建了基本的功能和结构，并启动了一个启动序列。

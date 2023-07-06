@@ -1,0 +1,29 @@
+chapter.of: Microkernel Architecture
+created: 20230706171713026
+creator: 马不前
+modified: 20230706172612127
+modifier: 马不前
+original-title: Module System
+sub.num: 3
+tags: doc 微内核架构
+title: 模块系统
+
+在引导内核提供用于加载条目的功能之后，TiddlyWiki应用程序的其余部分作为模块加载。
+
+其中一个模块是具有`application/javascript`类型的条目，其中包含与CommonJS兼容的JavaScript代码。这意味着单个模块通过名为`export`的变量提供其公共结构和函数。其他模块可以通过使用全局的`require`函数来获取这些结构和函数。
+
+```js
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
+// ...
+ButtonWidget.prototype = new Widget();
+```
+
+在大多数情况下，这些模块条目被打包成插件。
+
+遵循“一切都是条目”的概念，插件是一个包含一组其他条目的条目。这些条目首先被转换为JSON结构，然后成为插件条目的内容。
+
+这不仅限于模块条目。一个插件可以包含任何条目。开发人员可以将简单的模块、微件、用WikiText编写的UI，甚至是新的筛选器运算符或扩展到WikiText解析器放入一个插件条目中。事实上，整个TiddlyWiki核心都以单个插件的形式提供。在插件中提供的条目称为影子条目，无法编辑。相反，当尝试编辑影子条目时，会创建一个同名的新条目，然后该新条目“覆盖”了影子条目。
+
+与直接要求特定模块不同，模块开发者可以通过设置包含条目的字段“module-type”来指定他正在开发的模块的类型。
+
+例如，通过提供一个“saver”的模块类型，TiddlyWiki知道该模块实现了保存整个维基的方式，当用户点击保存按钮时，TiddlyWiki会自动将提供的模块视为保存当前状态的方法。

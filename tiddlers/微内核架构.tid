@@ -1,7 +1,8 @@
 created: 20230706141017007
 creator: 马不前
 description: TiddlyWiki的核心是它的微内核。本节将描述微内核中包括哪些基本的机制，以及如何加载附加模块。
-modified: 20230706144358850
+list: 微内核描述 数据模型
+modified: 20230706171312977
 modifier: 马不前
 original-title: Microkernel Architecture
 sectionnumber: 2
