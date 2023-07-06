@@ -1,0 +1,17 @@
+created: 20230706141017007
+creator: 马不前
+description: TiddlyWiki的核心是它的微内核。本节将描述微内核中包括哪些基本的机制，以及如何加载附加模块。
+modified: 20230706142707204
+modifier: 马不前
+original-title: Microkernel Architecture
+sectionnumber: 2
+tags: section doc TiddlyWiki/Dev
+title: 微内核架构
+
+本节描述了TiddlyWiki内核的结构。TiddlyWiki是基于一系列微内核，每个微内核都提供了某个特定功能。这个设计是为了给定制TiddlyWiki引入更干净的机制。本节还描述了TiddlyWiki的数据模型，称为条目。它给出了一个模块系统的概述，开发者可以用它来扩展TiddlyWiki应用程序的功能。
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[Microkernel Architecture]tag[doc]sort[sub.num]]">
+
+! <$link><$view field="title"/></$link>
+{{!!text}}
+</$list>
