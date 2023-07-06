@@ -1,8 +1,8 @@
 created: 20230705120942978
 creator: 马不前
-modified: 20230705121034388
+modified: 20230706175806393
 modifier: 马不前
 tags: $:/tags/SideBar
 title: TheBrain
 
-<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TheBrain.js" aliasField="caption" levels=2 focussedTiddler=<<currentiddler>> $height="500px" $width="100%" graphTitle="Graph" />
+<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TheBrain.js" aliasField="caption" levels=1 focussedTiddler=<<currentiddler>> $height="500px" $width="100%" graphTitle="Graph" />
