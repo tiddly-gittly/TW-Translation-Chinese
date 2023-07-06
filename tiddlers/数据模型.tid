@@ -1,0 +1,23 @@
+chapter.of: Microkernel Architecture
+created: 20230706171158870
+creator: 马不前
+modified: 20230706171603047
+modifier: 马不前
+original-title: Datamodel
+sub.num: 2
+tags: doc new 微内核架构
+title: 数据模型
+
+微内核创建了一个TiddlyWiki特定的数据结构，称为条目。在这里，您需要区分不同的条目定义。在架构视图中，一个条目是一个持有一些数据的JavaScript对象。从整体概念上讲，条目类似于普通维基应用程序（如维基百科）中的维基页面。在本节中，我们描述了一个条目对象的架构视图。下面的列表显示了一个条目对象的JSON表示。在TiddlyWiki的运行时，一切都以这样的对象形式保存。在没有任何插件的情况下，架构无法持久化任何类型的数据。所有数据都存储在一个存储器中。这个存储器是一个JavaScript对象，类似于一个带有一组键值对的Map。每个条目的名称作为地图中的键，JavaScript对象作为值。条目概念是TiddlyWiki中的主要数据模型，从数据到插件的所有内容都被存储为一个条目。
+
+```javascript
+{"fields":{
+   "text":"example Text",
+   "title":"Infrastruktur",
+   "tags":["vs"],
+   "modified":"2014-07-01T16:25:01.230Z",
+   "myField":"myFieldValue",
+   "created":"2014-07-01T16:22:10.673Z"
+   }
+}
+```

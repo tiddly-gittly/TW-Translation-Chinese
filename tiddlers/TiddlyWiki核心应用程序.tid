@@ -1,0 +1,25 @@
+created: 20230706172701858
+creator: 马不前
+description: 在解释了微内核之后，本节重点介绍核心插件。它描述了核心的中心模块，并解释了它们如何共同工作来构建一个单一文件应用程序。
+modified: 20230706175042186
+modifier: 马不前
+original-title: TiddlyWiki Core Application
+sectionnumber: 3
+tags: new doc section TiddlyWiki/Dev
+title: TiddlyWiki核心应用程序
+
+微内核通过提供基本的维基存储和简化的条目模型来构建管理条目的基本功能。
+
+微内核还可以加载一组（解密后的）条目，并提供一个模块系统，使开发人员能够通过模块条目和插件扩展内核并添加功能。
+
+例如，TiddlyWiki核心应用程序以单个插件的形式提供。在这部分，我们将重点介绍TiddlyWiki核心插件。在描述如何将新功能直接添加到维基存储之后，我们将展示核心插件如何实现条目的持久化。最后一部分描述了TiddlyWiki如何通过条目和WikiText构建用户界面。
+
+> {{arch.svg}}
+
+> TiddlyWiki应用程序由微内核和多个模块构建而成，形成完整的应用程序。
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[TiddlyWiki Core Application]tag[doc]sort[sub.num]]">
+
+! <$link><$view field="title"/></$link>
+{{!!text}}
+</$list>

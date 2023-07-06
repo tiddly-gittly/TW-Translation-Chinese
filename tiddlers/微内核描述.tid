@@ -1,0 +1,30 @@
+chapter.of: Microkernel Architecture
+created: 20230706143425509
+creator: 马不前
+modified: 20230706171236510
+modifier: 马不前
+original-title: Microkernel Description
+sub.num: 1
+tags: doc new 微内核架构
+title: 微内核描述
+
+TiddlyWiki应用程序基于微内核架构，这意味着它将最基本的核心功能与扩展功能分离开来。微内核提供加载外部扩展以扩展其核心功能的能力。
+
+TiddlyWiki微内核提供了一些辅助方法，但其主要任务是提供用于存储数据和加载扩展插件的基本功能。在TiddlyWiki架构中，所有内容都以条目的形式存储。关于TiddlyWiki架构在应用程序运行时如何存储数据的详细信息可以在[[数据模型]]中找到，而这个数据模型正是由内核提供的。
+
+内核还准备了存储和创建这些条目的功能。为此，在运行时它创建了一个存储库来管理这些条目。如果没有任何扩展，微内核将无法持久化这些条目，这意味着数据仅保存在RAM中。以下是内核提供的一些在内存中处理条目的示例接口：
+
+*$tw.Tiddler = function(/* [fields,] fields */)
+*$tw.Wiki.addTiddler = function(tiddler)
+*$tw.Wiki.deleteTiddler = function(title)
+*$tw.Wiki.getTiddler = function(title)
+
+微内核的另一个功能是能够加密和解密一段文本。为了提供这个功能，微内核内置了一个密码保险库来存储当前使用的密码。用于加密和解密数据的库是[[StandfordJavaScript Crypto Libary|http://bitwiseshiftleft.github.io/sjcl/]]。这个功能允许微内核从TiddlyWiki文件中加载加密的条目，同时也允许扩展插件使用加密功能，例如持久化一个加密的TiddlyWiki。
+
+为了加载扩展插件，微内核准备了一个接口来加载和执行这些插件。因此，微内核提供了一些反序列化器以提取不同类型的条目，例如从TiddlyWiki文件中提取。在微内核中安装了许多不同的反序列化器。这些反序列化器的存在是因为每个条目可以包含不同类型的数据，例如条目可以包含JavaScript代码、纯文本、HTML文本或JSON数据。即使在打包为 TiddlyWiki应用程序之后，每个插件也会作为一个条目存储在TiddlyWiki中。这个功能在[[模块系统]]部分中有详细说明。因此，微内核需要解析所有不同类型的条目的功能。为了区分不同类型的条目，每个条目都有一个由微内核生成的文件类型。
+
+下图显示了TiddlyWiki内核的启动过程。bootprefix负责准备内核在不同的引擎上启动，例如浏览器和Node.js。之后，包括微内核在内的主启动过程，通过startup-method开始。成功运行这些步骤后，加载主架构。最后一步是运行启动模块。稍后将描述这些模块。简言之，这是TiddlyWiki微内核可以通过自定义功能进行扩展的地方。在内核的引导过程完成后，每个标记为"startup"的模块都会启动。
+
+> {{StartupTimeline.png}}
+
+> 微内核构建了基本的功能和结构，并启动了一个启动序列。
