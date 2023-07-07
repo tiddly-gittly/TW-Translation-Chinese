@@ -7,6 +7,7 @@ original-title: Microkernel
 sub.num: 2
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 微内核
+type: text/vnd.tiddlywiki
 
 在TiddlyWiki的世界里，任何东西都是一个<c style="color:Red;">条目</c>。
 

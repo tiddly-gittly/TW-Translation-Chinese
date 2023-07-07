@@ -4,6 +4,7 @@ modified: 20230705071057029
 modifier: 马不前
 tags: $:/tags/Stylesheet
 title: 悬浮编辑器工具栏
+type: text/vnd.tiddlywiki
 
 .tc-editor-toolbar {
     position: -webkit-sticky;

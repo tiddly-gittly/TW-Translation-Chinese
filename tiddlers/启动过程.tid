@@ -1,0 +1,28 @@
+created: 20230707013441934
+modified: 20230707015648778
+tags: doc section new TiddlyWiki/Dev
+title: 启动过程
+type: text/vnd.tiddlywiki
+
+具有`module-type: startup`（即“模块类型：启动”）的模块：启动必须导出一个名为`startup`（即“启动”）的函数，并且可以通过导出名称属性来识别这个模块。启动功能将由引导过程末尾的启动内核执行。
+
+
+```
+// 从 boot.js:
+// 收集所有启动模块
+$tw.boot.remainingStartupModules = []; // Array of startup modules
+$tw.modules.forEachModuleOfType("startup",function(title,module) {
+	if(module.startup) {
+		$tw.boot.remainingStartupModules.push(module);
+	}
+});
+// 跟踪执行启动任务
+$tw.boot.executedStartupModules = Object.create(null);
+$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
+// 重复执行下一个符合条件的任务
+$tw.boot.executeNextStartupTask();
+```
+
+`ExecuteNextStartupTask ()`将执行其余 `StartupModule` 中的其余启动模块。启动模块可以导出`前`和（或）`后`的变量，每个变量包含其他启动模块的名称数组。`ExecuteNextStartupTask ()`将使用此信息以正确的顺序执行模块。
+
+可以通过导出`synchronous = true`将启动模块标记为同步。如果 sync 设置为 false，回调函数将作为执行启动函数的第一个参数。启动函数必须调用这个函数，来让后续的启动模块得以执行。当启动函数本身使用异步调用时，这是必要的。

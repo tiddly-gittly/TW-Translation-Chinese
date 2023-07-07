@@ -4,6 +4,7 @@ modified: 20230705120304379
 modifier: 马不前
 tags: $:/tags/Macro 术语集
 title: GlossaryMacro
+type: text/vnd.tiddlywiki
 
 \define glossary(define,term)
 ; $define$

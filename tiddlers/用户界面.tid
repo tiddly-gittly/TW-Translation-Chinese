@@ -7,6 +7,7 @@ original-title: The User Interface
 sub.num: 4
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 用户界面
+type: text/vnd.tiddlywiki
 
 遵循 "任何东西都是条目"的概念，甚至UI也由条目组成。
 

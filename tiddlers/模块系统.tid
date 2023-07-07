@@ -7,6 +7,7 @@ original-title: Module System
 sub.num: 3
 tags: doc 微内核架构
 title: 模块系统
+type: text/vnd.tiddlywiki
 
 在引导内核提供用于加载条目的功能之后，TiddlyWiki应用程序的其余部分作为模块加载。
 

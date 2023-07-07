@@ -4,6 +4,7 @@ modified: 20230705103357983
 modifier: 马不前
 tags: $:/tags/Stylesheet
 title: 修改编辑字体大小
+type: text/vnd.tiddlywiki
 
 .CodeMirror {
     height: auto;

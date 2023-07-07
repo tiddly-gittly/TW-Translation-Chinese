@@ -7,6 +7,7 @@ original-title: TiddlyWiki as Single Page Application
 sub.num: 1
 tags: doc [[TiddlyWiki - 快速概览]]
 title: TiddlyWiki作为单页应用程序
+type: text/vnd.tiddlywiki
 
 TiddlyWiki建立在一些基本概念之上。首先，TiddlyWiki不应该被看作是一个像传统的服务器端生成的网页那样的动态网页。相反，TiddlyWiki可以被看作是一个完全用JavaScript编写的应用程序，并使用HTML5和CSS3来渲染图形用户界面。这样，TiddlyWiki可以在任何JavaScript环境中执行，如浏览器或node.js实例，同时保持一个简单应用程序的优势。
 其中一个优点是，TiddlyWiki不需要像传统的网络应用程序那样去模拟一个应用程序的状态。

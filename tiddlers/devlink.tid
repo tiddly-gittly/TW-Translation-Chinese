@@ -5,6 +5,7 @@ modified: 20230706135508127
 modifier: 马不前
 tags: $:/tags/Macro $:/tags/ViewTemplate/Subtitle
 title: devlink
+type: text/vnd.tiddlywiki
 
 \define devlink(item,link)
 <a href="$link$/#$item$">{{!!original-title}}</a>

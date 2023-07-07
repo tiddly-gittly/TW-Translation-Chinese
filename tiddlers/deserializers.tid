@@ -4,6 +4,7 @@ modified: 20230706084115847
 modifier: 马不前
 tags: word
 title: deserializers
+type: text/vnd.tiddlywiki
 
 这是一个专业术语，通常翻译有“解释串器”、“反序列化”、“并行串”等翻译。这里一般翻译成`反序列化`。
 

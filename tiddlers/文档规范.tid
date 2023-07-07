@@ -4,6 +4,7 @@ modified: 20230706074043969
 modifier: 马不前
 tags: TW-Translation-Chinese
 title: 文档规范
+type: text/vnd.tiddlywiki
 
 标题写中文。虽然太微官方文档翻译时标题写英文的，然后在caption字段里写中文，但那样写链接时，也需要写英文，就比较麻烦。再加上我们这些基本上是写好的，不会有太大的变化，所以就还是写中文好了。但我们添加`original-title`字段表示原标题。方便其他人查找。
 

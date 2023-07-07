@@ -7,6 +7,7 @@ original-title: Modularization
 sub.num: 5
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 模块化
+type: text/vnd.tiddlywiki
 
 整个应用程序基本上是由三部分组成的。首先，微内核提供了处理条目的基本功能。第二部分是代表核心功能的条目。例如，这些模块通过更复杂的功能、UI 条目微件模块、WikiText解析器、复杂的反序列化器、保存器、同步适配器等扩展存储。
 
