@@ -1,0 +1,15 @@
+chapter.of: Extending the Store
+created: 20230707054538970
+creator: WhiteFall
+modified: 20230707060539632
+modifier: WhiteFall
+original-title: Caching
+sub.num: 2
+tags: doc new
+title: 缓存
+
+核心插件为wiki存储添加了两个缓存：全局缓存和每个tiddler的缓存。全局缓存在任何tiddler更改时都会被清除，而tiddler缓存只有在相关tiddler更改时才会被清除。tiddler缓存的想法是，有时我们希望从一个tiddler计算信息，但不希望每次需要这些信息时都重新计算。想象一个包含指向其他tiddler的链接的tiddler，我们想要得到链接tiddler的列表（LinksFilter）。使用tiddler缓存，我们可以解析WikiText，提取链接的tiddler，并将该列表放入缓存中。在tiddler更改之前，可以使用缓存来访问该信息的下一个请求。
+
+全局缓存也遵循相同的思路。例如，当解析[[filter|Tags and Filter Mechanism]]字符串并构建匹配tiddler列表时，可以将该列表放入全局缓存中以供以后重用，直到存储中发生变化。
+
+与[[事件机制]]类似，缓存需要在微内核中添加钩子函数。当一个tiddler更改时，微内核调用``clearGlobalCache()``和``clearCache(tiddlertitle)``。核心的缓存机制覆盖了这些函数。提供缓存系统的函数是通过[[wikimethod module type]]添加的。
