@@ -1,7 +1,8 @@
 created: 20230706172701858
 creator: 马不前
 description: 在解释了微内核之后，本节重点介绍核心插件。它描述了核心的中心模块，并解释了它们如何共同工作来构建一个单一文件应用程序。
-modified: 20230708034547727
+list: 启动过程 扩展存储 事件机制
+modified: 20230708043552663
 modifier: 马不前
 original-title: TiddlyWiki Core Application
 sectionnumber: 3

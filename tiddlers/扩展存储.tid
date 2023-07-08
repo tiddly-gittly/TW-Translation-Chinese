@@ -1,7 +1,10 @@
 created: 20230707015908799
-modified: 20230708034304266
+creator: 马不前
+list: 事件机制 缓存
+modified: 20230708043657252
+modifier: 马不前
 original-title: Extending the Store
-tags: doc new section TiddlyWiki/Dev [[TiddlyWiki Core Application]]
+tags: doc new section TiddlyWiki核心应用程序
 title: 扩展存储
 type: text/vnd.tiddlywiki
 
