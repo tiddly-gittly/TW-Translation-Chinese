@@ -7,6 +7,7 @@ modified: 20230705110025907
 modifier: 马不前
 tags: $:/tags/ViewTemplate
 title: Tiddler Breadcrumbs Template
+type: text/vnd.tiddlywiki
 use_apex_tag: true
 
 \define yetAgain()

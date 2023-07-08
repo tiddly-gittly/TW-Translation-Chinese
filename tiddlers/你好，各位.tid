@@ -5,6 +5,7 @@ modifier: 马不前
 original-title: HelloThere
 tags: TiddlyWiki/Dev
 title: 你好，各位
+type: text/vnd.tiddlywiki
 
 欢迎来到[[TiddlyWiki|https://tiddlywiki.com/]]的开发者文档。它目前是一项正在进行中的工作，因为来自两个不同来源的材料被改编和合并，此外还增加了原创内容：
 

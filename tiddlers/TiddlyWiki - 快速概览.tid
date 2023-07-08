@@ -8,6 +8,7 @@ original-title: TiddlyWiki - A quick Overview
 sectionnumber: 1
 tags: doc section TiddlyWiki/Dev
 title: TiddlyWiki - 快速概览
+type: text/vnd.tiddlywiki
 
 传统的网络应用受~HTTP-Concepts的约束，包括传输数据的无状态请求。在这些应用中，状态通常是通过使用会话来模拟的，这些会话需要在客户端，特别是在服务器端处理。
 

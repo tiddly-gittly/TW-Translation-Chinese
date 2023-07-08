@@ -1,0 +1,14 @@
+created: 20230707015908799
+modified: 20230708034304266
+original-title: Extending the Store
+tags: doc new section TiddlyWiki/Dev [[TiddlyWiki Core Application]]
+title: 扩展存储
+type: text/vnd.tiddlywiki
+
+{{事件机制}}
+
+{{缓存}}
+
+{{系统条目}}
+
+{{标签和筛选器机制}}

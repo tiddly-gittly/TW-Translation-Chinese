@@ -7,6 +7,7 @@ original-title: Microkernel Description
 sub.num: 1
 tags: doc new 微内核架构
 title: 微内核描述
+type: text/vnd.tiddlywiki
 
 TiddlyWiki应用程序基于微内核架构，这意味着它将最基本的核心功能与扩展功能分离开来。微内核提供加载外部扩展以扩展其核心功能的能力。
 

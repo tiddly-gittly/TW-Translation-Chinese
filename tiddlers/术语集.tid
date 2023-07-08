@@ -4,6 +4,7 @@ modified: 20230706123418445
 modifier: 马不前
 tags: OtherThings
 title: 术语集
+type: text/vnd.tiddlywiki
 
 <<glossary "TiddlyWiki" "国内翻译成太微，但在本文档中保留英文名。" >>
 <<glossary "[[Tiddler/Tiddlers|Tiddlers]]" "条目，是构建太微的基本内容。" >>

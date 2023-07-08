@@ -7,6 +7,7 @@ original-title: Tiddler as Basic Element
 sub.num: 6
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 条目是基本组成部分
+type: text/vnd.tiddlywiki
 
 通过将应用程序的几乎每一部分都作为条目来管理，应用程序只需要提供一些基本的功能来管理各个条目，加载和持久化它们，将它们渲染成HTML输出，并提供一种方法来储存对条目的修改。
 

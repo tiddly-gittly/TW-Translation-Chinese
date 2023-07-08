@@ -5,6 +5,7 @@ modifier: 马不前
 original-title: Section Overview
 tags: doc
 title: 分段概述
+type: text/vnd.tiddlywiki
 
 <dl>
 <$list filter="[!has[draft.of]tag[doc]tag[section]sort[sectionnumber]]">

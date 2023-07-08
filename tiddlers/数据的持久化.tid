@@ -7,6 +7,7 @@ original-title: Data Persistence
 sub.num: 3
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 数据的持久化
+type: text/vnd.tiddlywiki
 
 应用程序的下一个重要部分是[[反序列化|deserializers]]。反序列化负责从各种来源加载条目。例如，微内核提供的一个反序列化可以从当前DOM树中加载新的条目。
 

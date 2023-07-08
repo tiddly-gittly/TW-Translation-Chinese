@@ -7,6 +7,7 @@ original-title: WikiText Markup
 sub.num: 7
 tags: doc [[TiddlyWiki - 快速概览]]
 title: 维基文本语法
+type: text/vnd.tiddlywiki
 
 WikiText是一种标记语言，专门为TiddlyWiki应用程序的要求而创建。它以[[Markdown|http://daringfireball.net/projects/markdown]]为基础，但用一些TiddlyWiki的特定功能进行了扩展。 一方面，它是一种文本到HTML的转换语言，另一方面，它被用来提供TiddlyWiki的互动功能。这种语言的目的是让软件的用户专注于写作。WikiText用于在TiddlyWiki应用程序中格式化条目。WikiText语法的标签可以在标准文本输入字段中使用。
 
