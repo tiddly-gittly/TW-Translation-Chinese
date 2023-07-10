@@ -1,0 +1,9 @@
+code-body: yes
+created: 20230710065432946
+creator: 马不前
+modified: 20230710070508776
+modifier: 马不前
+tags: Configuration $:/tags/ViewTemplate/Subtitle
+title: 贡献者显示
+
+贡献者 <$link to={{!!creator}}/>
