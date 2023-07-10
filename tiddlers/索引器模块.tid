@@ -1,0 +1,57 @@
+created: 20230710065103773
+creator: WhiteFall
+modified: 20230710065309884
+modifier: WhiteFall
+tags: dev 模块类型
+title: 索引器模块
+
+索引器模块维护着以更高效的方式组织的Tiddler索引，通常用于加速某些过滤器操作等。例如，标签索引器会维护一个查找表，列出具有特定标签的Tiddler，这比遍历整个Wiki并询问每个Tiddler是否具有所需标签要快得多！
+
+索引器模块的`module-type`为`indexer`，TiddlyWiki附带的索引器可以在`core/modules/indexers`下找到。
+
+! 方法
+
+索引器模块必须导出一个构造函数，该构造函数以当前的wiki对象作为唯一的参数。构造函数构建的对象必须实现以下方法：
+
+!! `init()`
+
+执行索引器所需的任何初始设置。
+
+!! `rebuild()`
+
+从头开始重建索引，通常在对Wiki进行大量更改后执行。
+
+!! `update(updateDescriptor)`
+
+每次添加、修改或删除Tiddler时调用此方法。`updateDescriptor`是一个对象，包含两个字段 - `old`和`new`，分别表示Tiddler更新前和更新后的状态。每个字段本身又有三个字段：
+
+  * `tiddler` - Tiddler的状态（可能为`null`）
+  * `shadow` - 表示Tiddler是否为影子的布尔值
+  * `exists` - 表示Tiddler是否存在的布尔值
+
+例如，假设您有一个索引器`idx`，并创建了一个文本为"test"的Tiddler T - 这将导致索引器的`update`方法被如下调用：
+
+```javascript
+idx.update({
+  old: { tiddler: null, shadow: false, exists: false },
+  new: { tiddler: new $tw.Tiddler({title: 'T', text: 'test'}), shadow: false, exists: true }
+});
+```
+
+如果您将文本从"test"更改为"testing"，`update`将被如下调用：
+
+```javascript
+idx.update({
+  old: { tiddler: new $tw.Tiddler({title: 'T', text: 'test'}), shadow: false, exists: true },
+  new: { tiddler: new $tw.Tiddler({title: 'T', text: 'testing'}), shadow: false, exists: true }
+});
+```
+
+最后，如果删除T，`update`将被如下调用：
+
+```javascript
+idx.update({
+  old: { tiddler: new $tw.Tiddler({title: 'T', text: 'testing'}), shadow: false, exists: true },
+  new: { tiddler: null, shadow: false, exists: false }
+});
+```
