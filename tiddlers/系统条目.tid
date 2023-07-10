@@ -1,0 +1,13 @@
+chapter.of: Extending the Store
+created: 20230710063918148
+creator: WhiteFall
+modified: 20230710075025484
+modifier: WhiteFall
+original-title: System Tiddlers
+sub.num: 3
+tags: doc new 扩展存储
+title: 系统条目
+
+核心插件引入了条目的分离概念。Tiddler模型在整个TiddlyWiki应用程序中起着核心作用，并可以用于各种角色。由于TiddlyWiki用户使用条目（扮演wiki页面的角色），而条目是整个应用程序（包括模块、UI元素等）的构建模块，因此我们需要识别内部条目。
+
+核心插件引入了系统条目的概念。它建立在应用程序内部条目名称以`$:/`开头的约定基础上。然后，核心插件引入了一组新的函数到wiki存储中，用于检索条目，例如`getTiddlers(options)`和`forEachTiddler(callback, options)`。这些函数可以处理存储中的所有条目，但options参数提供了按字段名对条目进行排序并排除具有特定标签的条目的能力。默认情况下，它不返回系统条目。要获取包括系统条目在内的所有条目列表，必须通过options参数显式请求。如果一个函数想向用户呈现条目列表，它可以使用这些新函数，以避免将内部应用程序条目混杂在结果列表中。这些函数通过[[wikimethod模块类型]]添加。
