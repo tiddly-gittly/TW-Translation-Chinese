@@ -1,16 +1,18 @@
+chapter.of: TiddlyWiki Core Application
 created: 20230707013441934
 creator: fcjz
-modified: 20230708043544762
+modified: 20230711004820449
 modifier: 马不前
 original-title: Startup Process
-tags: doc section new TiddlyWiki核心应用程序
+sub.num: 1
+tags: doc TiddlyWiki核心应用程序
 title: 启动过程
 type: text/vnd.tiddlywiki
 
 具有`module-type: startup`（即“模块类型：启动”）的模块：启动必须导出一个名为`startup`（即“启动”）的函数，并且可以通过导出名称属性来识别这个模块。启动功能将由引导过程末尾的启动内核执行。
 
 
-```
+```js
 // 从 boot.js:
 // 收集所有启动模块
 $tw.boot.remainingStartupModules = []; // Array of startup modules
