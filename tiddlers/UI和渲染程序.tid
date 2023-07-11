@@ -1,7 +1,8 @@
 chapter.of: TiddlyWiki Core Application
 created: 20230711023912837
 creator: 马不前
-modified: 20230711025628908
+list: 维基语法 解析器 微件
+modified: 20230711050332607
 modifier: 马不前
 note: 原标题中的Pipeline翻译成程序，原意是管道，但翻译成管道反而无法理解。
 original-title: UI and Rendering Pipeline
@@ -19,3 +20,9 @@ title: UI和渲染程序
 
 > {{rendering.svg}}
 > [[The rendering pipeline|https://tiddlywiki.com/talkytalky]]
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[UI and Rendering Pipeline]tag[doc]sort[sub.num]]">
+
+!!! <$link><$view field="title"/></$link>
+{{!!text}}
+</$list>

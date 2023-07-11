@@ -1,6 +1,6 @@
 created: 20230705112747840
 creator: 马不前
-modified: 20230706123418445
+modified: 20230711050620728
 modifier: 马不前
 tags: OtherThings
 title: 术语集
@@ -13,5 +13,5 @@ type: text/vnd.tiddlywiki
 <<glossary "[[saver]]" "保存器">>
 <<glossary "[[deserializers]]" "反序列化">>
 <<glossary "[[syncadaptors]]" "同步适配器">>
-<<glossary "[[widget]]" "微件">>
+<<glossary "[[widget]]" "[[微件]]">>
 <<glossary "Microkernel" "[[微内核]]">>

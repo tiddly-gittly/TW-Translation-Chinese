@@ -1,0 +1,42 @@
+chapter.of: UI and Rendering Pipeline
+created: 20230711050003312
+creator: 马不前
+modified: 20230711051251282
+modifier: 马不前
+original-title: Widgets
+sub.num: 3
+tags: doc UI和渲染程序
+title: 微件
+
+当WikiText被转换成解析树后，下一步是将该解析树转换成小部件树。
+
+我们讨论了微件作为WikiText标记的一部分，但实际上，解析树的每个节点都会被转换为一个微件对象。
+
+核心插件提供了一个基本的微件对象，它接收应该表示的解析节点和一个DOM节点。然后，微件必须创建表示解析节点的DOM结构，并将其添加到提供的DOM节点中。
+
+例如，一个LinkWidget会创建一个`<a>...</a>`标签的DOM节点，并将其放入提供的DOM节点中。
+
+当一个微件获取带有子节点的解析节点时，它必须创建相应的子微件。
+
+所有这些功能基本上是通过基础微件提供的。但是，在为解析节点创建小部件时，它会加载具有`module-type: widget`的额外模块。这些模块可以导出多个扩展基础微件并覆盖其方法（如渲染和刷新函数）的微件。
+
+如[[解析器]]中所述，每个解析节点都包含一个"type"属性。此类型直接决定使用哪个微件模块。
+
+```js
+{type: "text", text: <string>} - a text node
+```
+
+将被转换为一个[[TextWidget|$:/core/modules/widgets/text.js]]。（注意，TextWidget模块导出了一个名为"text"的属性。）
+
+实际上，在讨论WikiText中的"widgets"时，它们并不是WikiText添加的一个功能，也不是由解析器选择微件类型，而是直接使用特定微件的能力。
+
+在开始时，我们讨论了微件及其如何实现动态行为。但是迄今为止，我们只描述了微件是如何从解析节点创建 DOM 节点的。
+
+微件通过两种方式添加动态行为。
+
+<$list filter="[!has[draft.of]has[chapter.of]chapter.of[Widgets]tag[doc]sort[sub.num]]">
+
+
+!!! <$link><$view field="title"/></$link>
+{{!!text}}
+</$list>
