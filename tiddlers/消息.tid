@@ -1,0 +1,31 @@
+chapter.of: Widgets
+created: 20230711060613733
+creator: 马不前
+modified: 20230711065607868
+modifier: 马不前
+original-title: Messages
+sub.num: 1
+tags: 微件 doc
+title: 消息
+
+消息是由用户触发的事件。它们由微件生成，例如当用户点击一个按钮微件时。
+
+每个消息都有一个类型属性，比如"tm-delete-tiddler"，还有一个参数。
+
+```js
+{type: "tm-delete-tiddler", param: "MyOldTiddler"}
+```
+
+当一个微件创建了一条消息时，它将将消息发送给其父级微件，然后父级微件将其发送给其自己的父级微件，依此类推。
+
+在这个过程中，每个微件都可以尝试调度这条消息。
+
+这个概念在基本微件对象中得到了实现。
+
+它提供了一个名为`dispatchEvent(message)`的函数，由子级微件调用以将消息冒泡到微件树中。
+
+另一个函数`addEventListener(type, listener)`可以用来将一个函数绑定到特定的消息类型上。
+
+如果监听器返回false，那么消息将被发送给父级微件。
+
+TiddlyWiki核心插件在[[NavigatorWidget|RootWidget和渲染启动]]中处理了很多消息。
