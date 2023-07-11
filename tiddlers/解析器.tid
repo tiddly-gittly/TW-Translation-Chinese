@@ -1,0 +1,51 @@
+chapter.of: UI and Rendering Pipeline
+created: 20230711044747762
+creator: 马不前
+modified: 20230711050153626
+modifier: 马不前
+original-title: Parser
+sub.num: 2
+tags: UI和渲染程序 doc
+title: 解析器
+
+WikiText处理的第一阶段是解析器。
+
+解析器是由一个带有`module-type: parser`的模块提供的，其责任是将文本块转换为解析树（parse-tree）。
+
+解析树由嵌套节点组成，例如：
+
+```js
+{type: "element", tag: <string>, attributes: {}, children: []} - an HTML element
+{type: "text", text: <string>} - a text node
+{type: "entity", entity: <string>} - an HTML entity like &copy; for a copyright symbol
+{type: "raw", html: <string>} - raw HTML
+```
+
+这是一个关于核心插件的说明，它提供了一个递归下降的WikiText解析器，它从不同的模块中加载各个规则。
+
+开发者可以通过使用`module-type: wikirule`来提供额外的规则。每个规则可以生成一组解析树节点。
+
+在[[horizrule.js|$:/core/modules/parsers/wikiparser/rules/horizrule.js]]中可以找到一个简单的例子，它将"---"转换为`<hr>`。
+
+HTML标签可以嵌入到WikiText中，这是因为[[html rule|$:/core/modules/parsers/wikiparser/rules/html.js]]的存在。
+
+这个规则匹配HTML标签的语法，并创建`type: "element"`的节点。
+
+但是html规则还有另一个特殊用途。通过解析HTML标签语法，它隐式地解析了WikiText微件。
+
+它通过标签名称开头的`$`字符识别它们，而不是生成"元素"节点，它使用标签名称作为类型。
+
+```js
+{type: "list", tag: "$list", attributes: {}, children: []} - a list element
+```
+
+在[[微件]]部分将揭示为什么这样做是有意义的，以及如何将每个节点转换成一个widget。
+
+html规则或一般解析节点的另一个特性是属性（attributes）属性。
+
+解析树中的属性不是以简单的字符串形式存储的，而是以节点的形式存储的，这样就可以将间接的文本引用作为[[微件]]中描述的属性使用：
+
+```js
+{type: "string", value: <string>} - literal string
+{type: "indirect", textReference: <textReference>} - indirect through a text reference
+```
