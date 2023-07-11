@@ -1,6 +1,6 @@
 created: 20230705114348384
 creator: 马不前
-modified: 20230706074043969
+modified: 20230711025523392
 modifier: 马不前
 tags: TW-Translation-Chinese
 title: 文档规范
@@ -13,3 +13,7 @@ type: text/vnd.tiddlywiki
 尽可能参考[[术语集]]内容来处理术语的翻译。
 
 部分字段中带有英文内容，也翻译成中文。
+
+如果需要给条目添加注释，统一添加到`note`字段里。note字段的内容表示注释。
+
+如果翻译其他网站内容，请添加`external-links`字段，并添加网站链接。
