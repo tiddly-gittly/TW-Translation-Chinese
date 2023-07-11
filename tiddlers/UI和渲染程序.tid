@@ -1,0 +1,21 @@
+chapter.of: TiddlyWiki Core Application
+created: 20230711023912837
+creator: 马不前
+modified: 20230711025628908
+modifier: 马不前
+note: 原标题中的Pipeline翻译成程序，原意是管道，但翻译成管道反而无法理解。
+original-title: UI and Rendering Pipeline
+sub.num: 4
+tags: doc TiddlyWiki核心应用程序
+title: UI和渲染程序
+
+微内核提供基本功能，用于存储条目并管理模块和插件。
+然后，[[启动过程]]加载核心插件，包括对存储的扩展，提供[[事件机制]]、[[缓存]]、[[标签|标签和筛选机制]]以及[[筛选机制|标签和筛选机制]]，使用户能够查询特定的条目。
+
+利用其中的一些技术，核心插件还添加了一些功能，用于加载和保存单个条目或整个wiki，在[[扩展持久性]]中有描述。
+
+接下来的章节将重点介绍提供TiddlyWiki用户界面的核心插件的部分。
+
+
+> {{rendering.svg}}
+> [[The rendering pipeline|https://tiddlywiki.com/talkytalky]]

@@ -1,0 +1,13 @@
+created: 20230711024821539
+creator: 马不前
+modified: 20230711030842116
+modifier: 马不前
+note: 有一些条目来源于其他网站资源，通过添加external-links字段来拓展。
+tags: $:/tags/ViewTemplate/Subtitle Configuration
+title: external-links
+
+\whitespace trim
+
+<$list filter="[all[current]has[external-links]]" >
+  <a href={{!!external-links}}>{{!!original-title}}</a>
+</$list>
