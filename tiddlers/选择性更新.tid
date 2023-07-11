@@ -1,0 +1,41 @@
+chapter.of: Widgets
+created: 20230711061333970
+creator: 马不前
+modified: 20230711065551691
+modifier: 马不前
+original-title: Selective Update
+sub.num: 2
+tags: doc 微件
+title: 选择性更新
+
+使用[[消息]]，微件能够将某种类型的事件放入TiddlyWiki应用程序中，这是微件动态行为的一部分。
+
+另一部分是选择性更新。
+
+微件通常依赖于条目的状态。
+
+例如，[[ListWidget|https://bramchen.github.io/tw5-docs/zh-Hans/#ListWidget]]可以配置为列出所有标记为`important`的条目。
+
+现在，当这个微件被修改并且它的`important`标签被移除时，这个变化应该在ListWidget中反映出来。
+
+为了让微件对这些变化做出反应，每个微件可以提供一个函数`refresh(changedTiddlers)`。
+
+[[RootWidget|RootWidget和渲染启动]]被注册到wiki存储中，使用[[事件机制]]。当发生变化事件时，它开始调用其子组件的refresh函数，并传递一个变化的条目列表。
+
+每个微件然后可以决定是否需要改变或重新渲染其DOM表示，并调用自己子组件的refresh函数。
+
+通过这种方式，每当一个条目或者wiki存储本身发生变化时，每个微件都可以立即对这些变化做出反应或者忽略它们。
+
+另一种更新文本参考属性的方法是使用文本引用（文本参考在[[嵌入与文本引用]]中有解释）：
+
+```js
+{type: "indirect", textReference: <textReference>}
+```
+
+当微件拥有一个属性，该属性是一个文本引用，并且调用刷新函数时，它可以检查文本引用是否引用了已更改的条目，并进行相应的更新。
+
+几乎所有UI的状态都存储在条目中。例如，搜索机制会使用一个“EditTextWidget”来显示一个文本输入字段用于搜索字符串，并使用一个“ListWidget”来显示搜索结果。
+
+EditTextWidget与一个名为`$:/temp/search`的条目绑定。这意味着当编辑输入字段中的文本时，该条目的内容也会相应改变。另一方面，当该条目发生变化时，[[RootWidget|RootWidget和渲染启动]]会收到通知。然后它开始调用其子级的刷新方法。最终会调用EditTextWidget的刷新方法，如果需要的话，它可以重新渲染自己。
+
+通过这种方式，TiddlyWiki可以重复使用已存在的数据结构，这不仅方便，因为我们不需要引入额外的结构，而且在wiki存储中管理的条目本身就是一个非常强大的数据结构，支持[[事件机制]]（因此我们不需要额外的观察者模式）、[[缓存]]、通过附加的条目字段进行元数据和[[获取特定条目的方法|标签和筛选机制]]。

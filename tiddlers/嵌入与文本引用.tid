@@ -1,0 +1,80 @@
+chapter.of: UI and Rendering Pipeline
+created: 20230711062746240
+creator: 马不前
+modified: 20230711065232175
+modifier: 马不前
+original-title: Transclusion and TextReference
+sub.num: 4
+tags: doc UI和渲染程序
+title: 嵌入与文本引用
+
+前面的部分[[微件]]和[[解析器]]解释了如何将WikiText块转换为DOM表示以及该表示如何对wiki存储的更改做出反应。
+
+之前的章节还描述了WikiText保存在单独的条目中，包括描述UI组件的WikiText。
+
+这引出了一个问题，即如何将这些多个条目构建成一个单一的UI。
+
+但在回答这个问题之前，我们需要介绍[[嵌入与文本引用]]。
+
+!!! 文本引用
+
+文本引用是一种特殊的符号，用于间接引用指定条目字段的内容。
+
+文本引用的语法如下：
+
+```
+<tiddlertitle>
+<tiddlertitle>!!<fieldname>
+!!<fieldname> - specifies a field of the current tiddlers
+```
+
+为了获取实际文本，核心插件向wiki存储中添加了一个函数//getTextReference(textRef, defaultText, currTiddlerTitle)//。其中的`currentTiddlerTitle`是一个条目的标题，在文本引用中没有指定条目标题时使用。
+
+currentTiddler的取值取决于文本引用的使用场景。例如，如果它被用作微件属性，那么currentTiddler就是包含该微件的条目。文本引用被微件（属性）、筛选器操作符（参数）和嵌入中使用。这些元素都使用`getTextReference(textRef, defaultText, currTiddlerTitle)`函数。
+
+!!! 嵌入
+
+嵌入是指将不同条目的内容包含在其中。这通过解析要包含的条目并将生成的节点作为其自身解析节点的子节点来实现。嵌入的诀窍在于，它显示了不同条目的内容，但默认情况下不会更改当前条目。这使我们能够创建包含文本引用的条目，并将它们用作模板。
+
+示例：条目“MyTask”包含字段和内容如下
+
+```
+important: "very"
+assoc.person: "Hans Dampf"
+
+<$transclude tiddler="TaskHeaderTemplate" />
+
+Hans needs some more Dampf.
+```
+
+添加条目`TaskHeaderTemplate`内容为:
+
+```
+<$view field="assoc.person"/> has a <$view field="important"/> important task for us:
+```
+
+`MyTask`条目会得到以下结果：
+
+```
+Hans Dampf has a very important task for us:
+
+Hans needs some more Dampf.
+```
+
+嵌入和模板是TiddlyWiki中最重要的概念之一。
+
+它允许我们使用当前条目的元数据来包含其他条目。
+
+还可以使用TiddlerWidget将模板条目嵌入为当前条目的第三方条目。
+
+```
+<$tiddler tiddler="MyTiddler">
+<$transclude tiddler="EditTemplate" />
+</$tiddler>
+```
+
+这样，我们可以为条目创建一个不仅显示标题和内容，还显示内容和元数据的不同视图，并允许我们编辑这个条目。
+
+同时，模板概念也被微件用来通过指定的模板显示条目。
+
+最后，当想要将wiki下载为一个新的HTML文件时，通过将所有条目的列表绑定到一个模板并将结果文本发送给在[[扩展持久化]]中描述的同步模块，就可以创建该HTML文件，并保存当前的wiki。

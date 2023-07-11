@@ -1,0 +1,42 @@
+chapter.of: UI and Rendering Pipeline
+created: 20230711065316957
+creator: 马不前
+modified: 20230711071943458
+modifier: 马不前
+original-title: RootWidget and Rendering Startup
+sub.num: 5
+tags: UI和渲染程序 doc
+title: RootWidget和渲染启动
+
+这一章的前几部分展示了WikiText如何转化为动态响应条目更改的DOM节点，以及通过其他条目组合生成条目的方法。
+
+本节介绍了TiddlyWiki核心插件如何从条目和WikiText构建UI。
+
+微内核加载完成后，开始执行[[启动过程]]的微件。
+
+核心插件包含两个启动模块，负责启动用户界面（UI）：
+
+[[rootwidget.js|$:/core/modules/startup/rootwidget.js]] 是一个启动模块，它创建了一个基础微件的实例。
+这个微件可以通过全局访问`$tw.rootWidget`。
+
+与该微件相关联的DOM节点是当前浏览器窗口的DOM对象（`document`）。
+
+初始状态下，根微件没有任何子元素，但提供了一些基本的事件处理程序（[[消息]]），例如：
+
+* ''tm-notify:'' 将参数中给定的信息显示为通知。
+* ''tm-save-wiki'': 当用户点击保存按钮时触发，利用在[[Extended Persistence]]中描述的同步器模块保存当前wiki。
+* ''tm-auto-save-wiki'': 类似于`tm-save-wiki`，但不是直接由用户触发，而是在编辑和保存wiki页面时自动触发。如果一个[[Saver]]实现启动了更新后的wiki文件的下载，则不支持自动保存方法，并且仅在使用``tm-save-wiki``消息时使用。
+* ''tm-download-file'': 此消息也使用在[[Extended Persistence]]中描述的同步器模块，但明确要求选择一个具有下载方法的saver来开始下载单个条目。
+
+当根微件加载完成后，另一个启动模块 [[$:/core/modules/startup/render.js]] 创建了一个嵌入微件，其中包含了[[$:/core/ui/PageTemplate]]的内容，并将其绑定到浏览器的DOM文档中。
+嵌入微件的渲染函数最初被执行，并在存储库中注册了一个监听器，该监听器执行嵌入微件的刷新函数，以触发[[选择性更新]]过程。
+
+在[[$:/core/ui/PageTemplate]]中最终使用了[[包含其他条目和Template的技术|嵌入与文本引用]]来构建TiddlyWiki的用户界面，该用户界面仅由WikiText中编写的条目（使用javascript实现的微件）组成：：
+
+例如，为了实现打开的wiki页面列表，[[$:/core/ui/PageTemplate]] 包含了一个 [[navigator widget|$:/core/modules/widgets/navigator.js]]，它在`$:/StoryList`的一个字段中维护着打开的条目列表，并处理像`tm-navigate`这样的事件，通过将参数指定的条目添加到$:/StoryList的顶部。
+
+然后，在[[$:/core/ui/PageTemplate]]中嵌入了`$:/core/ui/PageTemplate/story`，它使用了一个ListWidget通过一个特殊的模板[[$:/core/ui/ViewTemplate]] 来嵌入$:/StoryList中的所有条目。
+
+类型为`tm-close-tiddler`的事件会从$:/StoryList中移除指定的条目。
+
+[[事件机制]]会触发一个changed事件，这将触发 ListWidget的刷新函数，该函数将从列表中删除该条目，从而关闭该条目。
