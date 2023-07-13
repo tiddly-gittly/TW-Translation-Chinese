@@ -1,0 +1,11 @@
+created: 20230713082247879
+creator: 马不前
+modified: 20230713082525810
+modifier: 马不前
+original-title: Continuous Deployment
+tags: 新的开发者文档
+title: 持续部署
+
+TiddlyWiki 5使用[[GitHub Actions|https://docs.github.com/en/actions]]来进行持续部署。它由仓库中的工作流文件`.github/workflows/ci.yml`和它所调用的`bin`文件夹中的脚本驱动。
+
+构建历史可在[[https://github.com/Jermolene/TiddlyWiki5/actions]]中查看。

@@ -1,0 +1,43 @@
+created: 20230713082550994
+creator: 马不前
+modified: 20230713083155301
+modifier: 马不前
+original-title: How to run a local plugin library for testing
+tags: howto
+title: 如何运行本地插件库进行测试
+
+!! 启动插件库服务器
+
+"pluginlibrary" 版本包含了设置本地服务器以进行TiddlyWiki插件库测试或开发所需的组件。
+
+以下命令将创建库文件并启动一个测试服务器，地址为`http://localhost:8888`。
+
+```
+cd /your/path/to/TiddlyWiki5/editions/pluginlibrary
+tiddlywiki --build test-server
+```
+
+!! 重要
+
+<c style="color:Red;">该服务器只读。没有任何内容保存回文件系统</c>
+
+!! 使用单文件维基测试库
+
+* 打开一个单文件维基并导入配置tiddler表单 `http://localhost:8888/#%24%3A%2Fconfig%2FLocalPluginLibrary`
+* 打开''$:/ControlPanel : Plugins : "Get More Plugins"'' 模式窗口
+
+!! 使用Node.js维基测试该库
+
+* 创建一个新的Wiki，例如：
+
+<<<
+```
+cd /temp/
+tiddlywiki my-wiki --init server
+tiddlywiki my-wiki --listen
+```
+<<<
+
+* 从[[http://localhost:8080]]打开"my-wiki
+* 将[[http://localhost:8888/#%24%3A%2Fconfig%2FLocalPluginLibrary]]tiddler导入"my-wiki"
+* 打开''$:/ControlPanel : Plugins : "Get More Plugins"'' 模式窗口
