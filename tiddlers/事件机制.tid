@@ -1,8 +1,8 @@
 chapter.of: Extending the Store
 created: 20230707020143916
 creator: fcjz
-modified: 20230711005847181
-modifier: 马不前
+modified: 20230713022433452
+modifier: WhiteFall
 original-title: Event Mechanism
 sub.num: 1
 tags: doc new 扩展存储
@@ -19,4 +19,4 @@ type: text/vnd.tiddlywiki
 
 来自核心插件的事件机制会用它本身的实现覆盖这个函数。
 
-提供事件系统的函数是通过[[wikimmethod模块类型]]添加的。
+提供事件系统的函数是通过[[wikimethod模块类型]]添加的。

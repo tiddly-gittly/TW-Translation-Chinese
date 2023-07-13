@@ -1,8 +1,8 @@
 chapter.of: Extending the Store
 created: 20230711011918085
 creator: 马不前
-modified: 20230711013136818
-modifier: 马不前
+modified: 20230713022553654
+modifier: WhiteFall
 original-title: Tags and Filter Mechanism
 sub.num: 4
 tags: doc 扩展存储
@@ -57,4 +57,4 @@ title: 标签和筛选机制
 标签和筛选机制在核心插件中被广泛用于内部目的。
 以`$:/`开头的标签通常对普通用户隐藏，类似于[[系统条目]]。
 
-筛选机制通过[[wikimethod module type]]添加到了Wiki存储中。
+筛选机制通过[[wikimethod模块类型]]添加到了Wiki存储中。

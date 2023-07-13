@@ -1,8 +1,8 @@
 chapter.of: Extending the Store
 created: 20230707054538970
 creator: WhiteFall
-modified: 20230711013221768
-modifier: 马不前
+modified: 20230713022447698
+modifier: WhiteFall
 original-title: Caching
 sub.num: 2
 tags: doc new 扩展存储
@@ -12,4 +12,4 @@ title: 缓存
 
 全局缓存也遵循相同的思路。例如，当解析[[filter|标签和筛选机制]]字符串并构建匹配条目列表时，可以将该列表放入全局缓存中以供以后重用，直到存储中发生变化。
 
-与[[事件机制]]类似，缓存需要在微内核中添加钩子函数。当一个条目更改时，微内核调用``clearGlobalCache()``和``clearCache(tiddlertitle)``。核心的缓存机制覆盖了这些函数。提供缓存系统的函数是通过[[wikimethod module type]]添加的。
+与[[事件机制]]类似，缓存需要在微内核中添加钩子函数。当一个条目更改时，微内核调用``clearGlobalCache()``和``clearCache(tiddlertitle)``。核心的缓存机制覆盖了这些函数。提供缓存系统的函数是通过[[wikimethod模块类型]]添加的。
