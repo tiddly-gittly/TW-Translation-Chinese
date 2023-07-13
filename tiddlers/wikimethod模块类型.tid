@@ -1,9 +1,9 @@
 created: 20230710064702737
 creator: WhiteFall
-modified: 20230710074819652
-modifier: WhiteFall
+modified: 20230713084442950
+modifier: 马不前
 original-title: wikimethod module type
-tags: 模块类型
+tags: moduletypes
 title: wikimethod模块类型
 
 TiddlyWiki核心插件中的启动模块[[$:/core/modules/startup/load-modules.js]]会加载所有类型为``wikimethod``的模块，并将它们的导出函数放入wiki存储中。

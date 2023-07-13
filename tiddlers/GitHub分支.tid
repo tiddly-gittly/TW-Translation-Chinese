@@ -1,0 +1,14 @@
+created: 20230713081611655
+creator: 马不前
+modified: 20230713082050719
+modifier: 马不前
+original-title: GitHub Branches
+tags: 新的开发者文档
+title: GitHub分支
+
+TiddlyWiki5的开发在GitHub仓库 https://github.com/Jermolene/TiddlyWiki5 中使用了两个分支：
+
+* `master` 分支包含代码的最新版本，部署在 https://tiddlywiki.com/prerelease
+* `tiddlywiki-com` 分支包含文档的最新版本，部署在[[https://tiddlywiki.com/]]上，由最新发布版本的TiddlyWiki构建。
+
+在准备提交拉取请求时，将目标指向正确的分支非常重要。
