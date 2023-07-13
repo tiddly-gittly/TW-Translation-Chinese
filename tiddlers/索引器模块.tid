@@ -1,9 +1,9 @@
 created: 20230710065103773
 creator: WhiteFall
-modified: 20230710074835556
-modifier: WhiteFall
+modified: 20230713084616366
+modifier: 马不前
 original-title: indexer modules
-tags: dev 模块类型
+tags: dev moduletypes
 title: 索引器模块
 
 索引器模块维护着以更高效的方式组织的Tiddler索引，通常用于加速某些过滤器操作等。例如，标签索引器会维护一个查找表，列出具有特定标签的Tiddler，这比遍历整个Wiki并询问每个Tiddler是否具有所需标签要快得多！

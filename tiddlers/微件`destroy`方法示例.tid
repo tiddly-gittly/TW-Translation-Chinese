@@ -1,0 +1,39 @@
+created: 20230713084708648
+creator: 马不前
+modified: 20230713085133359
+modifier: 马不前
+original-title: Widget `destroy` method examples
+tags: 
+title: 微件`destroy`方法示例
+
+!! 使用v-dom库时
+
+虚拟DOM库会管理其内部状态，并定期将状态应用到DOM中，这就是所谓的[["受控组件"|https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components]]。当TiddlyWiki删除由虚拟DOM库控制的DOM元素时，可能会出现错误。
+
+因此，在创建一个提供虚拟DOM库绑定的插件时，需要告诉虚拟DOM库（例如React.js）DOM元素已被移除。我们将使用 `destroy` 方法来实现这个功能。
+
+```js
+  render() {
+    // ...other render related code
+    if (this.root === undefined || this.containerElement === undefined) {
+      // initialize the v-dom library
+      this.root = ReactDom.createRoot(document.createElement('div'));
+    }
+  }
+
+  destroy() {
+    // end the lifecycle of v-dom library
+    this.root && this.root.unmount();
+  }
+```
+
+`destroy` 方法将由父微件调用。如果你的微件没有任何子微件，你可以编写自己的清理逻辑。如果可能有一些子微件，请不要忘记在 `Widget` 类中调用原始的 `destroy` 方法来销毁子微件。
+
+```js
+Widget.prototype.destroy();
+this.root && this.root.unmount();
+/** if you are using ESNext
+super.destroy();
+this.root?.unmount();
+*/
+```
