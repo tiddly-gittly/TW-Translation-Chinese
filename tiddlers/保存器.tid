@@ -1,0 +1,23 @@
+chapter.of: Extended Persistence
+created: 20230713064502609
+creator: 马不前
+modified: 20230713065213673
+modifier: 马不前
+original-title: Saver
+sub.num: 2
+tags: doc 扩展持久性
+title: 保存器
+
+具有`module-type: saver`的模块提供保存整个Wiki的功能。一个保存器可以支持三种方法：
+
+<<glossary "save" "当用户请求保存时使用此方法，例如通过侧边栏中的保存按钮点击。">>
+<<glossary "autosave" "当用户更改、创建或删除条目时，TW会自动使用此方法。">>
+<<glossary "download" "当需要显式下载Wiki或单个条目时使用此方法。例如，控制面板使用此方法提供一个按钮，将Wiki保存为静态HTML文件。">>
+
+一个保存器模块需要导出两个函数。`canSave(wiki)` 返回true，表示该模块能够正常工作，`create(wiki)`返回一个保存器对象的实例。
+
+这个保存器对象必须提供一个包含名称、优先级、支持的方法数组和一个`save(text, method, callback)`方法的`info`属性。此方法从TW中调用，传入要保存的实际文本、使用的方法以及用于报告错误的回调函数：`callback("保存时发生错误")`或者用于通知保存成功的回调函数：`callback(null, "保存成功 :)")`。如果保存器方法成功保存了文件，则必须返回true，否则返回 false。
+
+保存操作由用户界面发送的消息触发。同步器模块使用具有最高优先级且能够使用请求的方法的保存器来保存文件。
+
+核心插件包含一个保存器，它能够使用名为Tiddlyfox的特殊Firefox扩展将当前的Wiki状态保存到本地硬盘上。如果此扩展不可用，保存器的 `canSave`方法将返回false。那么具有较低优先级的保存器将会提示用户将当前状态保存为新的HTML 文件。

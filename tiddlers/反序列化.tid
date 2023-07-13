@@ -1,0 +1,21 @@
+chapter.of: Extended Persistence
+created: 20230713062451149
+creator: 马不前
+modified: 20230713064458459
+modifier: 马不前
+original-title: Deserializer
+sub.num: 1
+tags: doc 扩展持久性
+title: 反序列化
+
+具有`module-type: tiddlerdeserializer`的模块可以提供函数，用于将任何文本表示形式转换为条目。每个函数必须与类型（如`application/json`或`text/html`）相关联。
+
+它们接收条目的文本表示形式、一些默认字段值和文本块的类型作为参数。它们返回表示生成的条目的JavaScript对象数组。
+
+反序列化器不由同步器模块管理。实际上，反序列化器的概念是微内核的一部分。
+
+这是必要的，因为微内核需要在加载核心插件并执行其启动模块之前，加载条目。（由于核心插件及其模块被表示为条目。）
+
+启动模块`load-modules`负责加载额外的反序列化器并将它们推送到存储库中。
+
+例如，核心插件包含了一些反序列化器，可以读取整个TiddlyWiki5或传统HTML文件，并将各个条目加载到存储库中。
