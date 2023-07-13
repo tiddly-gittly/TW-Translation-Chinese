@@ -1,6 +1,6 @@
 created: 20230705112747840
 creator: 马不前
-modified: 20230711050620728
+modified: 20230713071503003
 modifier: 马不前
 tags: OtherThings
 title: 术语集
@@ -15,3 +15,4 @@ type: text/vnd.tiddlywiki
 <<glossary "[[syncadaptors]]" "同步适配器">>
 <<glossary "[[widget]]" "[[微件]]">>
 <<glossary "Microkernel" "[[微内核]]">>
+<<glossary "Transclusion" "[[嵌入|嵌入与文本引用]]">>

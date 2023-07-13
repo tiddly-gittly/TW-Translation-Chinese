@@ -1,9 +1,16 @@
 chapter.of: Extended Persistence
 created: 20230713065250737
 creator: 马不前
-modified: 20230713065549541
+modified: 20230713070706325
 modifier: 马不前
 original-title: Syncadaptor
 sub.num: 3
 tags: doc 扩展持久性
 title: 同步适配器
+
+一个带有`module-type: syncadaptor`的模块提供了获取条目列表的功能（该列表通过SkinnyTiddlers提供，它是没有文本字段的普通条目），以及加载、保存和删除单个条目的功能。
+
+Syncadaptor还可以提供登录和注销功能，以便将 Syncadaptor模块用于与远程服务器同步条目。
+
+同步器模块仅使用一个同步适配器，并遵循一个特殊的[[系统条目|系统条目]][[$:/config/SyncFilter]]，其中包含一个[[筛选字符串|标签和筛选机制]]。与此筛选字符串匹配的条目将使用同步适配器保存到服务器上。它使用 [[WebServer API|https://tiddlywiki.com/#WebServer%20API%3A%20Get%20All%20Tiddlers]] 从服务器加载修改后的条目，并且该 API 只返回非系统条目。
+
