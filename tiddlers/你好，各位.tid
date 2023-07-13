@@ -1,6 +1,6 @@
 created: 20230706072348269
 creator: 马不前
-modified: 20230706072958472
+modified: 20230713081030040
 modifier: 马不前
 original-title: HelloThere
 tags: TiddlyWiki/Dev
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 欢迎来到[[TiddlyWiki|https://tiddlywiki.com/]]的开发者文档。它目前是一项正在进行中的工作，因为来自两个不同来源的材料被改编和合并，此外还增加了原创内容：
 
 * Christian Jurke和Christian Heigele的作业，他们是在吉森应用科学大学（Technische Hochschule Mittelhessen）攻读信息技术硕士学位的两名学生。他们的工作可以在[[导论]]和与之相关的条目中看到。
-* 新的开发者文档
+* [[新的开发者文档]]
 ** [[单文件TiddlyWiki的数据存储]] 
 ** [[持续部署]]
 ** [[GitHub分支]] 
@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki
 ** [[为TiddlyWiki添加Babel Polyfill]]。
 ** [[TiddlyWiki的拖放互操作性]]
 ** [[Javascript Widget教程]]
-* 来自[[原始开发者文档|https://tiddlywiki.com]]：
+* 来自[[原始开发者文档]]：
 ** [[TiddlyWiki for Developers]]
 ** [[TiddlyWiki编码风格指南]]
 ** [[TiddlyWiki架构]]
