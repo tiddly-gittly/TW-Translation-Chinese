@@ -1,0 +1,15 @@
+created: 20230714131158758
+creator: 马不前
+modified: 20230714131352843
+modifier: 马不前
+original-title: The Plugin and Module concept
+tags: [[Unlabelled Entry]] doc unused
+title: 插件与模块的概念
+
+除了启动内核，TiddlyWiki完全由模块构建而成。
+
+在介绍了TW中的模块和插件以及它们的组织和管理方式之后，接下来的部分将展示开发者可以构建的模块类型以及它们如何与TW架构进行连接。
+
+最后一节展示了构建插件的过程。
+
+这可以作为构建自己插件的教程，并展示了高级用户如何仅通过使用条目模型和WikiText标记语言来为自己的用例创建解决方案。

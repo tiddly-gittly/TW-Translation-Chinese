@@ -1,0 +1,9 @@
+created: 20230714131444599
+creator: 马不前
+modified: 20230714131533264
+modifier: 马不前
+original-title: The TiddlyWiki data management concept
+tags: [[Unlabelled Entry]]
+title: TiddlyWiki数据管理概念
+
+本节描述了在Tiddlywiki运行期间，wiki的数据是如何存储在Tiddlywiki中的。以及如何持久化完整的wiki。
