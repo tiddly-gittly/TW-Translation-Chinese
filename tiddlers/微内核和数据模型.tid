@@ -1,9 +1,11 @@
 created: 20230714124036319
 creator: 马不前
-modified: 20230714124120114
+modified: 20230714124724239
 modifier: 马不前
 original-title: Microkernel and Datamodel
 tags: redo
 title: 微内核和数据模型
+
+微内核负责创建一个精简的TiddlyWiki环境。它可以在Node.js或HTML5浏览器中运行。启动内核只加载足够的功能来加载包含应用程序主要逻辑的模块。该启动内核包含一些辅助方法、模块机制以及创建和管理条目的函数。启动内核还创建了一个基本的Wiki存储，它在运行时保存了整个Wiki的所有信息。在创建存储后，启动内核负责解密加密的条目，并提取所有条目，例如嵌入在HTML文件的DOM结构中的核心模块条目。此外，启动内核还提供了从文件加载条目的功能，当您在Node.js上运行TiddlyWiki时可以使用。
 
 {{StartupTimeline.png}}
