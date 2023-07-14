@@ -1,13 +1,13 @@
 created: 20230706072046313
 creator: 马不前
 list: 你好，各位 导论 [[TiddlyWiki - 快速概览]] 微内核架构 TiddlyWiki核心应用程序 结论
-modified: 20230714122825347
+modified: 20230714150851079
 modifier: 马不前
 tags: TableOfContents
 title: TiddlyWiki/Dev
 type: text/vnd.tiddlywiki
 
-这是官方开发者文档。
+这里是官方开发者文档。
 
 * https://tiddlywiki.com/dev/
 
@@ -16,3 +16,5 @@ type: text/vnd.tiddlywiki
 <<toc-selective-expandable 'TiddlyWiki/Dev'>>
 
 </div>
+
+* 部分条目的翻译来自[[TiddlyWiki 舞|https://bramchen.github.io/tw5-docs/zh-Hans]]，会在底部注明。
