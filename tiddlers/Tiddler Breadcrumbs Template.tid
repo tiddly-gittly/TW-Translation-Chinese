@@ -3,7 +3,7 @@ created: 20230705105835408
 creator: 马不前
 length_limit: 15
 list-after: $:/core/ui/ViewTemplate/title
-modified: 20230705110025907
+modified: 20230714133529534
 modifier: 马不前
 tags: $:/tags/ViewTemplate
 title: Tiddler Breadcrumbs Template
@@ -74,6 +74,7 @@ use_apex_tag: true
 </$list>
 \end
 
+<$list filter="[<currentTiddler>!prefix[$:/]] "> 
 <div style='width:100%'>
 <$reveal type='nomatch' state='$:/state/Global/ShowBreadcrumbs' text=true>
 	<$button class='tc-btn-invisible' set='$:/state/Global/ShowBreadcrumbs' setTo='true'>
@@ -92,3 +93,4 @@ use_apex_tag: true
 	</$set>
 </$reveal>
 </div>
+</$list>
