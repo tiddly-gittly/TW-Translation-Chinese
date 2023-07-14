@@ -1,0 +1,13 @@
+created: 20230714131816493
+creator: 马不前
+modified: 20230714132317939
+modifier: 马不前
+original-title: Using Modules to build a Single File Application
+tags: doc [[Unlabelled Entry]]
+title: 使用模块构建单文件应用程序
+
+TiddlyWiki 是由微内核构建，并使用模块机制提供各种加载和保存条目的方式，包括加载和保存到单个 HTML文件的能力。
+
+此外，开发者可以通过提供具有特定模块类型的模块来扩展应用程序。TiddlyWiki搜索具有这些特定模块类型的模块，并相应地处理它们。
+
+启动内核的最后一个阶段是执行启动模块。其中一个启动模块（"load-modules"）负责将某些具有特定模块类型的模块注册到正确的位置。例如，[[wikimethod模块类型]]导出的方法被放置在 `\textit{\$tw.Wiki.prototype}`中。其他启动模块构建初始用户界面并将事件链接到特定的模块。

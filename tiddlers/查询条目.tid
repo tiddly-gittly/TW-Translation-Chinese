@@ -1,0 +1,8 @@
+created: 20230714121312631
+creator: 马不前
+modified: 20230714122426242
+modifier: 马不前
+tags: Configuration $:/tags/AdvancedSearch
+title: 查询条目
+
+<<list-searchx filter:"[!is[system]]" class:"alert alert-secondary" placeholder:"请输入查询条目的名称" >>

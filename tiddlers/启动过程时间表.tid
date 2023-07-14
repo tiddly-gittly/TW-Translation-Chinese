@@ -1,0 +1,11 @@
+created: 20230714131643437
+creator: 马不前
+modified: 20230714131732031
+modifier: 马不前
+original-title: Timeline of the startup Process
+tags: [[Unlabelled Entry]]
+title: 启动过程时间表
+
+本节简要介绍 TW 的启动过程，从启动机制的第一步到加载不同的启动模块。下图显示了启动过程的主要部分。
+
+{{StartupTimeline.png}}
