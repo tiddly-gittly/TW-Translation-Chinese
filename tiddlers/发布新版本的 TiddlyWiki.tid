@@ -1,0 +1,50 @@
+created: 20230714135317224
+creator: 马不前
+modified: 20230714141152028
+modifier: 马不前
+original-title: Releasing a new version of TiddlyWiki
+tags: build
+title: 发布新版本的 TiddlyWiki
+
+!! 在主分支上的准备工作
+
+# 确保新的发布横幅图片是最新的
+# 从 ''tiddlywiki-com'' 同步更新到 ''master''
+# 在 `core/wiki/config/OfficialPluginLibrary.tid` 中验证[[$:/config/OfficialPluginLibrary]]的版本号
+# 将最新的预发布版中的发布说明移动到 tw5.com 版本中
+# 调整最新发布条目（例如，`Release 5.1.3`）的发布日期和 ''released'' 字段
+# 同样调整 github.com 比较链接，使其指向新发布的标签
+# 确保`TiddlyWiki Releases`以新版本作为默认标签
+# 调整[[你好，各位]]的修改时间
+# 确保 ''master'' 分支已完全提交
+
+!! 更新自述文件
+
+# 编辑`package.json`中的版本号为新版本号
+# 运行`./bin/readme-bld.sh`构建自述文件
+# 将新的自述文件提交到 ''master'' 分支
+# 将`package.json`恢复为先前的版本号
+
+!! 发布新版本
+
+# 运行 `./bin/verbump "5.1.3"`（替换为正确的版本号）来更新版本号，并为其分配一个标签
+# 运行 `./bin/npm-publish.sh` 将发布上传到 npm
+# 确认 TiddlyWiki 的新版本是否在[[https://www.npmjs.org/package/tiddlywiki]]上可用
+
+!! 更新 tiddlywiki.com 发布
+
+# 从 ''master'' 更新 ''tiddlywiki-com'' 并推送到 GitHub
+
+!! 清理工作
+
+# 使用文本 "TiddlyWiki v5.x.x released to https://tiddlywiki.com #newtiddlywikirelease" 发布推文
+
+!! 准备下一个 ''master'' 中的发布
+
+# 调整 `package.json` 中的版本号
+# 调整 `bin/build-site.sh` 中的版本号
+# 调整 [[$:/config/OfficialPluginLibrary]] 中的版本号（在 `editions/tw5.com` 和 `editions/prerelease/tiddlers/system` 中）和`$:/config/LocalPluginLibrary`中的版本号
+# 调整新发布的横幅
+# 为新版本创建发布说明
+# 将更改提交到''master''分支并推送到GitHub
+

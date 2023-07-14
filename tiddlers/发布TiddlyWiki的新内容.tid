@@ -1,0 +1,11 @@
+created: 20230714140542786
+creator: 马不前
+modified: 20230714140942738
+modifier: 马不前
+original-title: Releasing new content for TiddlyWiki
+tags: build [[Unlabelled Entry]]
+title: 发布TiddlyWiki的新内容
+
+要更新[[https://tiddlywiki.com]]的内容，需要向`tiddlywiki-com`分支提交包含更新的条目的 Pull Request。一旦 PR 合并，[[持续部署]]系统将自动重新构建站点。
+
+请注意，PR 应仅包括仓库中`editions`文件夹内的更新内容。
