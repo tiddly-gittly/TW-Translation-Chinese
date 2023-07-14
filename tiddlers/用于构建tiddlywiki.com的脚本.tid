@@ -1,0 +1,99 @@
+created: 20230714140959764
+creator: 马不前
+modified: 20230714142206415
+modifier: 马不前
+original-title: Scripts for building tiddlywiki.com
+tags: build
+title: 用于构建tiddlywiki.com的脚本
+
+这些脚本用于构建和发布 tiddlywiki.com 的内容。它们并不是为了通用目的而设计的，而是解决构建 tiddlywiki.com 的特定问题：推送到 GitHub Pages、处理预发布构建和升级版本号等。
+
+尽管如此，您可能会在其中找到对您自己的脚本有用的技巧。
+
+! Hosting
+
+[[https://tiddlywiki.com]]通过[[GitHub Pages|https://pages.github.com]]从仓库 [[https://github.com/Jermolene/jermolene.github.io]]提供服务。
+
+这些脚本位于仓库[[https://github.com/Jermolene/build.jermolene.github.io]]。
+
+! 目录结构
+
+这些脚本需要以下目录作为同级目录：
+
+* `build.jermolene.github.io` - [[https://github.com/Jermolene/build.jermolene.github.io]] 的本地副本
+* `jermolene.github.io` - [[https://github.com/Jermolene/jermolene.github.io]] 的本地副本
+* `TiddlyWiki5` -[[https://github.com/Jermolene/TiddlyWiki5]]的本地副本
+
+这些脚本设计为在当前目录为`TiddlyWiki5`目录时执行。
+
+! 配置
+
+!! package.json
+
+在`build.jermolene.github.io`仓库的根目录中的`package.json`文件包含一个依赖声明，指定了在构建发布目标时使用的最新官方发布版本的 TiddlyWiki：
+
+```js
+  "dependencies": {
+    "tiddlywiki": "5.1.2"
+  }
+```
+
+!! 环境变量
+
+其中一些脚本使用以下环境变量：
+
+* ''TW5_BUILD_MAIN_EDITION'' - 要用作主版本的wiki文件夹的路径，生成 `index.html` 和 `encrypted.html`
+* ''TW5_BUILD_OUTPUT'' - 输出文件夹的路径（默认为 `../jermolene.github.io`）
+* ''TW5_BUILD_TIDDLYWIKI'' - 要使用的 `tiddlywiki.js` 的路径名（默认为 `../build.jermolene.github.io/node_modules/tiddlywiki/tiddlywiki.js`）
+
+! 脚本
+
+!! `bld.sh`
+
+构建 `tiddlywiki.com` 目标文件。默认情况下，它使用 `package.json` 文件中指定的 tiddlywiki 版本。可以使用 ''TW5_BUILD_TIDDLYWIKI'' 环境变量进行覆盖。以下命令将从 `TiddlyWiki5` 目录中选择最新的预发布版本的 tiddlywiki：
+
+```bash
+    TW5_BUILD_TIDDLYWIKI=./tiddlywiki.js
+```
+
+!! `readme-bld.sh`
+
+使用`package.json`中指定的发布版本的 TiddlyWiki构建`TiddlyWiki5`和`build.jermolene.github.io`仓库的自述文件。
+
+!! `prerelease-bld.sh`
+
+使用最新的 TiddlyWiki 预发布代码和特殊的 ''prerelease''版本构建`tiddlywiki.com/prerelease`目标文件。
+
+!! `github-push.sh`
+
+将最新更改推送到GitHub的`jermolene.github.io`目录。
+
+!! `dev-bld.sh`
+
+构建''dev''预发布版本。
+
+!! `quick-bld.sh`
+
+构建 ''prerelease'' 预发布版本。
+
+!! `tiddlyspace-upload.sh`
+
+构建 ''tw5tiddlyweb'' 版本并将其上传到 TiddlySpace。
+
+!! `verbump.sh`
+
+增加`TiddlyWiki5`仓库中`package.json`的版本号，并为仓库应用正确的版本标签。
+
+!! `npm-publish.sh`
+
+将`TiddlyWiki5`仓库发布到npm。
+
+! 程序
+
+!! [[发布TiddlyWiki的新内容]]
+
+{{发布TiddlyWiki的新内容}}
+
+!! [[发布TiddlyWiki的新内容]]
+
+{{发布TiddlyWiki的新内容}}
