@@ -1,0 +1,40 @@
+created: 20230714152128119
+creator: 马不前
+modified: 20230714152329745
+modifier: 马不前
+original-title: TestingMechanism
+tags: Mechanisms
+title: 测试机制
+
+TiddlyWiki5 整合了 Jasmine JavaScript 测试框架（参见[[https://jasmine.github.io/]]）。它允许在浏览器和 Node.js 环境下运行相同的测试。
+
+! TiddlyWiki5 测试组件
+
+TiddlyWiki5 测试机制包括两个主要元素：
+
+* `tiddlywiki/jasmine` 插件，将 Jasmine 框架与一些桥接代码一起打包为插件
+* `test` TiddlyWiki5 版本，包含核心的测试规范，并包含 Jasmine 插件
+
+! 在 Node.js 中运行测试
+
+要在 Node.js 环境下运行测试，只需加载 `test` wiki：
+
+```
+node ./tiddlywiki.js \
+	./editions/test \
+```
+
+! 在浏览器中运行测试
+
+要生成包含浏览器测试的 wiki，请加载 `test` wiki 并将其保存为 HTML 文件：
+
+```
+node ./tiddlywiki.js \
+	./editions/test \
+	--verbose \
+	--rendertiddler $:/core/save/all test.html text/plain \
+```
+
+`test.html` 文件将放置在 wiki 文件夹中的 `output` 文件夹中。在浏览器中打开它以查看测试结果。在以下网址上有一个预构建的 `test.html` 版本：
+
+[[https://tiddlywiki.com/test.html]]

@@ -1,0 +1,32 @@
+created: 20230714144830592
+creator: 马不前
+modified: 20230714145704300
+modifier: 马不前
+original-title: StartupMechanism
+tags: Mechanisms
+title: 启动机制
+
+启动机制在[[初始化机制]]结束时运行已安装的启动模块。
+
+! 启动模块
+
+具有 ''module-type'' 字段设置为 `startup` 的模块：
+
+* 必须导出一个`startup`函数
+** 对于同步的启动模块，启动函数被调用为`startup()`，异步模块则会在完成时调用传入的回调函数：`startup(callback)`
+* 可以导出一个`name`属性，用于标识任务
+* 可以导出一个包含依赖任务名称的`after`属性的数组，这些依赖任务必须在当前任务之前运行
+* 可以导出一个包含后续任务名称的`before`属性的数组，这些任务必须在当前任务之后运行
+* 可以导出一个包含所需平台名称的`platforms`属性的数组，以便执行启动模块。定义的平台有 ''node'' 和 ''browser''。如果未提供`platforms` 属性，则默认为 `["node","browser"]`。
+
+! 启动进程
+
+启动模块按照它们声明的依赖关系顺序执行。
+
+对于共享相同依赖关系的任务，无法保证执行顺序。
+
+! 启动模块
+
+核心定义了以下启动模块：
+
+{{Startup Modules.svg}}
