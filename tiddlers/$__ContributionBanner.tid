@@ -1,0 +1,19 @@
+created: 20230715154143818
+creator: 马不前
+modified: 20230715154945517
+modifier: 马不前
+tags: Configuration $:/tags/EditTemplate
+title: $:/ContributionBanner
+
+\define base-github()
+https://github.com/tiddly-gittly/TW-Translation-Chinese/tree/master/tiddlers/
+\end
+
+<$set name="draft-of" value={{{ [<currentTiddler>get[draft.of]] }}}>
+<$list filter="[[$:/config/OriginalTiddlerPaths]getindex<draft-of>]" variable="target" >
+<div class="tc-improvement-banner">
+{{$:/core/images/star-filled}} 您能帮我们改进这个文档吗？[[了解如何|贡献与提交规范]]
+<a href={{{ [<target>addprefix<base-github>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">编辑在 ~GitHub 上的此条目</a>
+</div>
+</$list>
+</$set>

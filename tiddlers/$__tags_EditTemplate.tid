@@ -1,0 +1,6 @@
+created: 20230715154532386
+creator: 马不前
+list: $:/core/ui/EditTemplate/controls $:/core/ui/EditTemplate/title $:/plugins/bimlas/locator/edit-template/locator-references $:/ContributionBanner $:/core/ui/EditTemplate/tags $:/core/ui/EditTemplate/shadow $:/core/ui/ViewTemplate/classic $:/core/ui/EditTemplate/body $:/core/ui/EditTemplate/type $:/core/ui/EditTemplate/fields $:/plugins/mat/field-value-selector/field-value-selector
+modified: 20230715154603708
+modifier: 马不前
+title: $:/tags/EditTemplate

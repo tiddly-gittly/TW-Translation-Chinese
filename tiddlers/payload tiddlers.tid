@@ -1,6 +1,6 @@
 created: 20230715062913359
 creator: 马不前
-modified: 20230715070433800
+modified: 20230715130248065
 modifier: 马不前
 tags: word
 title: payload tiddlers
@@ -39,5 +39,7 @@ The string Hello, world! is the payload of JSON message, while the rest is proto
 
 [[维基百科|https://en.wikipedia.org/wiki/Payload_(computing)]]
 <<<
+
+payload一般就是附带的东西意思，比如附带的条目。
 
 综合考虑，决定翻译成<c style="color:Red;">负载条目</c>。
