@@ -1,11 +1,11 @@
 code-body: yes
 created: 20230710065432946
 creator: 马不前
-modified: 20230714133356037
+modified: 20230715070551878
 modifier: 马不前
 tags: Configuration $:/tags/ViewTemplate/Subtitle
 title: 贡献者显示
 
-<$list filter="[<currentTiddler>field:type[text/vnd.tiddlywiki]!prefix[$:/]]"> 
+<$list filter="[<currentTiddler>!prefix[$:/]]"> 
 贡献者 <$link to={{!!creator}}/>
 </$list>

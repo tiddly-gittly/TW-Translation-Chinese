@@ -1,0 +1,18 @@
+created: 20230715070859703
+creator: 马不前
+modified: 20230715071316632
+modifier: 马不前
+original-title: How to customise the password prompt
+tags: howto
+title: 如何自定义密码提示
+
+您可以自定义加密的TiddlyWiki文件在首次打开时显示的密码提示文本和外观。
+
+为此，请创建一个带有标签{{$:/core/wiki/rawmarkup||$:/core/ui/TagTemplate}}的条目，其中包含：
+
+* 一个JavaScript `<script>`标签，其中包含代码来覆盖配置变量`$tw.boot.encryptionPrompts.decrypt`。
+* CSS `<style>`定义，以针对`tc-password-wrapper`类应用样式到表单中。
+
+原始标记Tiddler会被拼接到独立HTML文件的顶部，并在初始化前缀和[[初始化内核|初始化机制]]之前执行。
+
+参见$:/PatchEncryptionPrompt以获取示例。

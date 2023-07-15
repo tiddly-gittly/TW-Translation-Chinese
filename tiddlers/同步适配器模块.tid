@@ -1,0 +1,162 @@
+created: 20230715053352056
+creator: 马不前
+modified: 20230715054242381
+modifier: 马不前
+original-title: SyncAdaptorModules
+tags: dev moduletypes
+title: 同步适配器模块
+
+! 简介
+
+SyncAdaptorModules 封装了可以被 SyncMechanism 使用的存储机制。其中两个示例是：
+
+* TiddlyWebAdaptor 与兼容 TiddlyWeb 的 HTTP API 的服务器接口交互，如 TiddlyWeb 本身和 TiddlyWiki5 内置的 ServerMechanism。
+
+* LocalFileAdaptor 与兼容 Node.js `fs` 模块的文件系统接口交互。
+
+SyncAdaptorModules 被表示为 JavaScript tiddlers，其 `module-type` 字段设置为 `syncadaptor`。
+
+有关该 API 演进的背景，请参阅此[[Pull Request|https://github.com/Jermolene/TiddlyWiki5/pull/4373]]。
+
+! 导出
+
+以下属性应该通过`exports`对象暴露出来：
+
+|!属性 |!描述 |
+|adaptorClass |适配器的JavaScript类 |
+
+如果适配器检测到无法成功运行（例如，因为仅在浏览器或服务器上运行，或缺少依赖项），则不应该导出任何内容。
+
+! 适配器模块方法
+
+适配器模块必须处理以下方法。
+
+!!! 错误处理
+
+syncadaptor 必须使用包含描述错误的字符串的 ''err'' 参数调用提供的回调函数。
+
+对于连接错误，syncer 有特殊处理。出于向后兼容的原因，syncer 将连接错误识别为字符串，其中包含条目`$:/language/Error/XMLHttpRequest`的内容，并在结尾附加字符串 ": 0"。例如，在英语中，该字符串是 "XMLHttpRequest error code: 0"，在巴西的葡萄牙语中是 "Código de erro XMLHttpRequest: 0"。
+
+!! `Constructor(options)`
+
+初始化新的适配器实例。
+
+|!参数 |!描述 |
+|options |见下文 |
+
+选项包括：
+
+* ''options.wiki'': 使用此 syncadaptor 的 wiki 的引用
+
+!! `getTiddlerInfo(tiddler)`
+
+获取适配器需要为特定条目追踪的附加信息。例如，TiddlyWeb 适配器包含一个 `bag` 字段，表示条目的原始 bag。
+
+|!参数 |!描述 |
+|tiddler |目标条目 |
+
+返回一个存储适配器所需的任何附加信息的对象。
+
+!! `getTiddlerRevision(title)`
+
+获取与指定条目标题关联的修订ID。
+
+|!参数 |!描述 |
+|title |条目标题 |
+
+返回一个修订ID。
+
+!! `getStatus(callback)`
+
+从服务器检索状态信息。此方法是可选的。
+
+|!参数 |!描述 |
+|callback |使用参数 `err,isLoggedIn,username,isReadOnly` 调用的回调函数 |
+
+!! `login(username,password,callback)`
+
+尝试使用指定的凭据登录服务器。此方法是可选的。
+
+|!参数 |!描述 |
+|username |用户名 |
+|password |密码 |
+|callback |使用参数`err`调用的回调函数 |
+
+!! `displayLoginPrompt(syncer)`
+
+由 syncer 调用以显示自定义登录提示。此方法是可选的。
+
+|!参数 |!描述 |
+|syncer |调用该方法的 syncer 对象的引用 |
+
+自定义登录提示应该发送带有用户名和密码的微件消息`tm-login`。
+
+!! `logout(callback)`
+
+尝试从服务器登出。此方法是可选的。
+
+|!参数 |!描述 |
+|callback |使用参数 `err` 调用的回调函数 |
+
+!! `getUpdatedTiddlers(syncer,callback)`
+
+从服务器检索需要更新的条目标题。
+
+此方法是可选的。如果适配器不实现此方法，则同步将从TiddlyWiki存储到适配器的方向是单向的，而不是双向的。
+
+syncer 将优先使用 `getUpdatedTiddlers()` 方法而不是 `getSkinnyTiddlers()` 方法。
+
+|!参数 |!描述 |
+|syncer |调用该方法的 syncer 对象的引用 |
+|callback |使用参数 `err,data` 调用的回调函数 -- 见下文 |
+
+回调提供的数据如下：
+
+```
+{
+modifications: [<array of title>],
+deletions: [<array of title>],
+}
+```
+
+!! `getSkinnyTiddlers(callback)`
+
+从服务器检索一系列精简的条目。
+
+此方法是可选的。如果适配器不实现此方法，则同步将从 TiddlyWiki 存储到适配器的方向是单向的，而不是双向的。
+
+syncer 将优先使用 `getUpdatedTiddlers()` 方法而不是 `getSkinnyTiddlers()` 方法。
+
+|!参数 |!描述 |
+|callback |使用参数 `err,tiddlers` 调用的回调函数，其中 `tiddlers` 是一个条目字段对象的数组 |
+
+!! `saveTiddler(tiddler,callback)`
+
+将条目保存到服务器。
+
+|!参数 |!描述 |
+|tiddler |要保存的条目 |
+|callback |使用参数 `err,adaptorInfo,revision` 调用的回调函数 |
+|tiddlerInfo |syncer 维护的用于该条目的 tiddlerInfo |
+
+!! `loadTiddler(title,callback)`
+
+从服务器加载一个条目。
+
+|!参数 |!描述 |
+|title |要检索的条目的标题 |
+|callback |使用参数 `err,tiddlerFields` 调用的回调函数 |
+
+!! `deleteTiddler(title,callback,options)`
+
+从服务器删除一个条目。
+
+|!参数 |!描述 |
+|title |要删除的条目的标题 |
+|callback |使用参数 `err` 调用的回调函数 |
+|options |见下文 |
+
+options 参数包含以下属性：
+
+|!属性 |!描述 |
+|tiddlerInfo |syncer 维护的用于该条目的 tiddlerInfo |

@@ -1,0 +1,28 @@
+created: 20230715074929024
+creator: 马不前
+modified: 20230715075736852
+modifier: 马不前
+original-title: TiddlyWiki on NW.js
+tags: [[Unlabelled Entry]]
+title: TiddlyWiki on NW.js
+
+[[NW.js|https://tiddlywiki.com/#NW.js]]（以前称为"node-webkit"）允许将 TiddlyWiki 设置为Windows、Mac OS X 或 Linux 的本地应用程序。
+
+设置步骤：
+
+# 创建一个文件夹，其中包含以下内容：
+## 适用于您的平台的NW.js副本，可从[[https://github.com/nwjs/nw.js]]下载
+## TiddlyWiki的HTML文件，重命名为 `index.html`
+## 名为 `package.json` 的文件，其内容如下：
+##> {{package.json for NW.js}}
+
+# 运行NW.js应用程序
+## 如果无法运行，请检查是否需要解除应用程序的阻止：
+## Mac OS X：请参考[[http://support.apple.com/kb/PH14369]]
+## 其他系统请参考对应的文档
+
+# 尝试按照通常的方式保存更改。
+
+! 注意事项：
+
+- MP3 音频和 H264 视频需要特殊步骤才能支持，详情请参考[[NW.js wiki|https://github.com/nwjs/nw.js/wiki/Using-MP3-%26-MP4-%28H.264%29-using-the--video--%26--audio--tags.]]。

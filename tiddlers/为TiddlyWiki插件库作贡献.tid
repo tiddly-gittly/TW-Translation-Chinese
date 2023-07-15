@@ -1,0 +1,17 @@
+created: 20230715060340473
+creator: 马不前
+modified: 20230715060424895
+modifier: 马不前
+original-title: Contributing to the TiddlyWiki Plugin Library
+tags: [[Unlabelled Entry]]
+title: 为TiddlyWiki插件库作贡献
+
+TiddlyWiki插件库是通过[[https://tiddlywiki.com]]分发的插件、主题和语言的集合。
+
+插件库旨在以以下方式帮助TiddlyWiki的最终用户：
+
+* 作为可靠的官方社区资产来源
+* 允许在升级过程中自动升级插件
+* 提供向后兼容性的保证
+
+插件库中的插件需要有一个维护者，他愿意承诺保持这些插件与后续的核心代码版本进行测试并保持完全运行状态。许多插件由核心团队维护。

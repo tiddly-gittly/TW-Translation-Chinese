@@ -1,0 +1,121 @@
+created: 20230715060632971
+creator: 马不前
+modified: 20230715061958187
+modifier: 马不前
+original-title: Developing plugins using Node.js and GitHub
+tags: howto
+title: 使用Node.js和GitHub开发插件
+
+最实用的开发插件的方法是使用Node.js和tiddlywiki5存储库来构建您的插件，并使用GitHub来管理您的文件。
+
+! 逐步指南
+
+!! 1. 安装
+
+首先阅读[[https://tiddlywiki.com/static/PluginMechanism.html]]。
+
+从[[http://git-scm.com/downloads]]安装Git。
+
+从[[http://nodejs.org/]]安装Node.js。
+
+!! 2. 在GitHub上创建一个新的空白存储库
+
+提示：GitHub存储库不能被组合到目录中，因此只能通过使用命名方案进行分组，例如，使用“TW5-”作为名称前缀与tiddlywiki5项目一起进行分组。
+
+访问[[https://github.com/]]，创建一个名为“pluginname”的新存储库，并选择添加一个readme文件。
+
+!! 3. 设置工作环境
+
+选择您的文件系统中的位置（例如TW5）作为插件项目的位置；执行以下命令：
+
+!!! 1. 创建目录
+
+```bash
+mkdir TW5
+
+```
+
+!!! 2. 创建~TiddlyWiki5存储库的本地只读副本
+
+```bash
+git clone https://github.com/Jermolene/TiddlyWiki5.git TW5
+
+```
+
+!!! 3. 为您的插件创建目录
+
+```bash
+cd TW5
+cd plugins
+mkdir yourname
+cd yourname
+mkdir pluginname
+
+```
+
+!!! 4. 创建您的插件存储库的本地副本
+
+```bash
+git clone https://github.com/yourgithub/pluginname.git pluginname
+
+```
+!!! 5. 进入您的文件
+
+```bash
+cd pluginname
+
+```
+
+创建一个名为plugin.info的文件，并添加以下内容：
+
+```js
+{
+	"title": "$:/plugins/yourgithub/pluginname",
+	"description": "summary of the plugin's purpose",
+	"author": "yourname",
+	"version": "0.0.1",
+	"core-version": ">=5.0.8",
+	"source": "https://github.com/yourgithub/pluginname",
+	"plugin-type": "plugin"
+}
+```
+
+!! 4. 为您的插件创建文件
+
+您可以参考~TiddlyWiki5存储库中的插件文件，即位于plugins/tiddlywiki/目录下的文件。有关支持的tiddler文件格式的详细信息，请参阅[[TiddlerFiles|https://bramchen.github.io/tw5-docs/zh-Hans/#TiddlerFiles]]。
+
+!! 5. 将您的文件构建为TiddlyWiki
+
+修改`editions/tw5.com/tiddlywiki.info`文件，将您的插件目录添加到其中。找到`"plugins": [`并添加`"yourname/pluginname"`。
+
+在TW5目录中，执行以下命令：
+
+```bash
+node ./tiddlywiki.js editions/tw5.com --build index
+```
+
+生成的文件（index.html）将放置在TW5存储库的`editions/tw5.com/output`目录中。
+
+!! 6. 将您的工作保存到~GitHub
+
+在`plugins/yourname/pluginname/`目录下，执行以下命令：
+
+!!! 1. 添加所有文件
+
+```bash
+git add -A
+```
+
+!!! 2. 提交到本地存储库
+
+```bash
+git commit -am "对这次提交做出有意义的说明"
+```
+
+!!! 3. 将本地更改复制到 GitHub
+
+```bash
+git push
+```
+
+这样，您的插件文件就会被推送到您在~GitHub上创建的存储库中。其他人可以从该存储库中克隆您的插件并使用它。

@@ -1,6 +1,6 @@
 created: 20230706072348269
 creator: 马不前
-modified: 20230713081030040
+modified: 20230715074010110
 modifier: 马不前
 original-title: HelloThere
 tags: TiddlyWiki/Dev
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 ** [[TiddlyWiki的拖放互操作性]]
 ** [[Javascript Widget教程]]
 * 来自[[原始开发者文档]]：
-** [[TiddlyWiki for Developers]]
+** [[面向开发者的TiddlyWiki]]
 ** [[TiddlyWiki编码风格指南]]
 ** [[TiddlyWiki架构]]
 ** [[TiddlyWiki5开发环境]]
@@ -30,9 +30,9 @@ type: text/vnd.tiddlywiki
 ** [[TiddlyWiki on NW.js]]
 ** [[package.json for NW.js]]
 ** [[如何在浏览器中创建插件]]
-** [[为TiddlyWiki核心做贡献]]
-** [[为TiddlyWiki插件库做贡献]]
+** [[为TiddlyWiki核心作贡献]]
+** [[为TiddlyWiki插件库作贡献]]
 ** [[构建tiddlywiki.com的脚本]]
-** SyncAdaptorModules
-** WidgetModules
-** WikiRuleModules
+** [[同步适配器模块]]
+** [[微件模块]]
+** [[wiki解析模块]]

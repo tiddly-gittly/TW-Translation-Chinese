@@ -1,0 +1,33 @@
+created: 20230715071350337
+creator: 马不前
+modified: 20230715072134623
+modifier: 马不前
+original-title: JavaScript Macros
+tags: dev [[Unlabelled Entry]]
+title: JavaScript宏
+
+宏可以通过JavaScript模块来实现，也可以通过[[wikitext语法|https://bramchen.github.io/tw5-docs/zh-Hans/#Macros]]来实现。
+
+! 概述
+
+JavaScript宏是具有"module-type"字段设置为"macro"的模块。它们必须导出以下三个属性：
+
+* ''name'': 一个字符串，表示用于调用宏的名称
+* ''params'': 一个包含以下属性的对象数组：
+** //name//: 参数的名称
+** //default//: （可选）参数的默认值
+* ''run'': 当宏需要评估时调用的函数。参数从宏调用中提取，并按照"params"数组的顺序排列。"run"函数应返回宏的字符串值。调用时，`this`指向调用宏的小部件节点。
+
+请注意，如果"params"数组缺失或为空，则所有提供的参数都将传递给`run()`方法。
+
+! 编写JavaScript宏
+
+核心中内置了一些JavaScript宏，它们可以作为你自己宏的起点：
+
+[[https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/macros]]
+
+请注意，JavaScript宏在客户端和服务器上都可以工作，因此无法访问浏览器的DOM。
+
+!! 宏的行为
+
+宏仅用于返回一块wikitext，供进一步处理。它们不应对wiki存储中的条目进行修改。原因是你无法控制何时调用宏；它可能作为刷新处理的一部分被重复调用。因此，宏不应该有除了生成其文本之外的任何其他副作用。

@@ -1,0 +1,50 @@
+created: 20230715061614609
+creator: 马不前
+modified: 20230715061910103
+modifier: 马不前
+original-title: How to create a translation for TiddlyWiki
+tags: howto
+title: 如何为TiddlyWiki创建翻译
+
+! 先决条件
+
+* [[在Node.js上运行TiddlyWiki|https://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]]
+* 一个GitHub账号，用于提交到tiddlywiki.com的翻译
+
+! 设置
+
+1. Fork TiddlyWiki的GitHub仓库（https://github.com/Jermolene/TiddlyWiki5）
+   - 如果你的GitHub用户名是JoeBloggs，你的fork地址将会是https://github.com/JoeBloggs/TiddlyWiki5
+2. 创建一个名为你打算创建翻译的语言的分支（例如“cy-GB”表示“威尔士语（英国）”）
+   - IETF语言代码列表：http://www.lingoes.net/en/translator/langcode.htm
+3. 将你fork的仓库克隆到你的电脑（例如，`/MyTranslation/TiddlyWiki5`）
+4. 创建一个同级目录`/MyTranslation/jermolene.github.io`
+5. 在 `<repo>/languages` 目录下为你的翻译创建一个新的文件夹
+6. 将 `<repo>/core/language/en-GB` 目录的内容复制到你的翻译文件夹
+7. 在你的翻译文件夹中创建一个 `plugin.info` 文件（见下文）
+8. 编辑 `<repo>/editions/tw5.com/tiddlywiki.info` 文件，将你的语言添加到语言列表中
+9. 运行 `../build.jermolene.github.io/quick-bld.sh` 来构建TiddlyWiki
+10. 打开位于 `/MyTranslation/jermolene.github.io/index.html` 的TiddlyWiki文件
+11. 你应该在控制面板中看到你的翻译名称，但是翻译的文本仍然是英式英语
+12. 编辑你语言文件夹中的 `.tid` 和 `.multids` 文件，将英文文本翻译成你的语言
+
+以下是Joe Bloggs的威尔士语翻译`plugin.info`文件内容：
+
+```js
+{
+	"title": "$:/languages/cy-GB",
+	"name": "cy-GB",
+	"plugin-type": "language",
+	"description": "Welsh (British)",
+	"author": "JoeBloggs",
+	"core-version": ">=5.0.0"
+}
+```
+
+[[MultiTiddlerFiles|https://bramchen.github.io/tw5-docs/zh-Hans/#MultiTiddlerFiles]]让将多个Tiddler的文本打包到单个文本文件中成为可能，简化了一些编辑任务。
+
+! 更新处理
+
+有时，主en-GB语言的条目会更新，内容可能会被修订或新增项目。跟踪语言相关的TiddlyWiki5:master的提交的最佳方法是监视这个RSS/Atom feed：
+
+[[https://github.com/Jermolene/TiddlyWiki5/commits/master/core/language.atom]]

@@ -1,10 +1,10 @@
 created: 20230714140959764
 creator: 马不前
-modified: 20230714142206415
+modified: 20230715060556282
 modifier: 马不前
 original-title: Scripts for building tiddlywiki.com
 tags: build
-title: 用于构建tiddlywiki.com的脚本
+title: 构建tiddlywiki.com的脚本
 
 这些脚本用于构建和发布 tiddlywiki.com 的内容。它们并不是为了通用目的而设计的，而是解决构建 tiddlywiki.com 的特定问题：推送到 GitHub Pages、处理预发布构建和升级版本号等。
 
