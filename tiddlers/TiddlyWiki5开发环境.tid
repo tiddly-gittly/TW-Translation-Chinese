@@ -1,0 +1,27 @@
+created: 20230715075902327
+creator: 马不前
+modified: 20230715080450484
+modifier: 马不前
+original-title: TiddlyWiki5 Development Environment
+tags: [[Unlabelled Entry]]
+title: TiddlyWiki5开发环境
+
+//这些信息适用于正在开发TiddlyWiki5本身的开发者，对终端用户无关//
+
+! 设置 npm
+
+使用 NPM 安装 [[TiddlyWiki5|https://bramchen.github.io/tw5-docs/zh-Hans/#Installing%20TiddlyWiki%20on%20Node.js]] 会下载TiddlyWiki5的快照版本。如果想使用TiddlyWiki5存储库的开发版本而不是由NPM安装的版本，请在TiddlyWiki5存储库的根目录下执行以下命令：
+
+```bash
+npm link
+```
+
+! 提升版本号
+
+在开发过程中进行发布时，需要调整 TiddlyWiki5 核心的版本号。这可以通过使用[[npm version|https://npmjs.org/doc/version.html]]命令来完成。例如：
+
+```bash
+npm version 5.0.0-alpha.10
+```
+
+如npm作者的[[这篇文章|http://blog.izs.me/post/1675072029/10-cool-things-you-probably-didnt-realize-npm-could-do]]中的第10点所述，当在git存储库中运行此命令时，它还会提交更改并打上标签。

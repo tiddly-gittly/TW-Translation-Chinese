@@ -1,0 +1,71 @@
+created: 20230715072340697
+creator: 马不前
+modified: 20230715073459571
+modifier: 马不前
+original-title: TiddlyWiki Architecture
+tags: dev [[Unlabelled Entry]]
+title: TiddlyWiki架构
+
+TiddlyWiki的核心是一个可扩展的文本和图像转换引擎。根据条目的文本内容和关联的ContentType，该引擎可以生成一个新的ContentType的渲染。此外，它可以高效地选择性地更新渲染，以跟踪条目或其依赖项的任何更改。
+
+! 概述
+
+{{TiddlyWiki Architecture.svg}}
+
+处理流程图显示了WikiText如何通过一系列解析规则被解析成解析树。解析树被渲染为一棵小部件树，然后通过刷新机制同步到DOM。
+
+DOM事件触发小部件上的操作，从而更新条目存储。这些更新触发更改事件，进而触发刷新机制更新DOM。
+
+! 客户端/服务器架构
+
+{{Server Architecture.svg}}
+
+在编写 TiddlyWiki 5 插件时，如果需要进行超出示例范围的更改，您需要更深入地了解 TiddlyWiki 的内部架构。
+
+! 数据模型
+
+TiddlyWiki 的数据模型是一个相当简单的键-值存储。
+
+* 每个条目都是一个对象，包含 `fields` 成员，例如 `title`、`text`、`tags` 等。
+* `boot/boot.js` 中定义的核心 `Wiki` 类实现了简单的关联数组行为，如插入、删除、迭代、列出键以及按键获取等。
+* 然后 `core/modules/wiki.js` 中的代码通过功能扩展了 `Wiki` 类，例如事件派发和各种基于缓存的方法，如 `getTiddlersWithTag`。
+
+可以通过 `$tw.wiki` 访问当前的条目存储，就像这个例子一样：
+
+```js
+$tw.wiki.makeTiddlerIterator($tw.wiki.getTiddlersWithTag('timeline')
+    )(function(tiddler, title) {
+        // Skip templates
+        if (tiddler.fields.tags.indexOf('templates') >= 0) { return; }
+
+        do_something(tiddler);
+});
+```
+
+数据（例如内部组件、插件、GUI 小部件的持久状态）在正常操作下不应该对终端用户可见，它们存储在通过一组[[命名空间|https://bramchen.github.io/tw5-docs/zh-Hans/#Naming%20of%20System%20Tiddlers]]组织的[[系统条目|https://bramchen.github.io/tw5-docs/zh-Hans/#SystemTiddlers]]中。
+
+文件系统路径和系统条目名称之间的相似性是有意的，并将在未来的 TiddlyWiki 发布中用于提供分层浏览界面。
+
+! 视图层
+
+TiddlyWiki 的视图层与桌面小部件工具包有很多共同之处，这是最容易让新手犯错的部分。它有两个方面：
+
+!! DOM 的作用
+
+由于TiddlyWiki可能重新渲染内容，插件应该将 DOM 视为只写的。
+
+换句话说，您在 DOM 中存储的任何状态可能会在任何时刻消失，因此您需要使用 TiddlyWiki 的内部[[状态机制|https://bramchen.github.io/tw5-docs/zh-Hans/#StateMechanism]]。
+
+在桌面应用程序中，基本小部件类定义了一个类似于 `paint(canvas)` 的方法，该方法在 `expose` 事件或“数据已更改”消息的响应中被调用。
+
+在 TiddlyWiki 中，`core/modules/widgets/widgets.js` 中的 `Widget` 类定义了一个 `render(parent, nextSibling)` 方法，TiddlyWiki 在多种事件中调用该方法，例如模型的更改。
+
+（此方法的潜在效率问题是通过 `refresh(changedTiddlers)` 方法得到缓解，TiddlyWiki 调用此方法来询问小部件其当前渲染是否已过时。）
+
+!! 控制点
+
+虽然 TiddlyWiki 的扩展[[维基语法]]在设计上类似于具有逻辑构造的 HTML 模板语言，但您不能忽略它并在原始 JavaScript 中组装所有内容，因为它用于定义大部分 TiddlyWiki 的用户界面。
+
+在这方面，它更接近于类似 Qt Quick 或 Python 的粘合语言，其中 Javascript 填充 C/C++ 在 Qt 和 GTK+ 等小部件工具包中的“创建新组件”的角色。
+
+要熟悉这一点，请阅读[[WikiText中的微件|https://bramchen.github.io/tw5-docs/zh-Hans/#Widgets%20in%20WikiText]]和[[筛选器介绍|https://bramchen.github.io/tw5-docs/zh-Hans/#Filters]]，然后查看像[[任务管理示例|https://bramchen.github.io/tw5-docs/zh-Hans/#TaskManagementExample]]这样的条目的内部结构。

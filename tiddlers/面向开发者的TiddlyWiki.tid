@@ -1,0 +1,28 @@
+created: 20230715074034327
+creator: 马不前
+modified: 20230715074711308
+modifier: 马不前
+original-title: TiddlyWiki for Developers
+tags: dev introduction
+title: 面向开发者的TiddlyWiki
+
+TiddlyWiki 是以开源方式发布的，这意味着任何人都可以阅读其代码并为其开发做出贡献。
+
+! 资源
+
+如果您对了解TiddlyWiki的内部运作方式感兴趣，[[TiddlyWiki架构]]提供了TiddlyWiki的结构概述。然后，请阅读代码——从初始化核心文件[[$:/boot/boot.js]]开始。
+
+! 你需要知道的一件事
+
+TiddlyWiki的架构与使用jQuery编写的 HTML 页面非常不同。这一部分简洁地解释了TiddlyWiki 的不同之处。初次阅读可能并不太容易理解。
+
+理解它内部运作的关键是要知道[[RefreshMechanism|https://bramchen.github.io/tw5-docs/zh-Hans/#RefreshMechanism]]要求在任何时候都可以重新生成DOM中的任何部分。这意味着用户界面的整个状态必须驻留在条目存储中，并从那里同步到DOM。这样做是为了通过在刷新周期中最小化DOM交互来提高性能。
+
+这也确定了标准的用户界面流程：
+
+# 一个小部件上的事件处理程序被触发
+# 事件处理程序可以直接操作由小部件创建的 DOM 节点，和/或修改 tiddler 存储的状态
+# 然后核心代码发出一个存储更改事件，触发刷新循环
+# 树中的每个小部件都有机会刷新自己，以反映存储中的更改（如果需要的话）
+
+从技术角度来看，TiddlyWiki是一个相当传统的 [[MVC架构|https://zhuanlan.zhihu.com/p/322316709]]，严格区分了职责。模型是条目存储，视图是渲染树（例如在startup.js中从 [[$:/core/ui/PageTemplate]]创建的树），控制器是核心代码本身。

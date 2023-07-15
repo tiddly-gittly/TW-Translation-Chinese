@@ -1,6 +1,47 @@
 created: 20230715060105405
 creator: 马不前
-modified: 20230715060105405
+modified: 20230715073845611
 modifier: 马不前
 original-title: TiddlyWiki Coding Style Guidelines
+tags: dev [[Unlabelled Entry]]
 title: TiddlyWiki编码风格指南
+
+! 动机
+
+TiddlyWiki 是一个庞大的项目，吸引了许多利益相关者。如果代码易读，那么每个人都会受益。其中一个关键部分是代码必须以一致的方式编写和布局，代码应该读起来好像是由一个作者编写的。
+
+! 指南
+
+这份指南并不全面，但涵盖了一些常见的问题。最终的指南是现有的TiddlyWiki代码库。在核心代码中仍然存在一些未能一致使用编码准则的地方；欢迎提交请求来帮助解决这些问题。
+
+!! 制表符和空格
+
+TiddlyWiki 使用4个空格作为缩进。
+
+在代码块之间使用一个空行进行分隔。偶尔在块内部使用空行以增加可读性是允许的，但应该避免除非它们解决了特定的可读性问题。
+
+!! 基本结构布局
+
+关于JavaScript基本结构的布局，请参见下面的示例：
+
+```js
+/*
+Multiline comments are used to introduce a block of code such as a function definition
+*/
+function demoFunction(param,more) {
+	// Proper sentence capitalisation for comments; prefer strict equality checks
+	if(condition === "something") {
+		// Always use braces, even when optional; no space between "if" and the brackets; always spaces around binary operators
+		something = somethingElse;
+		myOtherFunction(one,two); // No whitespace within function parameters
+		do {
+			myCondition.explore(); // Always use semicolons
+		} while(myCondition < worsens);
+	}	
+}
+
+```
+
+!! 字符串
+
+双引号比单引号更适用于字符串。

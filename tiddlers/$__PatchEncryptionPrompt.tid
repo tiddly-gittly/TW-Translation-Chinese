@@ -1,0 +1,37 @@
+created: 20230715071131636
+creator: 马不前
+modified: 20230715071143625
+modifier: 马不前
+tags: $:/core/wiki/rawmarkup
+title: $:/PatchEncryptionPrompt
+
+<script>
+
+window.$tw = window.$tw || Object.create(null);
+$tw.boot = $tw.boot || Object.create(null);
+
+$tw.boot.encryptionPrompts = {
+	decrypt: "Decrypt this TiddlyWiki by entering the password"
+};
+
+</script>
+<style>
+
+body .tc-password-wrapper {
+	background-color: rgb(183, 197, 235);
+	border: 8px solid rgb(152, 164, 197);
+}
+
+body .tc-password-wrapper form {
+	text-align: center;
+}
+
+body .tc-password-wrapper h1 {
+	padding-bottom: 8px;
+}
+
+body .tc-password-wrapper input {
+	width: auto;
+}
+
+</style>
