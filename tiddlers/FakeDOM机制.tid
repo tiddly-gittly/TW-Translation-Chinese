@@ -1,0 +1,13 @@
+created: 20230715061235681
+creator: 马不前
+modified: 20230715061347601
+modifier: 马不前
+original-title: FakeDomMechanism
+tags: [[Unlabelled Entry]]
+title: FakeDOM机制
+
+"Fake DOM"是DOM（文档对象模型）的简化JavaScript实现，可在服务器上运行。它的使用允许需要在Node.js下运行的模块通过DOM API生成和操作HTML，而无需将HTML字符串拼接在一起。
+
+Fake DOM仅实现了DOM API的一小部分，但足以使核心部件能够在Node.js下运行。
+
+由于Fake DOM比真实的DOM更快，因此在不需要与DOM进行交互渲染的情况下，它也用于浏览器。最好的例子是样式表处理，其中将WikiText样式表内容解析和渲染，并从Fake DOM中提取纯文本以用作样式表内容。

@@ -1,0 +1,37 @@
+created: 20230715055404722
+creator: 马不前
+modified: 20230715055725923
+modifier: 马不前
+original-title: WikiRuleModules
+tags: dev moduletypes
+title: wiki解析模块
+
+WikiRuleModules的`module-type`是`wikirule`，可能有以下类型：`pragma`、`block`、`inline`。这些类型的模块封装了WikiParser引擎使用的单个解析规则的逻辑。例如，`entity.js`规则模块通过匹配模式`&<chars>;`来识别HTML实体的引用。
+
+Pragma规则适用于文本块的开头，涵盖了影响其余文本解析的定义和声明。Block规则仅在维基文本块的开头应用，而inline规则可以出现在任何地方。目前唯一的pragma规则示例是用于宏定义。
+
+block规则的示例：
+
+* 标题
+* 表格
+* 列表
+
+inline规则的示例：
+
+* 实体
+* HTML标签
+* Wiki链接
+
+这些规则模块用于定义TiddlyWiki5的解析行为，可以根据不同的规则类型在不同的上下文中应用解析规则。规则的逻辑和行为由规则模块的处理函数定义，它们对解析和转换维基文本起着关键作用，从而实现不同的文本解析和处理功能。
+
+解析规则模块继承`$tw.WikiParserRule`类。这是通过实例化类，然后将规则模块的导出内容复制到实例上实现的。通过这种方式，解析规则可以覆盖`$tw.WikiParserRule`类的基本行为。特别是，基类包含使用正则表达式来匹配解析规则的逻辑，但是这个逻辑可以被解析规则覆盖，例如，一个解析规则可能想使用`indexOf()`而不是正则表达式。
+
+解析规则的标准方法和属性如下：
+
+* `name`：包含此解析规则名称的字符串
+* `types`：定义模块类型的对象。例如，`exports.types = {block: true};`
+* `init(parser)`：在构造函数之后立即调用的初始化函数，带有指向包含此规则的解析器的指针
+* `findNextMatch(pos)`：返回指定位置之后的下一个匹配位置
+* `parse()`：解析最近的匹配，返回生成的解析树节点数组。Pragma规则不返回解析树节点，而是直接修改解析器对象（例如，添加本地宏定义）
+
+内置的解析规则使用正则表达式匹配。这样的规则可以利用基类`$tw.WikiRule`类中的`findNextMatch()`方法的实现，确保它们的`init()`方法创建一个包含用于匹配的正则表达式的`matchRegExp`属性。`match`属性包含匹配的细节，供在`parse()`方法中使用。

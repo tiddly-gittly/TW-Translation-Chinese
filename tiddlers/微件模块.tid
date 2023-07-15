@@ -1,0 +1,90 @@
+created: 20230715054303093
+creator: 马不前
+modified: 20230715055148468
+modifier: 马不前
+original-title: WidgetModules
+tags: dev moduletypes
+title: 微件模块
+
+! 介绍
+
+微件模块在渲染机制中用于实现每种可渲染实体的部分。除了对最终用户熟悉的微件外，还实现了以下原始微件：
+
+* HTML 文本节点
+* HTML 元素节点
+* HTML 实体
+
+所有微件都继承自一个基本微件类，该类定义在 [[$:/core/modules/widgets/widget.js]] 中。
+
+! 微件属性
+
+核心定义了以下微件属性。微件对象的生命周期主要是在外部状态更改时维护这些内部属性的一致性。个别微件通常也会添加它们自己的附加属性。
+
+|!名称 |!描述 |
+|''parseTreeNode'' |引用与此微件对应的解析树节点 |
+|''wiki'' |引用与此微件关联的[[Wiki|https://bramchen.github.io/tw5-docs/zh-Hans/#Wiki]] 对象 |
+|''variables'' |关于每个微件变量的信息的哈希映射（见下文） |
+|''parentWidget'' |引用父微件 |
+|''document'' |引用与此微件关联的文档对象。通常是浏览器全局 `document` 变量或对 FakeDomMechanism 的 `$tw.fakeDocument` 的引用 |
+|''attributes'' |关于每个附加到此微件的属性的信息的哈希映射（见下文） |
+|''children'' |子微件的数组 |
+|''domNodes'' |对于直接生成 DOM 节点的微件，一个生成节点的数组 |
+|''eventListeners'' |事件监听器定义的数组 |
+
+!! 微件变量
+
+在微件上定义的微件变量存储在变量名称的哈希映射中。哈希映射包含：
+
+* `name`: 变量名称
+* `params`: 宏定义的参数数组，每个 `{name: "<name>", default: "<optionaldefault>"}`
+* `value`: 变量的字符串值
+
+!! 微件属性
+
+与微件关联的微件属性存储在属性名称的哈希映射中。哈希映射包含描述属性值的对象。当前支持三种属性值类型：
+
+* 字符串：`{type: "string", value: "<value>"}`
+* 条目文本引用间接性：`{type: "indirect", textReference: "<textref>"}`
+* 宏调用：`{type: "macro", value: {name: "<macroname>", params: [{name: "<paramname>", value: "<paramvalue>"}, ... ]}`
+
+!! 微件事件监听器
+
+附加到微件的事件监听器被存储为事件类型的哈希映射。每个值都是一个处理函数，接受一个 `event` 参数。
+
+! 微件方法
+
+微件对象定义的各个方法在 [[$:/core/modules/widgets/widget.js]] 的源代码中有记录。在这里，我们给出了整体生命周期的概述，以及这些方法如何相互配合。
+
+!! 微件 `initialise` 方法
+!! 微件 `widgetClasses` 方法
+!! 微件 `render` 方法
+!! 微件 `execute` 方法
+!! 微件 `getVariable` 方法
+!! 微件 `substituteVariableParameters` 方法
+!! 微件 `substituteVariableReferences` 方法
+!! 微件 `evaluateMacroModule` 方法
+!! 微件 `setVariable` 方法
+!! 微件 `hasVariable` 方法
+!! 微件 `getStateQualifier` 方法
+!! 微件 `computeAttributes` 方法
+!! 微件 `hasAttribute` 方法
+!! 微件 `getAttribute` 方法
+!! 微件 `assignAttributes` 方法
+!! 微件 `makeChildWidgets` 方法
+!! 微件 `makeChildWidget` 方法
+!! 微件 `renderChildren` 方法
+!! 微件 `addEventListeners` 方法
+!! 微件 `addEventListener` 方法
+!! 微件 `dispatchEvent` 方法
+!! 微件 `refresh` 方法
+!! 微件 `refreshSelf` 方法
+!! 微件 `refreshChildren` 方法
+!! 微件 `findNextSiblingDomNode` 方法
+!! 微件 `findFirstDomNode` 方法
+!! 微件 `destroy` 方法
+
+`5.3.0`当任何父微件从微件树卸载时调用。
+
+[[示例|微件`destroy`方法示例]]
+
+!! 微件 `removeChildDomNodes` 方法

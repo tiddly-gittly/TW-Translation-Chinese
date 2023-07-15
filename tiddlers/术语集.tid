@@ -1,6 +1,6 @@
 created: 20230705112747840
 creator: 马不前
-modified: 20230714145335285
+modified: 20230715070505291
 modifier: 马不前
 tags: OtherThings
 title: 术语集
@@ -17,3 +17,4 @@ type: text/vnd.tiddlywiki
 <<glossary "Microkernel" "[[微内核]]">>
 <<glossary "Transclusion" "[[嵌入|嵌入与文本引用]]">>
 <<glossary "Bootkernel" "[[初始内核|初始化机制]]">>
+<<glossary "[[payload tiddlers]]" "负载条目">>

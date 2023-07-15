@@ -1,0 +1,43 @@
+created: 20230715062913359
+creator: 马不前
+modified: 20230715070433800
+modifier: 马不前
+tags: word
+title: payload tiddlers
+
+常见于[[如何在浏览器中创建插件]]，payload单词不好翻译。
+
+查找了一些解释，payload原意是指可承载的重量。
+
+
+<<<
+首先解释一下什么是 payload，payload 在这里却是可以理解为有效载重，但是这只是字面意思。对于程序员来说，有效载重究竟是个什么玩意儿，又是一个新的问题（调用栈又多了一层……）。
+要解释什么是有效载重，就得说到货运行业。比如有一位客户需要支付一笔费用委托货车司机运送一车石油，石油本身的重量、车子的重量、司机的重量等等，这些都属于载重(load)。但是对于该客户来说，他关心的只有石油的重量，所以石油的重量是有效载重(pay-load，也就是付费的重量)。
+所以抽象一下，payload 可以理解为一系列信息中最为关键的信息。
+
+[[知乎|https://zhuanlan.zhihu.com/p/62189527?utm_id=0]]
+<<<
+
+
+<<<
+Payload tiddlers - this refers to tiddlers a plugin may be used to create for example a plugin to make buttons, the payload would be the buttons that were made (would work nicely with my aforementioned ‘plugins “accrual process”’)
+
+这是指插件可用于创建例如用于制作按钮的插件，有效负载将是制作的按钮（可以很好地与我前面提到的“插件”应计过程“配合使用）
+
+[[论坛|https://talk.tiddlywiki.org/t/gatha-plugin-experimental-release/2272/19]]
+<<<
+
+
+<<<
+In computer programming, the most common usage of the term is in the context of message protocols, to differentiate the protocol overhead from the actual data. For example, a JSON web service response might be:
+
+```
+{ "data": { "message": "Hello, world!" } }
+```
+
+The string Hello, world! is the payload of JSON message, while the rest is protocol overhead.
+
+[[维基百科|https://en.wikipedia.org/wiki/Payload_(computing)]]
+<<<
+
+综合考虑，决定翻译成<c style="color:Red;">负载条目</c>。

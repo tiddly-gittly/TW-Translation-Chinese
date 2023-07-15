@@ -1,0 +1,86 @@
+created: 20230715062213346
+creator: 马不前
+modified: 20230715070628983
+modifier: 马不前
+original-title: How to create plugins in the browser
+tags: howto
+title: 如何在浏览器中创建插件
+
+建议在浏览器中加载TiddlyWiki插件时要考虑以下几点：
+
+* 原始插件影子条目本身不会发生更改
+* [[负载条目|payload tiddlers]]被设置为单独的[[影子条目|https://bramchen.github.io/tw5-docs/zh-Hans/#ShadowTiddlers]]
+
+要创建插件的修改副本，可以编辑组成的影子条目（这样做实际上会用包含修改内容的新非影子条目覆盖影子条目）。重新打包过程会检索插件中包含的所有影子条目的当前值，然后将新值重新捆绑回原始插件条目。
+
+! 逐步进行：
+
+!! 1. 设置开发环境
+
+从空白TiddlyWiki开始。创建一个包含链接到您在插件开发过程中经常打开的各种条目的“HelloThere”条目：
+
+* 插件本身（例如`$:/plugins/yourname/pluginname`）
+* 要打包到插件中的负载条目（例如`$:/plugins/yourname/pluginname/mywidget.js`）
+
+!! 2. 创建插件条目
+
+点击插件条目的链接以打开它。假设它当前不存在，它会以斜体标题打开，表示它是一个缺失的条目。然后切换到编辑模式，并在条目上设置以下字段：
+
+| 字段           | 值                         |
+| -------------- | -------------------------- |
+| `dependents`   | 以空格分隔的依赖插件列表   |
+| `description`  | 插件描述                   |
+| `name`         | 插件名称                   |
+| `plugin-type`  | 插件类型，可以是“plugin”、“theme”或“language” |
+| `type`         | 设置为“application/json”    |
+| `version`      | 设置为插件的版本号（例如“0.0.1”） |
+
+然后，在条目的正文中插入：
+
+```js
+{"tiddlers": {}}
+```
+
+保存插件条目。
+
+!! 3. 修改负载条目
+
+通过点击步骤1中的“HelloThere”条目中的链接来创建负载条目。
+
+!! 4. 打包插件
+
+打开浏览器的开发者控制台，并键入以下JavaScript语句，但首先将第一个参数更改为插件的名称。第二个参数是一个可选的包含要添加到插件的条目标题的数组：
+
+```js
+$tw.utils.repackPlugin("$:/plugins/yourname/pluginname",["$:/plugins/yourname/pluginname/mywidget.js"])
+```
+
+您应该会看到一个确认消息，然后如果检查插件条目，您应该会看到它已填充了负载条目。
+
+每次保存插件时，版本号的最后部分会自动递增。这将确保使用较旧版本插件的用户将能够安装新版本。
+
+!! 5. 测试插件
+
+要测试插件，首先确保它已被打包。然后保存更改并刷新页面，以加载新插件。
+
+!! 6. 重新打包插件
+
+第一次构建插件后，您可以省略`repackPlugin()`的第二个参数，除非要添加新的条目：
+
+```js
+$tw.utils.repackPlugin("$:/plugins/yourname/pluginname")
+```
+
+!! 7. 从插件中删除条目
+
+要从插件中删除条目，请在可选的第三个参数中指定它们的标题：
+
+```js
+$tw.utils.repackPlugin("$:/plugins/yourname/pluginname",null,["$:/plugins/yourname/pluginname/mywidget.js"])
+```
+
+! 备注：
+
+!! 创建主题和语言插件
+
+在尝试重新打包插件之前，请确保将插件选为当前主题或语言。否则，影子条目将不会存在。
