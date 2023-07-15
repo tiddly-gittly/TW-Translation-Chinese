@@ -1,0 +1,9 @@
+author: tiddlywiki
+dependents: 
+description: Saver for nw.js
+list: readme
+name: nw.js Saver
+plugin-type: plugin
+title: $:/plugins/tiddlywiki/nodewebkitsaver
+type: application/json
+version: 5.2.7
