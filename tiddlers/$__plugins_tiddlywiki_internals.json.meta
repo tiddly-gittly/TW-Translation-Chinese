@@ -1,0 +1,9 @@
+author: tiddlywiki
+dependents: 
+description: Tools for exploring the internals of TiddlyWiki
+list: readme
+name: Internals
+plugin-type: plugin
+title: $:/plugins/tiddlywiki/internals
+type: application/json
+version: 5.2.7
