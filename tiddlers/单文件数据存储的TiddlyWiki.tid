@@ -1,0 +1,41 @@
+created: 20230715091550919
+creator: 马不前
+modified: 20230715092128446
+modifier: 马不前
+original-title: Data Storage in Single File TiddlyWiki
+tags: Data-Storage [[Data Storage]] doc 新的开发者文档
+title: 单文件数据存储的TiddlyWiki
+
+在 TiddlyWikiv5.1.23及之前的版本中TiddlyWiki的条目保存在HTML文件中的两个 `<div>` 标签之一，具体取决于TiddlyWiki是否配置了加密。
+
+!!! 未加密
+如果TiddlyWiki没有加密，数据将存储在一个带有 `id` 属性为"storeArea"的 `<div>` 标签中。
+
+```html
+<div id="storeArea" style="display:none;">
+```
+
+在存储区域 `<div>` 中，每个条目都存储在自己的 `<div>` 中。
+
+//条目DIV//
+
+每个条目 `<div>` 都有一个对应于条目的每个字段的属性，除了文本字段，它保存在 `<div>` 内的 `pre` 标签中。请注意，所有属性（因此字段名称）必须是小写字母、数字或字符 `-`（破折号）、`_`（下划线）和 `.`（句点）。唯一必需的属性是 `title`，所有其他属性都是可选的。所有属性值和 `pre` 标签中的文本字段都是 HTML 编码的。
+
+示例：
+
+```html
+<div id="storeArea" style="display:none;">
+<div created="20140611153703343" modified="20140611153734589" tags="testTag" testfield="testvalue" title="TestTiddler" type="text/plain">
+<pre>testText</pre>
+</div>
+</div>
+```
+
+!!! 加密
+
+如果~TiddlyWiki被配置为加密其内容，那么条目将以加密的JSON字符串形式存储在一个具有`id`属性为"encryptedStoreArea"的`<pre>`标签中。
+
+```html
+<pre id="encryptedStoreArea" type="text/plain" style="display:none;">
+```
+

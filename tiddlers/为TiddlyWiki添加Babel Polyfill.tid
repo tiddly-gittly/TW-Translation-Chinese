@@ -1,0 +1,67 @@
+created: 20230715090503793
+creator: 马不前
+modified: 20230715091502722
+modifier: 马不前
+original-title: Adding Babel Polyfill to TiddlyWiki
+tags: 新的开发者文档
+title: 为TiddlyWiki添加Babel Polyfill
+
+并非所有浏览器都支持ES2015的最新功能。Babel项目提供了一个polyfill，可以将其包含到您的TiddlyWiki中，从而使这些功能对您的插件可用。为此，您需要获得polyfill的源代码。
+
+您可以通过npm或下载/保存来获取源代码。有关安装的具体信息，请参阅[[Babel Polyfill文档|https://babeljs.io/docs/usage/polyfill/]]。
+
+在您的TiddlyWiki`editions`文件夹中，确保有一个`plugins/babel-polyfill`文件夹。然后创建`plugins/babel-polyfill/plugin.info`文件，并在其中包含以下内容：
+
+```json
+{
+  "title": "$:/plugins/babel/babel-polyfill",
+  "description": "Babel Polyfills for ES2015 support",
+  "author": "Your Name Here",
+  "core-version": ">=5.0.0"
+}
+```
+
+创建`plugins/babel-polyfill/files`文件夹。然后在其中创建`plugins/babel-polyfill/files/tiddlywiki.files`文件，并在其中包含以下内容：
+
+```json
+{
+  "tiddlers": [
+    {
+      "file": "polyfill.min.js",
+      "fields": {
+        "title": "$:/plugins/babel/babel-polyfill/polyfill.min.js",
+        "type": "application/javascript",
+        "module-type": "library",
+        "global-module": "true"
+      }
+    }
+  ]
+}
+```
+
+现在将您下载或保存的 `polyfill.min.js` 文件复制到 `plugins/babel-polyfill/files` 文件夹中。
+
+<<.tip "如果您通过`npm`下载了这个文件，它将会位于`./node_modules/babel-polyfill/dist/polyfill.min.js`的位置。请将该文件复制到`plugins/babel-polyfill/files` 文件夹中。">>
+
+最后，您需要一个初始化文件，因此请创建 `plugins/babel-polyfill/plugin.js` 文件，并将以下内容添加进去：
+
+```javascript
+/*\
+title: $:/plugins/babel/babel-polyfill/plugin.js
+type: application/javascript
+module-type: startup
+
+Load the babel-polyfill library on startup
+
+\*/
+
+exports.startup = function() {
+  $tw.modules.execute('$:/plugins/babel/babel-polyfill/polyfill.min.js');
+}
+```
+
+<<.warning "由于 Polyfill 旨在在浏览器中使用，我们需要有条件地加载该库，而 ES2016 不允许这样做。这就是为什么它使用 TiddlyWiki 的依赖解析器来编写，而不是使用 ES2015 的 `import` 语句。这样可以确保在不支持模块的浏览器中也能正确加载 Polyfill。">>
+
+现在，所有的 ES2015 运行时特性都可用，例如在您的插件代码中使用 `Promise`。
+
+有关如何使用 ES2015 //语法//编写插件代码，请参阅[[使用ES2016编写插件]]。
