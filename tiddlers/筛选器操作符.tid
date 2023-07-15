@@ -1,0 +1,100 @@
+created: 20230715162715222
+creator: 马不前
+modified: 20230715163648297
+modifier: 马不前
+original-title: Filter Operators
+tags: dev 新的开发者文档
+title: 筛选器操作符
+
+筛选器操作符是模块（类型为`application/javascript`的条目），其`module-type`字段设置为`filteroperator`，导出一个或多个实现筛选器的函数。
+
+每个函数将被传入三个参数：
+
+* 一个表示前一筛选器步骤结果的[[条目迭代器|Tiddler Iterators]]（如果该筛选器在表达式中首次出现，则表示所有条目），通常命名为`source`。
+* 一个对象，通常称为`operator`，表示该筛选器步骤的参数，包含以下键：
+  ** //operator//：在WikiText中指定的筛选器操作符的名称；
+  ** //operand//：筛选器步骤的操作数（作为字符串；如果筛选器在角括号或大括号中指定，则文本引用或变量名已经被解析）；
+  ** //prefix//：（可选）如果要对筛选器操作符进行否定，则包含一个包含单个感叹号的字符串；
+  ** //suffix//：（可选）包含筛选器名称后的附加筛选器参数（通常是条目字段名），在筛选器语法中用冒号分隔；
+  ** //regexp//：（可选，已弃用）如果筛选器操作数是正则表达式，则用于替代//operand//。
+* 一个对象，通常称为`options`，包含以下键：
+  ** //wiki//：`$tw.Wiki`对象；
+  ** //widget//：（可选）一个小部件节点。
+
+该函数应返回一个新的[[条目迭代器|Tiddler Iterators]]或一个包含条目标题的数组（作为字符串）。底层的筛选器机制会根据需要在迭代器和数组之间进行转换。
+
+! 参考资料
+
+核心代码库中内置了几个筛选器操作符，可以作为你编写自己筛选器操作符的起点：
+
+[[https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/filters]]
+
+! 示例
+
+假设我们想要创建一个筛选器操作符，它从输入列表中返回每隔一个条目。一个典型的调用可能是`[tags[interesting]everyother[]]`。
+
+我们创建一个新的条目，设置其`type`和`module-type`，并开始编写代码：
+
+```javascript
+(function(){
+"use strict";
+    
+exports.everyother = function(source, operator, options) {
+    // TODO
+}
+})();
+```
+
+对于这个示例筛选器语法，我们的函数将会被调用，并传入以下参数：
+
+* source：一个迭代器，遍历所有标记为`interesting`的条目
+* operator：一个对象`{operator: "everyother", operand: ""}`
+* options：一个包含当前Wiki对象和一个微件对象的对象，我们都不需要这些信息
+
+通常情况下，我们不关心`operator.operator`（因为这个信息已经被用来查找我们的函数），我们也不关心`operator.operand`，因为这个操作没有有意义的操作数。
+
+我们可以通过迭代输入的条目并显式地构建一个结果标题的数组来实现该操作：
+
+```javascript
+(function(){
+"use strict";
+    
+exports.everyother = function(source, operator, options) {
+    var result = [];
+    var include = true;
+    source(function(tiddler, title) {
+        if (include) { result.push(title); }
+        include = !include;
+    });
+    return result;
+}
+})();
+```
+
+也就是说，我们向`source`提供了一个回调函数，在每次迭代时对`include`进行取反（以获取每隔一个结果），并将每隔一个条目的标题推送到结果数组中。
+
+或者，我们可以返回我们自己的迭代器，通过返回一个接受类似回调函数的函数，并且仅在每隔一个条目上调用它：
+
+```javascript
+(function(){
+"use strict";
+    
+exports.everyother = function(source, operator, options) {
+    return function(callback) {
+        var include = true;
+        source(function(tiddler, title) {
+            if (include) { callback(tiddler, title); }
+            include = !include;
+        });
+    };
+}
+})();
+```
+
+无论哪种方式，我们都可以解释筛选器中的`!`标志（如果存在），它可以用来表示我们想要的是条目的//另一半//，通过将其用于设置`include`的初始值：`var include = operator.prefix !== "!";`
+
+! 筛选器行为
+
+与[[JavaScript宏]]类似，筛选器操作符不应该对条目进行修改，而只能返回一个条目列表或一个条目迭代器。
+
+* 另可参考文档中的内容[[筛选器操作符|https://bramchen.github.io/tw5-docs/zh-Hans/#Filter%20Operators]]。

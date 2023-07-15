@@ -1,0 +1,13 @@
+created: 20230715162042956
+creator: 马不前
+modified: 20230715162926677
+modifier: 马不前
+original-title: Data Storage
+tags: doc 新的开发者文档
+title: 数据储存
+
+TiddlyWiki有两种保存用户数据（条目）的方式，具体取决于您使用的是单文件版本还是node.js服务器版本。
+
+在node.js上运行的TiddlyWiki将每个条目保存在单独的文本文件中。有关node.js上支持的条目文件格式的详细信息，请参阅[[条目文件|https://bramchen.github.io/tw5-docs/zh-Hans/#TiddlerFiles]]。
+
+单文件版本的TiddlyWiki将条目保存在HTML文件中。请参阅[[单文件数据存储的TiddlyWiki]]。
