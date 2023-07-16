@@ -1,0 +1,41 @@
+created: 20230716021304624
+creator: 马不前
+modified: 20230716021816019
+modifier: 马不前
+original-title: HookMechanism
+tags: 新的开发者文档
+title: 钩子机制
+
+[[钩子|hook]]机制为插件拦截和修改默认功能提供了一种方式。钩子的添加方式如下：
+
+```js
+/*
+name: name of hook function (by convention prefixed with `th-`)
+handler: function to be called when hook is invoked
+*/
+$tw.hooks.addHook(name,handler);
+```
+
+钩子机制的处理函数会根据具体的钩子而定，但它们的参数遵循以下模式：`handler(value,params...)`
+
+* ''value'': 可选参数，需要由钩子函数进行转换的值
+* ''params'': 一个或多个可选参数，传递给钩子函数的参数
+
+根据特定的钩子，如果需要，处理函数必须返回修改后的''value''。
+
+可以通过多次调用来为同一个名称指定多个处理函数。当通过名称调用钩子时，所有已注册的函数将按照它们添加的顺序依次被调用。
+
+注意，传递给后续钩子函数的''value''将是前一个钩子函数的返回值。
+
+虽然不是必需的，但应该注意确保在调用钩子之前添加钩子。例如：[[Hook: th-opening-default-tiddlers-list]] 最好在故事启动模块被调用之前添加，否则在页面初始加载时，钩子指定的默认条目的任何添加都不会显示出来，但如果用户点击主页按钮，则会显示出来。
+
+!! 示例
+
+在默认条目中添加"test"钩子的示例。
+
+```js
+$tw.hooks.addHook("th-opening-default-tiddlers-list",function(list) { 
+    list.push("test");
+    return list; 
+});
+```
