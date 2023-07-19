@@ -1,0 +1,29 @@
+created: 20230719035806181
+creator: 马不前
+modified: 20230719040248725
+modifier: 马不前
+original-title: Hook: th-importing-tiddler
+tags: 钩子机制
+title: 钩子：导入条目
+
+这个钩子允许插件在条目通过导入机制导入时检查或修改它们。它在点击最终的“导入”按钮并将所选条目导入存储时被调用。
+
+这个钩子是`NavigatorWidget.prototype.handlePerformImportEvent`函数的一部分。
+
+如果你想在条目从文件中提取出来后处理每个导入的条目,请使用这个钩子。如果你想控制从文件中提取条目的方式,请参阅[[钩子：导入文件]]。
+
+钩子函数参数:
+
+* `tiddler`:即将被导入的条目对象
+
+返回值:
+
+* 要导入的条目对象
+
+钩子可以原封不动地返回原始的条目对象。如果钩子需要修改条目,则应返回一个新的条目对象,例如:
+
+```
+	return new $tw.Tiddler(tiddler,{"my-field": value});
+```
+
+钩子不能改变`title`字段,但可以自由修改条目的任何其他字段。

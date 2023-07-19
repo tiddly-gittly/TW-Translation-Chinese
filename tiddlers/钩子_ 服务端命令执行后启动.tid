@@ -1,0 +1,20 @@
+created: 20230719041418765
+creator: 马不前
+modified: 20230719041620351
+modifier: 马不前
+original-title: Hook: th-server-command-post-start
+tags: 钩子机制
+title: 钩子: 服务端命令执行后启动
+
+这个钩子允许插件在 TiddlyWiki 服务端命令初始化后对其进行扩展。两个最明显的使用案例是向 SimpleServer 实例添加路由(例如用于外部文件的 attachments 文件夹)以及向 HTTP 服务器添加 websocket 处理程序。
+
+钩子函数参数:
+
+* SimpleServer 实例
+  ** 在 core/modules/commands/server.js 中定义
+* NodeJS HTTP 服务器实例
+  ** 请参阅 [[NodeJS文档|https://nodejs.org/docs/latest-v8.x/api/http.html#http_class_http_server]]
+* 调用此钩子的服务器的名称(用于特殊处理 NodeJS HTTP 服务器实例参数)。
+** 当前已知的值:`tiddlywiki`、`tiddlyserver`。
+
+返回值会被忽略。

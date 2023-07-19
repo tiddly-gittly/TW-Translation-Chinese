@@ -1,0 +1,70 @@
+created: 20230716022350591
+creator: 马不前
+modified: 20230719034434259
+modifier: 马不前
+original-title: Hook: th-before-importing
+tags: 钩子机制
+title: 钩子：导入之前
+
+这个 Hook 允许插件在任何条目被导入之前检查或修改 `importTiddler` 对象。它在最终点击"导入"按钮之后触发，但在选定的条目被导入到存储之前执行。
+
+''预期使用场景'':
+
+* 操作导入的 "选择状态"
+* 例如：创建一个自定义的"log-tiddler"，它包含一个标题，应该只写入一次
+
+''重要提示'': 
+
+* 这个 Hook<c style="color:Red;">不应</c>用于修改`importTiddler.fields.text`元素！
+* 如果您想给用户提供验证导入数据的可能性，请使用类似于：`$:/core/modules/upgraders/` 的升级器。
+* 如果您需要在没有默认用户交互的情况下操作导入的条目内容，请考虑使用 [[Hook: th-importing-tiddler]]。
+
+这个钩子是`NavigatorWidget.prototype.handlePerformImportEvent`函数的一部分。
+
+钩子函数参数:
+
+* `importTiddler`:一个对象,包含有关“选中/未选中”条目等更多信息
+
+返回值:
+
+* `importTiddler`:对象
+
+钩子必须返回`importTiddler`对象。在许多使用案例中,对象将原封不动地返回。
+
+''在您的项目中实现钩子的代码示例''
+
+```
+/*\
+title: $:/plugins/<author>/<plugin>/th-before-importing.js
+type: application/javascript
+module-type: startup
+
+YOUR DISCRCRIPTION COMES HERE!
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false, exports: true */
+"use strict";
+
+// Export name and synchronous status
+exports.name = "<yournamecomesherewithoutspaces>";
+exports.platforms = ["browser"];
+exports.after = ["startup"];
+exports.synchronous = true;
+
+// Define your variables here!
+
+exports.startup = function() {
+	$tw.hooks.addHook("th-before-importing",function(importTiddler) {
+
+// YOUR CODE !
+
+		return importTiddler;
+	});
+};
+
+})();
+
+```

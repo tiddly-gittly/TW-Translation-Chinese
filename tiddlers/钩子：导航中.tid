@@ -1,0 +1,21 @@
+created: 20230719040304743
+creator: 马不前
+modified: 20230719040440628
+modifier: 马不前
+original-title: Hook: th-navigating
+tags: 钩子机制
+title: 钩子：导航中
+
+这个钩子允许插件监视和修改导航事件。
+
+钩子函数参数:
+
+* `event`:描述导航事件的对象:
+  ** `event.navigateTo`:目标条目的标题
+  ** `event.navigateFromTitle`:包含导航源的条目的标题
+  ** `event.navigateSuppressNavigation`:布尔值;为true时目标条目会在不滚动的情况下打开
+  ** `event.navigateFromClientRect`:触发导航的DOM节点在客户端坐标中的矩形
+
+返回值:
+
+* 可能被修改的事件对象

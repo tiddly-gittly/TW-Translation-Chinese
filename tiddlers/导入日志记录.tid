@@ -1,0 +1,18 @@
+created: 20230719041821957
+creator: 马不前
+modified: 20230719042055524
+modifier: 马不前
+original-title: ImportLogging
+tags: 新的开发者文档
+title: 导入日志记录
+
+浏览器在处理拖放和剪贴板操作方面仍存在显著差异。
+
+您可以开启特殊的日志记录来帮助调试问题:
+
+# 打开浏览器的JavaScript控制台
+# 输入:
+#> `$tw.log.IMPORT = true`
+# 拖放或粘贴一个文件以导入它
+# 在控制台中查看调试信息。例如:
+#> `Importing file 'my-image.png', type: 'image/png', isBinary: true`

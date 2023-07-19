@@ -1,0 +1,17 @@
+created: 20230719034909903
+creator: 马不前
+modified: 20230719035140246
+modifier: 马不前
+original-title: Hook: th-page-refreshed
+tags: 钩子机制
+title: 钩子: 页面刷新完成
+
+这个钩子通知插件页面刚刚完成了一次刷新。它通常用于应用渲染后的效果。
+
+钩子函数参数:
+
+* (无)
+
+返回值:
+
+* (无)

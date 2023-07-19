@@ -1,0 +1,22 @@
+created: 20230719034542311
+creator: 马不前
+modified: 20230719034826032
+modifier: 马不前
+original-title: Hook: th-closing-tiddler
+tags: 钩子机制
+title: 钩子：关闭条目
+
+这个钩子允许插件监视从故事中关闭条目的过程。
+
+钩子函数参数:
+
+* `event`: 微件消息对象,具有以下属性:
+** `event`:触发微件消息的DOM事件对象
+** `tiddlerTitle`:正在关闭的条目的标题
+** `widget`:引用发送消息的微件
+
+返回值:
+
+* `event`: 微件消息对象
+
+钩子可以原封不动地返回事件微件消息对象。

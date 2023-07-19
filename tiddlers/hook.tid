@@ -1,0 +1,16 @@
+created: 20230716021825261
+creator: 马不前
+modified: 20230716022011282
+modifier: 马不前
+tags: word
+title: hook
+
+本意就是钩子或者挂钩的意思。下面列出了维基百科的解释：
+
+<<<
+In computer programming, the term hooking covers a range of techniques used to alter or augment the behaviour of an operating system, of applications, or of other software components by intercepting function calls or messages or events passed between software components. Code that handles such intercepted function calls, events or messages is called a hook.
+
+在计算机编程中，术语钩接涵盖了一系列技术，用于通过拦截函数调用或软件组件之间传递的消息或事件来改变或增强操作系统、应用程序或其他软件组件的行为。处理此类截获的函数调用、事件或消息的代码称为钩子。
+
+[[维基百科|https://en.wikipedia.org/wiki/Hooking]]
+<<<

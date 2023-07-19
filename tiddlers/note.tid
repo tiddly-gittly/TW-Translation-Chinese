@@ -1,6 +1,6 @@
 created: 20230714145807704
 creator: 马不前
-modified: 20230714145926040
+modified: 20230716022252806
 modifier: 马不前
 tags: OtherThings
 title: note
@@ -8,3 +8,10 @@ title: note
 有些翻译内容值得讨论，但目前又没有太多精力在这上面，就先记录下来。回头再讨论。
 
 如果note内容比较多，也可以单独在这边建立条目说明。内容不多就写在note字段里好了。
+
+<$list filter="[!has[draft.of]has[note]]">
+
+<$link><$view field="title"/></$link>
+
+{{!!note}}
+</$list>

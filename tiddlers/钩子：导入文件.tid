@@ -1,0 +1,24 @@
+created: 20230719035607800
+creator: 马不前
+modified: 20230719040022051
+modifier: 马不前
+original-title: Hook: th-importing-file
+tags: 钩子机制
+title: 钩子：导入文件
+
+这个钩子允许插件检查或修改通过拖放或“导入”按钮导入的文件的详细信息。当浏览器在响应导入或拖放时提供的每个[[File对象|https://developer.mozilla.org/en-US/docs/Web/API/File]]被读取时,它会被调用。钩子函数可以选择忽略该文件,在这种情况下,TiddlyWiki的默认处理会继续读取并导入文件内容。另外,钩子函数可以自己处理文件以提取条目,然后将它们传回TiddlyWiki由导入过程的其余部分处理。
+
+如果你想控制从文件中提取条目的方式,请使用这个钩子。如果你想在条目被提取出文件后处理每个导入的条目,请参阅[[钩子：导入条目]]。
+
+钩子函数参数:
+
+* `info`: 一个对象,包含与当前文件相关的属性信息:
+  ** `file`: 对浏览器的 [[File对象|https://developer.mozilla.org/en-US/docs/Web/API/File]] 的引用
+  ** `type`: 文件的 MIME 类型。如果浏览器没有提供则 TiddlyWiki 会尝试从文件扩展名推断类型
+  ** `isBinary`: 标志指示文件是否包含二进制数据(这需要 TiddlyWiki 识别文件类型)
+  ** `callback`: 回调函数,使用从文件对象提取的条目字段对象数组进行调用
+
+返回值:
+
+* `true` 表示钩子已经处理了该文件,并通过回调传递了提取的任何条目
+* `false` 表示钩子没有处理该文件

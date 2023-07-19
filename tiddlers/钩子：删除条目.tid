@@ -1,0 +1,19 @@
+created: 20230719035205437
+creator: 马不前
+modified: 20230719035411903
+modifier: 马不前
+original-title: Hook: th-deleting-tiddler
+tags: 钩子机制
+title: 钩子：删除条目
+
+这个钩子允许插件在条目通过“<c style="color:Red;">删除</c>”工具栏按钮删除之前检查它们。当从编辑工具栏使用删除按钮时,`th-deleting-tiddler`钩子函数实际上会被调用两次:一次用于原始条目,一次用于草稿。
+
+请注意,此钩子不会被通过其他方式删除条目的`ActionDeleteTiddlerWidget`等调用。
+
+钩子函数参数:
+
+* <c style="color:Red;">tiddler</c>:即将被删除的条目对象
+
+返回值:
+
+* 未修改的要删除的条目
