@@ -1,0 +1,26 @@
+created: 20230719040822441
+creator: 马不前
+modified: 20230719041032705
+modifier: 马不前
+original-title: Hook: th-renaming-tiddler
+tags: 钩子机制
+title: 钩子: 重命名条目
+
+这个钩子允许插件在条目被 `tm-rename-tiddler` 消息修改前检查它们。
+
+钩子函数参数:
+
+* `newTiddler`: 包含重命名的条目对象
+* `oldTiddler`: 可选的将被覆盖的现有条目对象
+
+返回值:
+
+* `newTiddler`: 将在重命名操作中使用的条目对象。
+
+钩子可以原封不动地返回原始的条目对象。如果钩子需要修改条目,则应返回一个新的条目对象,例如:
+
+```
+	return new $tw.Tiddler(tiddler,{"my-field": value});
+```
+
+钩子不能改变`title`字段,但可以自由修改条目的任何其他字段。

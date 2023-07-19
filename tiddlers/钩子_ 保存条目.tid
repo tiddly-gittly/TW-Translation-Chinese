@@ -1,0 +1,26 @@
+created: 20230719042552592
+creator: 马不前
+modified: 20230719042702847
+modifier: 马不前
+original-title: Hook: th-saving-tiddler
+tags: 钩子机制
+title: 钩子: 保存条目
+
+这个钩子允许插件在条目通过“确认”工具栏按钮保存之前检查或修改它们;该钩子不会为通过其他方式保存的条目调用,比如由 ActionSetFieldWidget 创建的状态条目。
+
+钩子函数参数:
+
+* `newTiddler`:即将被保存的条目对象
+* `oldTiddler`:正在被保存的草稿条目对象(从 v5.1.23 开始)
+
+返回值:
+
+* 将要保存的条目对象
+
+钩子可以原封不动地返回原始的条目对象。如果钩子需要修改条目,则应返回一个新的条目对象,例如:
+
+```
+	return new $tw.Tiddler(tiddler,{"my-field": value});
+```
+
+钩子不能改变`title`字段,但可以自由修改条目的任何其他字段。

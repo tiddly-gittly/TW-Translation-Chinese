@@ -1,6 +1,6 @@
 created: 20230706072348269
 creator: 马不前
-modified: 20230716015232294
+modified: 20230719034945734
 modifier: 马不前
 original-title: HelloThere
 tags: TiddlyWiki/Dev
@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 ** [[单文件数据存储的TiddlyWiki]] 
 ** [[持续部署]]
 ** [[GitHub分支]] 
-** HookMechanism
+** [[钩子机制]]
 ** [[使用ES2016编写插件]]
 ** [[为TiddlyWiki添加Babel Polyfill]]。
 ** [[TiddlyWiki的拖放互操作性]]

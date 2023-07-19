@@ -1,0 +1,17 @@
+created: 20230719035431368
+creator: 马不前
+modified: 20230719035549413
+modifier: 马不前
+original-title: Hook: th-editing-tiddler
+tags: 钩子机制
+title: 钩子：编辑条目
+
+这个钩子允许插件在条目通过“编辑”工具栏按钮编辑之前检查它们。
+
+钩子函数参数:
+
+* `event`:触发编辑的 DOM 事件对象
+
+返回值:
+
+* `editTiddler`:返回`true`则继续像往常一样编辑条目,返回`false`则悄悄取消编辑

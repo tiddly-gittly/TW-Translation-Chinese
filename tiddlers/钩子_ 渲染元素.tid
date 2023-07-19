@@ -1,0 +1,38 @@
+created: 20230719041134913
+creator: 马不前
+modified: 20230719041253303
+modifier: 马不前
+original-title: Hook: th-rendering-element
+tags: 钩子机制
+title: 钩子: 渲染元素
+
+这个钩子提供了一个通知,即一个DOM元素即将被“element”组件渲染。钩子可以可选地提供一个替代的解析树,它将代替预期的元素进行渲染。
+
+注意,element组件只渲染那些在wikitext中被解析为纯HTML元素的元素(即使用`<tagname>`语法)。这意味着这个钩子不会为其他组件创建的元素调用。
+
+钩子函数参数:
+
+* `newParseTreeNodes`: 由之前调用的钩子提供的可选解析树节点
+* `widget`: 调用钩子的element组件的实例
+
+返回值:
+
+* `newParseTreeNodes`: 可选的新的解析树节点以替换预期的元素,如果保留元素不变则返回假值
+
+下面是一个钩子处理程序的示例:
+
+```js
+$tw.hooks.addHook("th-rendering-element",function(parseTreeNodes,widget) {
+	// Return the previous mapping if there is one
+	if(parseTreeNodes) {
+		return parseTreeNodes;
+	}
+	// Detect the elements we're interested in
+	if(someCondition()) {
+		// Replace them with a parse tree
+		return generateParseTreeNodes();
+	}
+	// Otherwise do nothing
+	return null;
+});
+```

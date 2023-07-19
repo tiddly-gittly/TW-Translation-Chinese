@@ -1,0 +1,18 @@
+created: 20230719041645942
+creator: 马不前
+modified: 20230719041740259
+modifier: 马不前
+original-title: Hook: th-make-tiddler-path
+tags: 钩子机制
+title: 钩子: 生成条目路径
+
+这个钩子让插件在保存过程中检查或修改条目文件的路径。
+
+钩子函数参数:
+
+* `currentPath`: 条目文件将要保存到的路径。
+* `originalPath`: 任何钩子未修改的原始条目文件路径。
+
+返回值:
+
+用于保存条目文件的路径。

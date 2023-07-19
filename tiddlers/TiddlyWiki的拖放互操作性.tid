@@ -1,0 +1,23 @@
+created: 20230719042743369
+creator: 马不前
+modified: 20230719042905595
+modifier: 马不前
+original-title: TiddlyWiki Drag and Drop Interoperability
+tags: 新的开发者文档
+title: TiddlyWiki的拖放互操作性
+
+让任何 HTML 文件与 TiddlyWiki 的拖放实现互操作非常简单。
+
+这个示例展示了如何将可拖动数据附加到 DOM 元素。数据以两种不同的形式提供:
+
+* 如果元素被拖放到文本编辑区域,将使用字符串数据
+* 如果元素被拖放到 TiddlyWiki 的导入区域,将使用条目数据
+
+这使得从普通网页拖放内容到 TiddlyWiki 变得很容易。
+
+<$button>
+<$action-sendmessage $message="tm-download-file" $param="$:/dev/save/dragndropinterop" filename="index.html"/>
+下载简单代码
+</$button>
+
+<$codeblock code={{DragAndDropInterop}} language="text/html"/>

@@ -1,0 +1,46 @@
+created: 20230719042102730
+creator: 马不前
+modified: 20230719042227060
+modifier: 马不前
+original-title: ParserSubclassingMechanism
+tags: 新的开发者文档
+title: 解析器子类化机制
+
+!! 简介
+
+wikitext解析器的子类化机制使自定义解析器能够使用 wikitext解析引擎,同时自定义使用的规则。
+
+!! 示例
+
+下面是一个 checkbox组件子类的示例,它在事件处理程序中添加了日志记录:
+
+```js
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["text/vnd.tiddlywiki"],
+	HtmlParser = $tw.modules.createClassFromModule(require("$:/core/modules/parsers/wikiparser/rules/html.js"),$tw.WikiRuleBase),
+	EntityParser = $tw.modules.createClassFromModule(require("$:/core/modules/parsers/wikiparser/rules/entity.js"),$tw.WikiRuleBase);
+
+var MyCustomWikiParser = function(type,text,options) {
+	var parser = new WikiParser(type,text,$tw.utils.extend({},options,{
+		// Force the parser to parse in inline mode
+		parseAsInline: true,
+		// Specify which rules will be used
+		rules: {
+			pragma: [],
+			block: [],
+			inline: [HtmlParser,EntityParser]
+		}
+	}));
+	this.tree = parser.tree;
+	this.prototype = parser.prototype;
+};
+
+exports["text/vnd.my-custom-type"] = MyCustomWikiParser;
+
+})();
+```

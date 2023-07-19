@@ -1,0 +1,19 @@
+created: 20230719042356744
+creator: 马不前
+modified: 20230719042518788
+modifier: 马不前
+original-title: Hook: th-opening-default-tiddlers-list
+tags: 钩子机制
+title: 钩子: 打开默认条目列表
+
+这个钩子允许插件添加或删除 wiki 初次加载或点击主页按钮时将要打开的条目列表。
+
+钩子函数参数:
+
+* `list`:将要打开的条目标题数组
+
+返回值:
+
+* 修改后的将要打开的条目标题数组
+
+注意,这个钩子使用从[[$:/DefaultTiddlers]]筛选器生成的条目标题调用。任何添加的条目必须是条目标题,而不是筛选器表达式。
