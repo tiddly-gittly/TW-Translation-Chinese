@@ -1,0 +1,29 @@
+created: 20230719063501339
+creator: 马不前
+modified: 20230719063741032
+modifier: 马不前
+original-title: Widget refresh tutorial part III
+tags: [[Javascript Widget教程]]
+title: 微件刷新教程 第3部分
+
+这个教程旨在演示几个 `refresh` 方法调用 vs 从头重新创建微件的示例。
+
+这是通过一个 [[refreshcount.js]] 微件实现的,该微件在创建微件时将计数器设置为零,并在每次调用 `refresh` 方法时递增计数器。以下是完整的代码:
+
+{{refreshcount.js}}
+
+上面代码的关键部分:
+
+```javascript
+this.refreshCount = 0;
+this.document.createTextNode(this.refreshCount + " refreshes"); 
+this.refreshCount++;
+```
+
+在以下示例中(参见 [[微件刷新演示3]] 查看代码),创建了 `refreshcount` 微件的两个实例。一个在顶层,另一个在列表微件内部,其过滤结果取决于 `test` 微件的 `text` 字段的值。可以通过两个按钮和一个输入框以几种方式修改条目存储:
+
+{{微件刷新演示3}}
+
+* `修改其他条目` - 每次点击此按钮,两个计数器都会递增,表示正在调用 `refresh` 方法
+* `修改此条目` - 单击此按钮会修改该条目本身。在较早的 TiddlyWiki 版本中,这会导致两个微件从头开始重新创建,从而计数器会重置为零。从 [[version 5.2.0|https://bramchen.github.io/tw5-docs/zh-Hans/#Release%205.2.0]] 开始,修改此条目的另一个字段不会导致微件重新创建,计数器也不会重置。  
+* `条目 'test' 的文字字段` - 在输入框中输入文本会导致独立的 `refreshcount` 微件的计数器递增。但是另一个微件实例嵌入在一个列表微件中,其过滤输出取决于正在修改的条目字段的值。这会导致它从头开始重新创建子项,每次键入都会重置计数器。所以每击一键,左边的计数器会递增,但右边的计数器会重置为/保持在零。

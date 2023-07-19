@@ -1,6 +1,7 @@
 created: 20230713080948538
 creator: 马不前
-modified: 20230713082129160
+list: 单文件数据存储的TiddlyWiki 持续部署 GitHub分支 钩子机制 使用ES2016编写插件 [[为TiddlyWiki添加Babel Polyfill]] TiddlyWiki的拖放互操作性 [[Javascript Widget教程]] 导入日志记录 解析器子类化机制 筛选器操作符 使用通知 数据储存 微件子类化机制 DragAndDropInterop $:/dev/save/dragndropinterop
+modified: 20230719064012641
 modifier: 马不前
 tags: TiddlyWiki/Dev
 title: 新的开发者文档

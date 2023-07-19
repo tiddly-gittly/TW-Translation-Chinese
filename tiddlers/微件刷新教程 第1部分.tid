@@ -1,0 +1,49 @@
+created: 20230719063028166
+creator: 马不前
+modified: 20230719063205917
+modifier: 马不前
+original-title: Widget refresh tutorial part I
+tags: [[Javascript Widget教程]]
+title: 微件刷新教程 第1部分
+
+但是,如果我们想显示动态内容怎么办?我们如何显示信息并随着变化保持更新呢?让我们显示一个条目字段的内容。
+
+定义 `tiddlerfield` 微件的 [[tiddlerfield-norefresh.js]] 和 [[hello.js]] 几乎相同,除了这个部分:
+
+```javascript
+MyWidget.prototype.render = function(parent,nextSibling) {
+ this.parentDomNode = parent;
+ var text = this.wiki.getTiddlerText("test", "<empty>")
+ var textNode = this.document.createTextNode(text);
+ parent.insertBefore(textNode,nextSibling);
+ this.domNodes.push(textNode);  
+};
+```
+
+这里创建文本 DOM 节点使用的不是静态字符串,而是 `test` 条目的 text 字段。这类似于这样使用 view 微件:`<$view tiddler="test"/>`
+
+它看起来像这样(参见 [[微件刷新演示1]] 查看代码):
+
+{{微件刷新演示1}}
+
+注意,如果您更改输入框中的文本,`tiddlerfield` 微件的输出不会改变,但 `view` 微件的输出会改变。只有在点击“强制刷新”按钮后,`tiddlerfield`的输出才会更新以匹配输入框的内容。
+
+这里发生了什么?微件代码的 render 方法仅在微件首次创建时由 tiddlywiki 核心调用。之后,除非微件被完全销毁然后重新创建,否则不会再次调用它。
+
+tiddlywiki 的 ViewWidget 有一个正确编写的 `refresh` 方法,所以在输入框中输入会导致其内容更新。然而,`tiddlerfield` 微件根本没有 `refresh` 方法。它没有获取 `test` 条目内容已更改的通知的方法。在点击“强制刷新”按钮之前,它的输出不会改变。
+
+请参阅下一个示例,了解为 `tiddlerfield` 微件实现 `refresh` 方法的内容。
+
+刷新按钮的代码如下:
+
+```
+<$button set="!!refresh" setTo={{test}}>Force refresh</$button>  
+```
+
+微件包含在这样的列表微件中:
+
+```
+<$list filter="[{!!refresh}]">...</$list>
+```
+
+点击按钮时,包含条目的 `refresh` 字段被修改,导致从头开始重新创建列表微件的子项。调用 render 方法,并更新 `tiddlerfield` 微件的输出。
