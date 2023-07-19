@@ -1,0 +1,143 @@
+created: 20230719053241343
+creator: 马不前
+modified: 20230719054554368
+modifier: 马不前
+original-title: Child widgets tutorial
+tags: [[Javascript Widget教程]]
+title: 子微件教程
+
+\define showTrees(wikitext)
+<table>
+<thead>
+<tr><th>wiki text</th><th>html</th><th>renders as</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>`$wikitext$`</td>
+<td>
+<$wikify name=html text="""$wikitext$""" output=html mode=inline>
+<$text text=<<html>>/>
+</$wikify>
+</td>
+<td>$wikitext$</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr><th>parse tree</th><th>widget tree</th></tr>
+</thead>
+<tbody>
+<tr>
+<td style="vertical-align: text-top">
+<pre><code>
+<$wikify name=parsetree text="""$wikitext$""" output=parsetree mode=inline>
+<<parsetree>>
+</$wikify>
+</code></pre>
+</td>
+<td style="vertical-align: text-top">
+<pre><code>
+<$wikify name=widgettree text="""$wikitext$""" output=widgettree mode=inline>
+<<widgettree>>
+</$wikify>
+</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+\end
+
+! 简介
+
+到目前为止,示例只涵盖了简单的叶子微件,但微件可以排列成层次结构。与只有叶子的微件相比,支持拥有子微件的微件类必须包含实例化子微件的代码。
+
+并非所有微件都需要支持拥有子微件。仅用于集成第三方JavaScript库的微件可能不需要它。
+
+! wiki文本 ⇨ 解析树 ⇨ 微件树 ⇨ DOM树
+
+# [[wiki文本|https://tiddlywiki.com/#WikiText]] - 用户在条目中使用wiki文本编写内容。
+# [[解析树|https://tiddlywiki.com/dev/#ParsingMechanism]] - 解析树是一个描述wiki文本的JSON数据结构。可以使用`this.wiki.parseText`将wiki文本转换为解析树。
+# ''微件树'' - 解析树中的大多数项对应微件树中的一个或多个项。`this.makeChildWidgets`方法用于将解析树转换为微件树。
+# [[DOM树|https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction]] - DOM树是一个标准的JavaScript数据结构,浏览器使用它来显示网页。`this.renderChildren`方法用于实例化微件类,然后渲染微件树中的每个微件。如果某个微件在浏览器中可见,则会创建一个或多个DOM节点。
+
+! 示例 
+
+!! 不具嵌套的简单树
+
+[[Widgets in wiki text|https://bramchen.github.io/tw5-docs/zh-Hans/#Widgets%20in%20WikiText]] 中的语法类似 html(即`<$list/>`)。但所有[[wiki 标记|https://bramchen.github.io/tw5-docs/zh-Hans/#WikiText]] 对 tiddlywiki 代码来说都被视为微件。即使是一个简单的字符串也会被视为一个微件。在这种情况下,一个类型为 `text` 的微件: 
+
+<<showTrees """hello""">>
+
+上面的纯文本基本上只是这个微件语法的同义词:
+
+<<showTrees """<$text text=hello/>""">>
+
+在这两个示例中,parseTree 和 widgetTree 的一些细节不同,但总体结构是相同的,渲染输出也是相同的。在这两个简单的示例中,没有嵌套,所以没有创建子微件。
+
+!! 具有一级嵌套的树
+
+这个例子展示了粗体 wiki 语法的结构。它仍然很简单,但引入了一级嵌套:
+
+`element`→`text`
+
+粗体的 wiki 语法转换为标准 html 元素 `strong`。标准 html 元素在 tiddlywiki 中都表示为类型为`element` 的微件:
+
+<<showTrees """''bold''""">>
+
+另一个展示一级嵌套的例子(`link`→`text`):
+
+<<showTrees """<$link to=atiddler>link</$link>""">>
+
+!! 不为 DOM 做贡献的微件
+
+并非所有微件都为 DOM 做贡献。一些微件的目的是通过改变某些状态来影响后代微件的显示。
+
+例如 `$set` 微件设置一个变量,后代微件可以访问该变量:
+
+<<showTrees """<$set name=myvar value=hi/>""">>
+
+没有渲染任何内容,也没有 html,但解析树和微件树包含有关该变量的信息。
+
+!! 使用 this.wiki.parseText 动态生成微件子节点
+
+到目前为止的所有示例中,解析树和微件树之间的嵌套结构都存在非常密切的映射关系。如果该项在解析树中,那么它也在微件树中。如果解析树项有子项,那么微件树具有相同数量的子项。
+
+然而,在几个微件示例中,在微件渲染过程中会动态生成更多级别的嵌套。
+
+`$macrocall` 微件是一个示例:
+
+<<showTrees """<$macrocall $name=now/>""" >>
+
+解析树只有一个类型为 $macrocall 的元素,没有子元素。微件树有相同类型为 $macrocall 的元素,但它还有一个不在解析树中的子微件。
+
+在所有情况下,`$macrocall` 微件都会调用给定的宏,然后在输出上调用 `this.wiki.parseText`。这会产生一个新的解析树,用于生成子微件。
+
+在这个特定的情况下,调用了 `now` 宏。它返回一个简单的文本字符串,所以在解析时,结果导致创建了一个包含当前日期和时间的单个子文本微件。
+
+!! 不支持嵌套的微件
+
+就像一些微件可以使微件树比解析树有更多的嵌套一样,有些微件可以使微件树比解析树具有更少的嵌套。
+
+这发生在微件没有任何使用子项的需求时。例如,`$text` 微件就没有任何显示后代的需求。
+
+这种行为是通过不调用 `makeChildWidgets` 方法来实现的。如果没有那个方法的调用,子微件就不会从子解析树项创建。例如:
+
+<$macrocall $name=showTrees wikitext="""<$text text="hi">被忽略的子文本</$text>"""/>
+
+由于 `$text` 微件没有调用 `makeChildWidgets`,所以上面的“被忽略的子文本”在解析树中存在,但不在微件树中。
+
+! 参考
+
+|!方法|!调用时机|!作用|
+|`makeChildWidgets`|直接或间接地从`render`方法调用|将子解析树项转换为微件树项|
+|`renderChildren`|直接或间接地从`render`方法调用,在`makeChildWidgets`调用之后|调用子微件的`render`方法|
+|`refreshChildren`|直接或间接地从`refresh`方法调用,只在没有调用`refreshSelf`时需要|调用子微件的`refresh`方法,以便它们可以检查是否需要刷新|
+|`this.wiki.parseText`|将输出解析树传递给`makeChildWidgets`|将给定文本转换为解析树...只在动态构造解析树时需要|
+
+|!调用示例|!目的|!使用这种方法的微件|
+|`this.makeChildWidgets()`|从静态解析树构造子微件|[[$link|$:/core/modules/widgets/link.js]], [[$button|$:/core/modules/widgets/button.js]] 等|
+|`this.makeChildWidgets(parseTreeNodes)`|从动态解析树构造子微件|[[$list|$:/core/modules/widgets/list.js]], [[$transclude|$:/core/modules/widgets/transclude.js]], [[$macrocall|$:/core/modules/widgets/macrocall.js]]等|
+|`this.renderChildren(parent, nextSibling)`|当微件不向dom添加任何内容时,将`render`参数原封不动传递给子项|[[$set|$:/core/modules/widgets/set.js]], [[$importvariables|$:/core/modules/widgets/importvariables.js]], [[$tiddler|$:/core/modules/widgets/tiddler.js]], [[$wikify|$:/core/modules/widgets/wikify.js]]等|
+|`this.renderChildren(domNode, null)`|将该微件生成的dom节点传递给子项|[[$link|$:/core/modules/widgets/link.js]], [[$button|$:/core/modules/widgets/button.js]]等|
