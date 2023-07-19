@@ -1,0 +1,39 @@
+created: 20230719063221750
+creator: 马不前
+modified: 20230719063438429
+modifier: 马不前
+original-title: Widget refresh tutorial part II
+tags: [[Javascript Widget教程]]
+title: 微件刷新教程 第2部分
+
+这个示例类似于[[微件刷新教程 第1部分]],除了当条目字段更改时,微件输出将自动刷新。
+
+[[tiddlerfield.js]]与[[tiddlerfield-norefresh.js]]相同,只是添加了这个`refresh`方法:
+
+```javascript
+/*
+性能优化的微件会选择性地刷新,但在这里我们总是刷新  
+*/
+MyWidget.prototype.refresh = function(changedTiddlers) {
+ // 重新生成并重新渲染微件
+ // 并替换现有的 DOM 节点
+ this.refreshSelf();
+ return true;
+};
+```
+
+上面调用的`refreshSelf`方法由核心微件类实现,它负责清理旧的dom节点并调用render函数。
+
+结果如下([[微件刷新演示2]]):
+
+{{微件刷新演示2}}
+
+现在在输入框中输入任何内容都会立即使`tiddlerfield`和`view`微件的输出刷新。
+
+请注意,这是一个天真版本的`refresh`。它无条件地刷新自身。由于`refresh`方法在条目存储更改时为所有可见微件调用,这远非最佳。但是按照我们定义的方式,输出仅取决于标题为`text`的条目。
+
+在tiddlywiki中,条目存储用于一切,几乎任何交互都会导致存储的更新。这意味着几乎任何交互都会导致调用refresh方法。例如,如果您在搜索框中输入,`tiddlerfield`微件将在每次按键时刷新。
+
+添加和删除DOM元素是一个相对昂贵的操作,因此,如果某人使用列表微件创建了该微件的几百个实例,那么此类tiddlywiki交互可能会出现明显的延迟。因此,通过编写更智能的`refresh`方法尽可能避免修改dom通常是明智的。
+
+“练习” - 只在`changedTiddlers`输入数组包含`test`的情况下调用上面的refresh方法`refreshSelf`(提示:请参阅[[$:/core/modules/widgets/view.js]]中的refresh方法示例)。

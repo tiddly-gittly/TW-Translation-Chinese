@@ -1,0 +1,40 @@
+created: 20230719053500497
+creator: 马不前
+list: 未定义微件教程 不做任何操作的微件教程 [[Hello World 微件教程]] [[微件刷新教程 第1部分]] [[微件刷新教程 第2部分]] [[微件刷新教程 第3部分]] [[微件属性教程 第1部分]] [[微件属性教程 第2部分]] 子微件教程 demo部分 js代码部分
+modified: 20230719063632399
+modifier: 马不前
+original-title: Javascript Widget Tutorial
+tags: 新的开发者文档
+title: Javascript Widget教程
+
+! 简介
+本教程提供了逐步的交互式示例,介绍如何为 TiddlyWiki 微件编写代码。可以在不必重新加载整个维基的情况下修改演示 JavaScript 代码。
+
+目标受众:
+
+# 那些非常了解 TiddlyWiki、熟悉编程和 JavaScript,并希望编写自己的微件的人。我不会在这里解释 JavaScript。关于这个,你需要其他资源。
+# 那些非常了解 TiddlyWiki 但不知道 JavaScript,但是想更多地了解 TiddlyWiki 的工作原理的人。你应该能浏览并与演示交互,并学到一些东西。
+
+!教程
+* [[未定义微件教程]]
+* [[不做任何操作的微件教程]]  
+* [[Hello World 微件教程]]
+* [[微件刷新教程 第1部分]]
+* [[微件刷新教程 第2部分]]
+* [[微件刷新教程 第3部分]]
+* [[微件属性教程 第1部分]]
+* [[微件属性教程 第2部分]]
+* [[子微件教程]]
+
+! 笔记
+
+TiddlyWiki 不支持动态重新加载 JavaScript。如果您更改了一个 JavaScript 条目,那么您需要保存并重新加载 wiki 才能使更改生效。
+
+为避免此类重新加载的需要,使用了优秀的 [[innerwiki 插件|https://tiddlywiki.com/prerelease/plugins/tiddlywiki/innerwiki/]]。这允许从外部 wiki 的条目子集创建内部 wiki。每次刷新内部 wiki 时,会重新加载其整个 wiki,内部 wiki 中的 JavaScript 更改将生效。
+
+无需重新加载,安装了 [[innerwiki 插件|https://tiddlywiki.com/prerelease/plugins/tiddlywiki/innerwiki/]] 的 TiddlyWiki 实例可用作与 TiddlyWiki JavaScript 交互的完美沙箱。
+
+! 关于编写 TW 微件的其他文档
+
+* [[微件模块]]
+* [[微件]]

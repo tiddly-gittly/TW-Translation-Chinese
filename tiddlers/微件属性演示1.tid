@@ -1,0 +1,50 @@
+created: 20230719061455449
+creator: 马不前
+modified: 20230719061759013
+modifier: 马不前
+original-title: Widget attributes demo I
+tags: demo部分
+title: 微件属性演示1
+
+<!-- The innerwiki doesn't refresh on its own when tiddlers on the outside change, so use the list widget to force a dependency -->
+<$list name=refresh filter=[[hello-attribute.js]get[text]]>
+<$innerwiki width="600" height="400" style="width:100%;">
+	<$data title="$:/DefaultTiddlers" text="[[hello world widget]]"/>
+	<$data $tiddler=hello-attribute.js/>
+	<$data title="hello world widget" text="""
+```
+<$hello/>
+```
+
+Renders as:
+
+<$hello/>
+
+---
+
+```
+<$hello message="pale blue dot"/>
+```
+
+Renders as:
+
+<$hello message="pale blue dot"/>
+
+---
+
+<$edit-text focus=yes tiddler=test tag=input/>
+
+```
+<$hello message={{test!!text}}/>
+```
+
+Renders as:
+
+<$hello message={{test!!text}}/>
+
+"""/>
+
+	<$data title="test" text="Alice"/>
+
+</$innerwiki>
+</$list>
