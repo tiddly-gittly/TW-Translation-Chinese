@@ -1,0 +1,58 @@
+created: 20230719044444923
+creator: 马不前
+modified: 20230719044636602
+modifier: 马不前
+original-title: WidgetSubclassingMechanism
+tags: 新的开发者文档
+title: 微件子类化机制
+
+!! 简介
+
+小组件子类化机制允许用额外的方法和属性子类化小组件。子类小组件可以覆盖基类小组件的现有定义,或者作为一个新的小组件使它可用。
+
+小组件子类在`widget-subclass`类型的模块中定义。它们应该导出以下属性:
+
+* `baseClass`:被子类化的小组件类的名称
+* `name`:(可选)用于子类小组件的名称(默认为覆盖基类小组件)
+* `constructor`:用于创建小组件对象的构造函数
+* `prototype`:其属性被添加到子类的对象
+
+!! 示例
+
+下面是一个在事件处理程序中添加日志的复选框小组件子类的示例:
+
+```javascript
+/*\
+title: $:/my-customised-checkbox-widget.js
+type: application/javascript
+module-type: widget-subclass
+
+Widget base class
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+exports.baseClass = "checkbox"; // Extend the <$checkbox> widget
+
+// Specify a different name to make the subclass available as a new widget instead of overwriting the baseclass:
+// exports.name = "my-enhanced-checkbox";
+
+exports.constructor = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
+exports.prototype = {};
+
+exports.prototype.handleChangeEvent = function(event) {
+	// Call the base class handleChangeEvent function
+	Object.getPrototypeOf(Object.getPrototypeOf(this)).handleChangeEvent.call(this,event);
+	// Print our message
+	console.log("Checkbox status:",this.inputDomNode.checked);
+};
+
+})();
+```

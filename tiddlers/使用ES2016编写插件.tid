@@ -1,7 +1,201 @@
 created: 20230715091451376
 creator: 马不前
-modified: 20230715091515565
+modified: 20230719044136393
 modifier: 马不前
 original-title: Using ES2016 for Writing Plugins
 tags: 新的开发者文档
 title: 使用ES2016编写插件
+
+随着 ES2015(也称为 ES6)的出现和 [[Babel.js|http://babeljs.io/]] 的可用性,插件开发者可以在编写 TiddlyWiki 插件时利用 ES2015。理解 TiddlyWiki 的模块沙箱和 Babel 如何编译它的输出以备像 CommonJS/AMD 这样的模块系统使用的细微差别。
+
+请理解 PluginMechanism 的工作原理,因为这与使用 Babel 编写插件以编译将包含在最终 TiddlyWiki 中的输出(例如 [[TiddlyWiki 于 Node.js|https://bramchen.github.io/tw5-docs/zh-Hans/#TiddlyWiki%20on%20Node.js]])有关。
+
+!! 安装和配置 Babel
+
+你可以使用以下命令安装 Babel:
+
+```
+$ npm install --global babel-cli babel-presets-es2015
+```
+
+如果你正在开发要发布到 npm 中心仓库的插件(或者出于方便),你可以避免全局安装,并将它保存到本地的 `package.json` 文件中:
+
+```
+$ npm install --save-dev babel-cli babel-presets-es2015
+```
+
+在插件项目中编辑 `.babelrc` 文件,输入以下内容:
+
+```json
+{
+  "presets": [
+    "es2015"
+  ]
+}
+```
+
+<<.tip "我发现如果像 npm 模块一样管理插件更容易,包含一个通过 `npm run build` 编译输出的 `package.json`。有关详情,请参阅 [[npm 脚本文档|https://docs.npmjs.com/misc/scripts]]。">>
+
+!! 编译输出
+
+选择一个文件夹来存储 ES2015 JavaScript,以及一个文件夹来输出适用于 TiddlyWiki 的 JavaScript。在这个例子中,我分别使用 `src` 和 `lib`。安装好 Babel 后,我可以通过运行以下命令将 `src` 文件夹中的所有 JavaScript 编译到 `lib` 文件夹:
+
+```
+$ babel src -d lib
+```
+
+<<.warning "Babel 不会复制非 JavaScript 文件。开发者需要自行包含所有支持文件。Babel 仅将 `src` 文件夹中的 JavaScript 文件(以 `.js` 结尾)转换到 `lib` 文件夹。">>
+
+!! 导入和导出
+
+在 ES2015 之前编写的插件会通过 TiddlyWiki 像这样 `require`一个模块:
+
+```javascript
+var Widget = require('$:/core/modules/widgets/widget.js').widget;
+```
+
+但在 ES2015 中会是这样:
+
+```javascript
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
+```
+
+方便的是,Babel 在编译时会基本输出与第一个 ES2016 前代码相同的 JavaScript。
+
+另外,在 ES2016 中你需要在开头声明导入,不能动态 `require` 东西。这意味着你不能在 if 块或函数中有 `import` 语句。如果需要该功能,你仍需直接使用 `require()` 语句。但要考虑这样做可能会错过使代码更简洁优雅的机会。
+
+导出也是一样。你使用 `export` 关键字而不是赋值给 `exports` 变量的一个属性:
+
+```javascript
+export { MyWidget as mywidget };
+```
+
+<<.tip "使用一个非标识符的名称导出是非法的 JavaScript,尽管在作为属性键时使用非标识符(字符串)是ok的。这意味着如果你想组件包含一个短横线,你必须revert回使用 `exports['my-widget'] = MyWidget;` 语法。">>
+
+重要的是要理解在 ES2016 中默认导出在 TiddlyWiki 中是不被支持的。这主要是因为核心代码期望特定的属性被附加到 `exports` 变量上。Babel 的 `export` 转换与此很好地兼容,除了默认导出。
+
+!! 类
+
+在小组件的例子中,ES2016 可以很好地兼容类继承。对比一下,典型的 Widget 定义看起来像这样:
+
+```javascript
+function MyWidget() {
+  Widget.call(this); 
+}
+MyWidget.prototype = new Widget();
+MyWidget.prototype.render = function(parent, nextSibling) {...};
+// 等等...
+```
+
+使用类可以使这种仪式更紧凑:
+
+```javascript
+class MyWidget extends Widget {
+  render(parent, nextSibling) {...}
+  // 等等... 
+}
+```
+
+使用类,可以使用<<.def "getter">>消除大量 `Widget.execute()` 冗余。我发现这比典型的对象赋值更具可读性。它还带来了允许在通常会混淆 `execute()` 方法的属性中进行计算的好处。例如,这样开发复合属性:
+
+```javascript
+class NameWidget extends Widget {
+  get title() { return this.getAttribute('title'); }
+  get firstName() { return this.getAttribute('first'); } 
+  get lastName() { return this.getAttribute('last'); }
+  get fullName() { return `${this.title}. ${this.firstName} ${this.lastName}`; }
+}
+```
+
+!!! 非类模块
+
+对于非类模块,你可以使用 `export` 关键字。下面是一个简单的 [[启动模块|moduletypes]]: 
+
+```javascript
+export function startup() {
+  // 在这里做事情
+}
+```
+
+或者在[[JavaScript宏]]的情况下:
+
+```javascript
+export const name = 'my-macro';
+export const params = {};
+export function run() {...}
+```
+
+!!  Polyfill
+
+ES2015带来了一些是 JavaScript 核心对象的一部分的特性。这些特性不是所有浏览器都支持。为了在[[大多数浏览器|BrowserCompatibility]]中使用这些特性,你需要一个<<.def "polyfill">>。Babel 有一个 polyfill 包你可以引入。请参阅[[将 Babel Polyfill 加入 TiddlyWiki]]了解如何实现。
+
+!! 示例
+
+下面是一个会显示时间并更新的 ES2015 插件/组件示例:
+
+```javascript
+/*\  
+标题:$:/plugins/sukima/clock-widget.js
+类型:application/javascript
+模块类型:widget
+
+一个更新的时间戳
+
+\*/
+
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
+
+class ClockWidget extends Widget {
+
+  构造函数(parseTreeNode, options) {
+    super(parseTreeNode, options);
+    this.logger = new $tw.utils.Logger('clock-widget');
+  }
+
+  render(parent, nextSibling) {
+    if (!$tw.browser) { return; }
+    this.logger.log('渲染时钟DOM节点');
+    this.computeAttributes();
+    this.parentDomNode = parent;
+    this.domNode = $tw.utils.domMaker('div', {
+      document: this.document,
+      class: 'tc-clock-widget'
+    });
+    parent.insertBefore(this.domNode, nextSibling);
+    this.tick();
+  }
+
+  tick() {
+    this.logger.log('嘀嗒!');
+    if (!document.contains(this.domNode)) {
+      // 显然组件已经从 DOM 中移除。做些清理。
+      return this.stop(); 
+    }
+    this.start();
+    this.domNode.innerHTML = this.dateString;
+  }
+
+  start() {
+    if (!this.clockTicker) {
+      this.logger.log('启动时钟');
+      this.clockTicker = setInterval(this.tick.bind(this), 1000); 
+    }
+  }
+
+  stop() {
+    this.logger.log('停止时钟');
+    clearInterval(this.clockTicker);
+    this.clockTicker = null;
+  }
+
+  get dateString() {
+    const format = 'DDth MMM YYYY at hh12:0mm:0ss am';
+    return $tw.utils.formatDateString(new Date(), format);
+  }
+
+}
+
+export { ClockWidget as clock };
+```
+
+<<.tip "在顶部添加一个额外的空格会导致 Babel 在没有任何可怕缩进的情况下输出前置条目注释。虽然这不会影响 TiddlyWiki,但在阅读右对齐超出屏幕的输出时可能会引起困惑。">>
