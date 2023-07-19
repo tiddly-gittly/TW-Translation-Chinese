@@ -1,10 +1,10 @@
 created: 20230719054652163
 creator: 马不前
-modified: 20230719054804064
+modified: 20230719061759012
 modifier: 马不前
 original-title: Do nothing widget demo
-tags: [[Javascript Widget教程]]
-title: 不做任何事的微件演示
+tags: demo部分
+title: 不做任何操作的微件演示
 
 <!-- The innerwiki doesn't refresh on its own when tiddlers on the outside change, so use the list widget to force a dependency -->
 <$list name=refresh filter=[[donothing.js]get[text]]>

@@ -1,0 +1,35 @@
+created: 20230719062545510
+creator: 马不前
+modified: 20230719062641886
+modifier: 马不前
+original-title: Widget attributes tutorial part II
+tags: [[Javascript Widget教程]]
+title: 微件属性教程 第2部分
+
+这个示例将基于前一个示例进行构建。唯一的修改是在 `refresh` 方法中添加检查。只有在检测到属性更改时才会调用 `refreshSelf`。
+
+`computeAttributes` 方法返回一个包含每个发生更改的属性的 Javascript 对象。所以可以使用像 `if (changedAttributes.attr1 || changedAttributes.attr2 || changedAttributes.attr3)` 等检查来检测更改。请参阅 [[$:/core/modules/widgets/view.js]] 中的 refresh 方法,其中展示了对多个属性的检查。
+
+对于这个示例,`message` 是唯一实现的属性。
+
+```javascript
+/*
+如果属性值自渲染后发生了更改,则刷新
+*/
+MyWidget.prototype.refresh = function(changedTiddlers) {
+ // 查找哪些属性已更改
+ var changedAttributes = this.computeAttributes();
+ if (changedAttributes.message) {
+  this.refreshSelf();
+  return true;
+ } else {
+  return false;
+ }
+};
+```
+
+完整的代码可以在 [[hello-attribute-optimized.js]] 中看到,结果如下([[微件属性演示2]]):
+
+{{微件属性演示2}}
+
+这里的可见行为应与前一个教程中的未优化行为完全相同。

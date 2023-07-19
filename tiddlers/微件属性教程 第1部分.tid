@@ -1,0 +1,52 @@
+created: 20230719061923294
+creator: 马不前
+modified: 20230719062443583
+modifier: 马不前
+original-title: Widget attributes tutorial part I
+tags: [[Javascript Widget教程]]
+title: 微件属性教程 第1部分
+
+到目前为止,我们实现的所有微件都没有用于处理微件属性的代码。绝大多数有用的微件都需要支持属性以使其有用。
+
+举个例子,让我们更改 Hello World 微件,以便它不仅可以向世界问好,还可以向用户希望的任何人/事问好。为此,我们可以添加一个名为 `what` 的属性,并像 `<$hello what="pale blue dot"/>` 这样调用它。
+
+TiddlyWiki 的微件类提供了 `computeAttributes` 和 `getAttribute` 方法,微件代码可以共同使用这两个方法来发现传递给微件的值。
+
+可以像这样调用 `computeAttributes` 和 `getAttribute` 方法(如果用户没有在微件调用中提供该属性,`getAttribute` 的第二个参数将用作默认值):
+
+```javascript
+this.computeAttributes();
+var message = this.getAttribute("message", "World");
+```
+
+Then the `message` variable can be used to construct the Hello XXX string:
+
+```javascript
+var textNode = this.document.createTextNode("Hello, " + message + "!");
+```
+
+原始的 [[hello.js]] 代码只实现了一个 `render` 方法。不需要 `refresh` 方法,因为微件的输出永远不会不同...它总是“Hello World!”。
+
+即使有一个 `message` 属性,你可能也认为仅用 `render` 就足够了。毕竟,输入参数 `message` 的值只能通过修改 wiki 文本来更改,这意味着条目将从头重新显示。
+
+然而,TiddlyWiki 有一种语法允许在不修改 wiki 文本的情况下改变参数值。详情见 [[Widgets in WikiText|https://bramchen.github.io/tw5-docs/zh-Hans/#Widgets%20in%20WikiText]]。例如,如果微件被如此调用:`<$hello message={{MyTiddler!!field}}/>`,那么每次 `MyTiddler` 的 `field` 字段被修改时,只会调用 `refresh` 方法。因此,为了使微件显示更新,需要实现 refresh 方法。
+
+如果在 `render` 方法中放置 `computeAttributes` 和 `getAttribute` 调用,那么我们可以像在 [[Widget refresh tutorial part II]] 中所做的那样实现性能未优化的 `refresh`:
+
+```javascript
+/*
+性能优化的微件会选择性地刷新,但在这里我们总是刷新
+*/
+MyWidget.prototype.refresh = function(changedTiddlers) {
+ // 重新生成和重新渲染微件
+ // 并替换现有的 DOM 节点
+ this.refreshSelf();
+ return true;
+};
+```
+
+完整的代码可以在 [[hello-attribute.js]] 中看到,结果如下([[微件属性演示1]]):
+
+{{微件属性演示1}}
+
+上面的第三个示例是正确行为所必须的唯一一个需要 refresh 方法的示例。

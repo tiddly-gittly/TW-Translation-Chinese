@@ -1,0 +1,30 @@
+created: 20230719055859879
+creator: 马不前
+modified: 20230719060839969
+modifier: 马不前
+original-title: Do nothing widget tutorial
+tags: [[Javascript Widget教程]]
+title: 不做任何操作的微件教程
+
+为了在条目中定义一个微件,该条目必须满足这些要求:
+
+* type字段为application/javascript
+* module-type字段为widget 
+* text字段包含JavaScript代码
+
+[[donothing.js]]条目满足了这些要求,它的代码如下:
+
+{{donothing.js}}
+
+那段代码做了两件关键的事情:
+
+* 导入核心Widget类([[$:/core/modules/widgets/widget.js]])
+* 在我们希望微件拥有的名称(`donothing`)的属性中导出该类
+
+它的样子如下:
+
+{{不做任何操作的微件演示}}
+
+它工作了。这次没有错误信息。
+
+''练习'': 修改 [[donothing.js]] 和 [[不做任何操作的微件演示]] 使微件的名称为 `noop` 而不是 `donothing`

@@ -1,0 +1,23 @@
+created: 20230719060438335
+creator: 马不前
+modified: 20230719060627983
+modifier: 马不前
+original-title: Hello World widget tutorial
+tags: [[Javascript Widget教程]]
+title: Hello World 微件教程
+
+现在让我们创建一个实际有输出的微件。
+
+当 TiddlyWiki 遇到像 `<$hello>` 这样的微件定义时,它会创建一个对象,该对象是由微件代码导出的类的一个实例。
+
+除了创建类的一个实例外,TiddlyWiki 还会调用结果对象的 render 方法。render 方法预期会创建一个 DOM 节点,该节点将显示在微件的位置。
+
+在 `donothing` 示例中导出了核心微件。核心微件类没有创建 DOM 节点的 render 方法,这就是为什么没有输出的原因。获取输出需要编写一个继承自核心 `Widget` 类的微件类。这个类的 render 方法中的代码将显示 Hello World 消息。
+
+[[hello.js]] 条目包含实现这一点的代码:
+
+{{hello.js}}
+
+导入核心微件类的代码保持不变,但现在我们还有代码来创建继承它的自己的类。此外,还包括了 `render` 方法的实现。这是结果:
+
+{{Hello World演示}}
