@@ -1,0 +1,79 @@
+created: 20230820212039040
+creator: 马不前
+modified: 20230821003552862
+modifier: 马不前
+tags: TiddlyWiki5的诞生！
+title: TiddlyWiki5的诞生-原文
+
+So, it is now six weeks since I left BT. As I announced here at the time [1], my plan was to strike a balance between consultancy work and putting significant effort into bringing TiddlyWiki up to date, and making it more useful. I've now reached a bit of a milestone that is worth explaining. It's technical and confusing, but rewardingly mind-blowing, hence my posting in this group. 
+
+At the risk of sowing even more confusion, I'll try a metaphorical explanation first.  
+
+TiddlyWiki is a car with the unusual ability of creating copies of itself. The car is so complex and fiddly to work on that we keep all the components spread out on the floor of our workshop. When we want to test the car, we have a robot called Ruby that whizzes around the factory picking up the right pieces, and slotting them together to make a functioning TiddlyWiki car. The trouble is that Ruby isn't as good at making TiddlyWiki cars as TiddlyWiki itself; Ruby makes mistakes. So, we can't sell the cars that Ruby produces directly. Instead, as each car rolls out of the factory gates, we manually lean in and press the button marked "regenerate". The TiddlyWiki car promptly rebuilds itself perfectly, without the defects that Ruby introduced.  
+
+So, what you've got there is something awesome (a self building car!) that is dependent on something awful (a factory that makes dodgy cars!). The answer, obviously, is to improve the factory so that it can create defect-free TiddlyWiki cars.  
+
+Out goes Ruby, to be replaced by a new robot called Node, which does a much better job. To make sure that it makes cars just as good as the ones that TiddlyWiki makes itself, Node was built out of pieces taken from the TiddlyWiki car with lots of polishing and refurbishment. Hurray, finally, we've got a factory that can reliably turn out the tried and trusted TiddlyWiki car.  
+
+But now that we've got the new cars whizzing out of the factory, we see that actually the TiddlyWiki car isn't as wonderful as it once was. The design is showing its age, and it doesn't seem to be as well adapted to modern roads. And modern mechanics take one look at it and deride its antique internals.  
+
+Sticking with the tortured metaphor, the breakthrough that has me excited is that I've (in an experimental way) got this new Node robot to produce a shiny new model 5 of the TiddlyWiki car. The new car isn't built from the components of the classic TiddlyWiki car, but rather Node pulls its own components out of it's own body to construct TiddlyWiki5. So, in fact, there is no difference between TiddlyWiki5 and Node; the car has become its own factory robot.  
+
+Abandoning the metaphorical...  
+
+The problem I set out to tackle first was to replace TiddlyWiki's build tools. Originally, back in 2004, I wrote TiddlyWiki as one big file. It became increasingly hard to manage it as the product grew and so by the time we set up the first official source code repository on Trac, we decided to split the source code up into separate files, and a tool called cook.rb was created in Ruby which could stitch the individual files back together into a functioning TiddlyWiki. 
+
+In this respect, cook.rb was like TiddlyWiki: it was a blob of code that could generate TiddlyWiki HTML files. However, cook.rb didn't have all the capabilities of TiddlyWiki (such as the ability to wikify text), and so has never been able to precisely duplicate the files that TiddlyWiki itself generates. So, with cook.rb the build process for TiddlyWiki was convoluted: use cook.rb to stitch the files together into a not-quite-correct TiddlyWiki file, and then load that TiddlyWiki up in Firefox and click 'save changes' to generate a true TiddlyWiki. 
+
+The awkwardness and fragility of this process makes it harder than necessary to work on the development of TiddlyWiki itself. So, I set out to create a replacement tool that I called cook.js [2]. The idea was that it would run on the command line under node.js, and do the same things that cook.rb used to do, but, crucially, also to incorporate code from TiddlyWiki itself so that it could, for example, wikify text.  
+
+So, the first phase of my work was to analyse the existing cook.rb tool, and update its documentation [2]. I then built up new JavaScript code to replicate the key bits of functionality of the old tools - you can see the code at [3].  
+
+To begin with, the new code was about understanding the `.recipe` files used by cook.rb, and figuring out how to load the required files, and if necessary massage them as they get spliced into the main template. By the end of November, I had code that could do all the basic file stitching, and did in fact create a functioning TiddlyWiki.  
+
+At that point, the outstanding issues preventing cook.js from doing everything that TiddlyWiki could do were all around wikifying. For example, TiddlyWiki updates the `<title>` tag of the HTML page according to the plain text rendered content of the WindowTitle shadow tiddler, which is normally defined as "`<<tiddler SiteTitle>>` - `<<tiddler SiteSubtitle`". So, for cook.js to create the correct text for the `<title>` tag, it would have to be able to convert raw wiki text into HTML, and handle transclusion and other macros. Similarly, TiddlyWiki can generate an RSS file that includes HTML representations of recent tiddlers.  
+
+So, at the beginning of December I took a deep breath and transliterated the existing TiddlyWiki wikifier code into cook.js. In the process, I massively refactored it, and structured it much more sensibly. Instead of using jQuery and the DOM, it now parses the wikitext into a generic tree format, and then renders that into textual HTML.  
+
+Thus, a week ago, I got to the point where cook.js contained a fully functioning wikifier (albeit currently implementing only a handful of macros).  
+
+I spent some time refining the command line interface so that it was easy to use it to perform a bunch of tiddler and TiddlyWiki operations:  
+
+* Splitting tiddlywiki files into tiddlers 
+* Constructing tiddlywiki files from recipes 
+* Dynamically serving tiddlywiki files over http 
+* Dynamically serving individual tiddlers in HTML over http  
+
+There's room to add more, too: for instance, it could read a TiddlyWiki file and then generate a directory with a wikified .HTML file for each tiddler, all cross linking to each other. The result would be an entirely static, but browsable version of the content from a TiddlyWiki. And a little more polishing would let it be used in TiddlySpace, for improved server-side wikification support.  
+
+But, yesterday I tried an experiment that I think is even more exciting: to take all the new code in cook.js for handling tiddlers and wikifying, and make it run in the browser. In effect, cook.js has now reached the point where it can do (almost) everything that TiddlyWiki can do - and so, the new code can completely supplant the old.  
+
+For the moment, I've reused the name TiddlyWiki5 for this new school TiddlyWiki. What I did was to build up a recipe that referenced the new JavaScript modules that I had built for cook.js, and pack them into an HTML file, along with some tiddlers and some boot code.  
+
+Node.js modules don't work directly in a browser, so I had to write a little bootloader that replicates enough of the node.js module environment. I had to add a bit of code to navigate to tiddlers when links are clicked. I barely touched the main cook.js code itself, but the thing worked pretty much first time.  
+
+So, what we've got is a primordial TiddlyWiki5, built by a version of itself running on the server. You can see it at [4]. If you click on a tiddler link then the new tiddler is shown at the bottom of the page. If you click on an external page then it opens in a new window. That's it; there's no title shown, no styling, and of course no editing capabilities. All of that is to come.  
+
+The reason why this is a big deal is that it brings all the TiddlyWiki developments together. We've got a build tool that can uniformly build old and new TiddlyWikis. We've got a single wikifier code base that can be used on the server, in the browser and as a command line tool. So, we can efficiently maintain the old 2.x codebase while charging ahead with the new code.  
+
+The new code will have quite an impact on the capabilities of TiddlyWiki. For example, it now formally separates parsing wiki text into a structured tree from rendering it into HTML. The structured tree representation will allow TiddlyWiki to finally properly implement features like sections and slices, orphans and missing links.  
+
+I'm very excited about TiddlyWiki5. I've been thinking about TiddlyWiki for a long time now, and have many ideas built up. Today's breakthrough isn't really visible to end users, which is why I've tried to explain it here. But hopefully you can see that this train is starting to pick up steam and get moving.  
+
+If you want to find out more, dive into the code at [3] - there's a long readme file. To make the code work, you'll need to install node.js, but happily that is very easy these days - see http://nodejs.org/ for instructions.  
+
+For the most part, I shall continue to post development updates to the TWDev group. I'm hoping to get quite a lot done over the next few weeks, and will post in this group when I've got something that's worth having a look at.  
+
+As ever,I'll do my best to answer any questions,  
+
+Best wishes  
+
+Jeremy  
+
+[1][[http://groups.google.com/group/tiddlywiki/browse_thread/thread/7ea26be3f6b76698/38e167b0e73b6c5a]]
+
+[2] [[https://github.com/TiddlyWiki/cooker]]
+
+[3] [[https://github.com/Jermolene/cook.js]]
+
+[4] [[http://jermolene.github.com/tiddlywiki5/index.html]]

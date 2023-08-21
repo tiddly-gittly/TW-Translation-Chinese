@@ -1,0 +1,82 @@
+created: 20230820211810911
+creator: 马不前
+external-links: https://groups.google.com/g/tiddlywiki/c/snKsq4e3D1E/m/QN08AYiFZjgJ
+modified: 20230821003611191
+modifier: 马不前
+original-title: The Birth of TW5!
+page-cover: 
+tags: [[Separate Article]]
+title: TiddlyWiki5的诞生！
+
+我离开英国电信已经六个星期了。正如我当时在这里宣布的[1]，我的计划是在顾问工作和投入大量精力更新 TiddlyWiki 并使其更加有用之间取得平衡。现在，我达到了一个值得解释的里程碑。它是技术性的、令人困惑的，但也是令人心潮澎湃的，因此我才在这个群里发帖。
+
+冒着引起更多混乱的风险，我先试着用比喻来解释。
+
+TiddlyWiki 是一辆具有自我复制能力的汽车。这辆汽车非常复杂，工作起来非常繁琐，所以我们把所有部件都放在车间的地板上。当我们要测试汽车时，我们有一个叫 Ruby 的机器人，它在工厂里飞快地拾取合适的部件，然后把它们拼接在一起，制造出一辆正常运作的 TiddlyWiki 汽车。问题是，Ruby 制作 TiddlyWiki 汽车的能力不如 TiddlyWiki 本身；Ruby 也会出错。因此，我们不能直接出售 Ruby 生产的汽车。相反，当每辆汽车驶出工厂大门时，我们会手动靠过去，按下 "再生 "按钮。TiddlyWiki 汽车很快就能完美地自我重建，没有了 Ruby 带来的缺陷。
+
+所以,你得到的东西很棒(一辆能自我构建的汽车！),但它依赖的东西很糟糕(一家制造劣质汽车的工厂！)。答案显然是改进工厂，让它能制造出没有缺陷的 TiddlyWiki 汽车。
+
+Ruby走了，取而代之的是一个名叫Node的新机器人，它的工作要好得多。为了确保它制造的汽车和 TiddlyWiki 自己制造的汽车一样好，Node 是用从 TiddlyWiki 汽车上拆下来的零件经过大量抛光和翻新制造出来的。万幸，我们终于有了一家工厂，可以可靠地生产出久经考验、值得信赖的 TiddlyWiki 汽车。
+
+但现在，我们看到新车从工厂里呼啸而出，TiddlyWiki 汽车其实并没有以前那么出色了。它的设计已显老态，而且似乎也不太适应现代道路。现代机械师看了一眼，就嘲笑它的内部结构太古董了。
+
+继续用这个曲折的比喻，让我兴奋不已的突破是，我（以实验的方式）让这个新的节点机器人制造出了一辆闪闪发光的TiddlyWiki汽车的新模型5。这辆新车并不是用经典的 TiddlyWiki 汽车的部件制造的，而是 Node 从它自己的身体里取出自己的部件来制造 TiddlyWiki5。因此，事实上，TiddlyWiki5 和 Node 之间并没有什么区别；这辆车已经变成了它自己工厂里的机器人。
+
+放弃比喻……
+
+我首先要解决的问题是替换 TiddlyWiki 的构建工具。早在2004年，我就把TiddlyWiki写成了一个大文件。随着产品的发展，管理它变得越来越困难，所以当我们在 Trac 上建立了第一个官方源代码仓库时，我们决定将源代码分割成不同的文件，并用 Ruby 创建了一个名为 cook.rb 的工具，它可以将各个文件拼接成一个正常运行的 TiddlyWiki。
+
+在这方面，cook.rb 就像 TiddlyWiki：它是一个可以生成 TiddlyWiki HTML 文件的代码块。然而，cook.rb 并不具备 TiddlyWiki 的所有功能（例如对文本进行维基化的能力），因此无法精确复制 TiddlyWiki 本身生成的文件。因此，使用cook.rb构建TiddlyWiki的过程非常复杂：使用cook.rb将文件拼接成一个不完全正确的TiddlyWiki文件，然后在Firefox中加载该TiddlyWiki，点击 "保存更改 "生成一个真正的TiddlyWiki。
+
+这一过程的笨拙性和脆弱性使得 TiddlyWiki 本身的开发工作难上加难。因此，我开始创建一个替代工具，并将其命名为 cook.js [2]。我的想法是，它可以在 node.js 下的命令行上运行，做 cook.rb 曾经做过的事情，但重要的是，它还可以整合 TiddlyWiki 本身的代码，这样它就可以对文本进行维基化等操作。
+
+因此，我工作的第一阶段是分析现有的 cook.rb 工具，并更新其文档 [2]。然后，我编写了新的 JavaScript 代码，以复制旧工具的关键功能--你可以在 [3] 中看到这些代码。
+
+一开始，新代码主要是理解 cook.rb 使用的`.recipe`文件，弄清楚如何加载所需的文件，并在必要时对它们进行按摩，因为它们会被拼接到主模板中。到 11 月底，我的代码已经可以完成所有基本的文件拼接工作，并确实创建了一个正常运行的 TiddlyWiki。
+
+在这一点上，阻碍 cook.js 完成 TiddlyWiki 所能完成的一切工作的未决问题都是围绕着维基化`wikifying`而展开的。例如，TiddlyWiki 会根据 WindowTitle 影子条目的纯文本渲染内容更新 HTML 页面的 `<title>` 标记，通常定义为"`<<tiddler SiteTitle>>` - `<<tiddler SiteSubtitle`"。因此，要让 cook.js 为 `<title>` 标签创建正确的文本，它必须能够将原始维基文本转换为 HTML，并处理转包和其他宏。同样，TiddlyWiki 也可以生成一个 RSS 文件，其中包含最近的条目 的 HTML 表示法。
+
+因此，12 月初我深吸了一口气，将现有的 TiddlyWiki 维基模块`wikifier`代码翻译成了 cook.js。在这一过程中，我对其进行了大规模重构，使其结构更加合理。现在，它不再使用 jQuery 和 DOM，而是将维基文本wikitext解析为通用的树形格式，然后将其渲染为文本 HTML。
+
+因此，一周前，我的 cook.js 中包含了一个功能完备的维基模块 wikifier（尽管目前只实现了少量宏）。
+
+我花了一些时间改进命令行界面，以便于用它来执行一系列条目和 TiddlyWiki 操作：
+
+* 将 tiddlywiki 文件分割成 `tiddlers` 
+* 从配方中构建 tiddlywiki 文件 
+* 通过 http 动态提供 tiddlywiki 文件 
+* 通过 http 动态提供 HTML 中的单个条目
+
+它还可以添加更多内容：例如，它可以读取一个 TiddlyWiki 文件，然后为每个条目生成一个包含 wikified .HTML 文件的目录，所有文件都可以相互交叉链接。这样，TiddlyWiki 的内容就会变成一个完全静态、但可浏览的版本。再稍加润色，就可以在 TiddlySpace 中使用，以改进服务器端的维基化支持。
+
+不过，昨天我尝试了一个我认为更令人兴奋的实验：将 cook.js 中用于处理条目和 wikifying 的所有新代码，在浏览器中运行。实际上，cook.js 现在已经能做到（几乎）TiddlyWiki 所能做到的一切--因此，新代码可以完全取代旧代码。
+
+目前，我重新使用了 TiddlyWiki5 作为这个新派 TiddlyWiki 的名称。我所做的就是创建一个配方，其中引用了我为 cook.js 创建的新 JavaScript 模块，并将它们打包到一个 HTML 文件中，同时还有一些条目和一些启动代码。
+
+Node.js 模块无法直接在浏览器中运行，因此我必须编写一个小引导程序，以复制足够的 node.js 模块环境。我不得不添加一些代码，以便在点击链接时导航到条目。我几乎没有碰过 cook.js 的主代码本身，但它在第一时间就能正常工作。
+
+因此，我们得到的是一个原始的 TiddlyWiki5，由运行在服务器上的自身版本构建而成。你可以在 [4] 中看到它。如果你点击一个条目链接，新的条目就会显示在页面底部。如果点击外部页面，则会在新窗口中打开。仅此而已；没有显示标题，没有样式，当然也没有编辑功能。这些都是后话。
+
+之所以说这是一件大事，是因为它将所有 TiddlyWiki 的开发工作结合在了一起。我们有了一个可以统一构建新旧 TiddlyWiki 的构建工具。我们有了一个单一的 wikifier 代码库，可以在服务器、浏览器和命令行工具中使用。因此，我们可以高效地维护旧的 2.x 代码库，同时继续开发新的代码。
+
+新代码将对 TiddlyWiki 的功能产生相当大的影响。例如，它现在正式将 wiki 文本解析为结构树与将其渲染为 HTML 区分开来。结构化树的表现形式将允许 TiddlyWiki 最终正确地实现章节和切片、孤立和缺失链接等功能。
+
+我对TiddlyWiki5感到非常兴奋。关于 TiddlyWiki，我已经考虑了很久，也积累了很多想法。今天的突破对于最终用户来说并不是很明显，这也是我为什么要在这里解释它的原因。但希望你能看到这列火车已经开始加速前进了。
+
+如果您想了解更多信息，请访问 [3] 深入了解代码，这里有一个很长的自述文件。要使代码正常工作，您需要安装 node.js，不过现在安装 node.js 非常容易，请参见 http://nodejs.org/ 了解安装说明。
+
+在大多数情况下，我将继续在 TWDev 小组发布开发更新。我希望在接下来的几周里能完成很多工作，一旦有值得一看的东西，我就会在这个群里发布。
+
+我会一如既往地尽力回答任何问题。  
+
+最美好的祝愿  
+
+杰里米
+
+[1][[http://groups.google.com/group/tiddlywiki/browse_thread/thread/7ea26be3f6b76698/38e167b0e73b6c5a]]
+
+[2] [[https://github.com/TiddlyWiki/cooker]]
+
+[3] [[https://github.com/Jermolene/cook.js]]
+
+[4] [[http://jermolene.github.com/tiddlywiki5/index.html]]
